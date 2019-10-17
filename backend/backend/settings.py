@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'moviescore.apps.MoviescoreConfig',
     'users.apps.UsersConfig',
+    'movieInfo.apps.MovieinfoConfig',
     'rest_framework',
     'corsheaders',
     'knox',

@@ -2,11 +2,13 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from moviescore import views
+from moviescore.views import MovieScoreView
+from movieInfo.views import MovieInfoView
 
 
 router = routers.DefaultRouter()
-router.register('movieScore', views.MovieScoreView, 'movieScore')
+router.register('movieScore', MovieScoreView, 'movieScore')
+router.register('movieInfo', MovieInfoView, 'movieInfo')
 
 
 class HomeTemplateView(TemplateView):

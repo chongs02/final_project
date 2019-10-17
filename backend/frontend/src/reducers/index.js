@@ -4,12 +4,14 @@ import errors from "./errors";
 import { combineReducers } from "redux";
 import { LOGOUT_SUCCESSFUL } from "../actions/actionTypes";
 import getScore from "./getScore";
+import getMovieInfo from "./movieInfo"
 
 const appReducer = combineReducers({
   auth,
   messages,
   errors,
-  getScore
+  getScore,
+  getMovieInfo
 });
 
 const rootReducer = (state, action) => {

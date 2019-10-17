@@ -1,36 +1,34 @@
 import React, { Component } from "react";
-import Content from "./layouts/Content";
 import axios from "axios";
-import { Link, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { getScore } from "../actions/movieScore";
+import {movieInfo} from "../actions/movieInfo"
 
 // django csrftoken
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
+// axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+// axios.defaults.xsrfCookieName = "csrftoken";
 
 class QueryList extends Component {
   componentDidMount() {
     this.props.getScore();
+    this.props.movieInfo()
   }
 
   moviecomponent = () => {
     const movieData = this.props.movieData;
-    movieData.map(item => {
+    const data = movieData.map(item => {
+      console.log(item)
       return (
-        <React.Fragment>
-          <Link to={`/movie/${item.movie_title}`}>{item.movie_title}</Link>
-        </React.Fragment>
+          <h1 key={item.id}>{item.movie_title}</h1>
       );
     });
+    return data
   };
 
   render() {
-    console.log(this.props.movieData);
     return (
       <div>
         {this.props.isLoaded ? this.moviecomponent() : <h1>Loading...</h1>}
-        <Route exact path="/movie/:movie_title" component={Content} />
       </div>
     );
   }
@@ -45,7 +43,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getScore }
+  { getScore,movieInfo }
 )(QueryList);
 
 // <React.Fragment>

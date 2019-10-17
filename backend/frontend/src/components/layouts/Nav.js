@@ -2,11 +2,38 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
+import MovieInfo from "../MovieInfo"
 
 class Nav extends Component {
-  state = {};
+  state = {
+    keyword : ""
+  };
+
+  handleChange = (e) =>{
+
+    this.setState({
+      keyword : e.target.value
+    })
+
+  }
+
   render() {
+    
     const { isAuthenticated, user } = this.props.auth;
+    const {keyword} = this.state
+
+    const mapToComponent = (data) => {
+      data = data.filter(
+        (title) => {
+          return title.movieNm.indexOf(keyword) > -1
+        }
+      )
+      return data.map((title, i) =>{
+        return(<MovieInfo title={title.movieNm} key={i}></MovieInfo>)
+      })
+    }
+
+
     const AuthLink = (
       <div>
         <span>{user ? `welcome ${user.username}` : ""}</span>
@@ -23,9 +50,10 @@ class Nav extends Component {
 
     return (
       <nav className="nav">
-        <input className="search" type="text" placeholder="검색하시오"></input>
+        <input className="search" type="text" placeholder="검색하시오" value={this.state.keword} onChange={this.handleChange}></input>
         <button>검색</button>
         <div>{isAuthenticated ? AuthLink : GuestLink}</div>
+        {this.props.isLoaded? mapToComponent(this.props.movieInfo):<div>Loading</div>}
       </nav>
     );
   }
@@ -33,7 +61,10 @@ class Nav extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    movieData: state.getScore.movieData,
+    movieInfo: state.getMovieInfo.movieInfo,
+    isLoaded: state.getScore.isLoaded
   };
 };
 
