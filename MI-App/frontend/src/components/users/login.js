@@ -51,6 +51,7 @@ const StyledButton = styled.button`
   color: palevioletred;
   border: 2px solid palevioletred;
   margin-right: 0px;
+  font-family: "font";
 `;
 
 const AlignSubmit = styled.div`
@@ -106,7 +107,7 @@ class Login extends Component {
             <AlignSubmit>
               <StyledButton type="submit">Login</StyledButton>
             </AlignSubmit>
-            <div style={{ color: "white" }}>
+            <div style={{ color: "white", textAlign: "right" }}>
               계정이 없으시다구요?
               <Link to="/register">
                 <StyledButton type="submit">등록</StyledButton>
