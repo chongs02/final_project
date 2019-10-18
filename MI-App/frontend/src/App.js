@@ -14,6 +14,8 @@ import Login from "./components/users/login";
 import Register from "./components/users/register";
 import Nav from "./components/layouts/Nav";
 import QuaryList from "./components/QuaryList";
+import SearchResult from "./components/SearchResult";
+
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const middleware = [thunk];
@@ -52,6 +54,7 @@ class RootContainerComponent extends React.Component {
           <PrivateRoute exact path="/" component={QuaryList} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/searchResult" component={SearchResult} />
         </Switch>
       </BrowserRouter>
     );
