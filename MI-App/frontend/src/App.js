@@ -3,25 +3,16 @@ import React from "react";
 import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 
 import { Provider, connect } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 
 import { loadUser } from "./actions/auth";
 
-import rootReducer from "./reducers";
-
+import store from "./store";
 import Login from "./components/users/login";
 import Register from "./components/users/register";
-import Nav from "./components/layouts/Nav";
+import Nav from "./components/layouts/Main";
 import QuaryList from "./components/QuaryList";
-import { composeWithDevTools } from "redux-devtools-extension";
-
-const middleware = [thunk];
-
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+import Main from "./components/layouts/Main";
+import MyPage from "./components/users/MyPage";
 
 class RootContainerComponent extends React.Component {
   componentDidMount() {
@@ -35,7 +26,7 @@ class RootContainerComponent extends React.Component {
           if (this.props.auth.isLoading) {
             return <em>Loading...</em>;
           } else if (!this.props.auth.isAuthenticated) {
-            return <Redirect to="/" />;
+            return <Redirect to="/login" />;
           } else {
             return <ChildComponent {...props} />;
           }
@@ -47,11 +38,11 @@ class RootContainerComponent extends React.Component {
     let { PrivateRoute } = this;
     return (
       <BrowserRouter>
-        <Nav></Nav>
         <Switch>
-          <PrivateRoute exact path="/" component={QuaryList} />
+          <PrivateRoute exact path="/" component={Main} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/mypage" component={MyPage} />
         </Switch>
       </BrowserRouter>
     );
