@@ -1,14 +1,9 @@
-/* @font-face {
-  font-family: "BMDOHYEON_ttf";
-  src: url("/statics/BMDOHYEON_ttf.ttf");
-} */
+@font-face {
+  font-family: "font";
+  src: url("./statics/BMDOHYEON_ttf.ttf");
+}
 
-/* body,
-table,
-div,
-p {
-  font-family: "Nanum Gothic";
-} */
 #root {
   height: 100%;
+  font-family: "font";
 }
