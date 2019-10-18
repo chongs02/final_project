@@ -9,10 +9,20 @@ import { loadUser } from "./actions/auth";
 import store from "./store";
 import Login from "./components/users/login";
 import Register from "./components/users/register";
-import Nav from "./components/layouts/Main";
-import QuaryList from "./components/QuaryList";
 import Main from "./components/layouts/Main";
 import MyPage from "./components/users/MyPage";
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+                html {
+                  height: 100%;
+                }
+                body{
+                  height: 100%;
+                  
+                  background-color: #2c2c2c;
+                }
+                `;
 
 class RootContainerComponent extends React.Component {
   componentDidMount() {
@@ -37,14 +47,17 @@ class RootContainerComponent extends React.Component {
   render() {
     let { PrivateRoute } = this;
     return (
-      <BrowserRouter>
-        <Switch>
-          <PrivateRoute exact path="/" component={Main} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/mypage" component={MyPage} />
-        </Switch>
-      </BrowserRouter>
+      <React.Fragment>
+        <GlobalStyle></GlobalStyle>
+        <BrowserRouter>
+          <Switch>
+            <PrivateRoute exact path="/" component={Main} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/mypage" component={MyPage} />
+          </Switch>
+        </BrowserRouter>
+      </React.Fragment>
     );
   }
 }
