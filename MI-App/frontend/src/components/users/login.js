@@ -8,30 +8,39 @@ import { Icon } from "react-icons-kit";
 import { ic_vpn_key } from "react-icons-kit/md/ic_vpn_key";
 import logo from "../../statics/logo.png";
 
-const Input = styled.input`
+const StyledInput = styled.input`
   padding: 0.5em;
   margin: 0.5em;
-  color: ${props => props.inputColor || "palevioletred"};
+  color: palevioletred;
   background: papayawhip;
   border: none;
   border-radius: 3px;
 `;
 
 const StyledLogin = styled.div`
-  flex: 1;
-  height:100%
+  height: 100%;
   display: flex;
   justify-content: center;
-  `;
+  align-items: center;
+`;
 
 const StyledForm = styled.form`
   height: 100%;
-  align-item: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledFieldSet = styled.fieldset`
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledH1 = styled.h1`
   color: white;
   text-align: right;
+  display: inline-block;
 `;
 
 const StyledButton = styled.button`
@@ -39,7 +48,6 @@ const StyledButton = styled.button`
   margin: 1em;
   padding: 0.25em 1em;
   border-radius: 3px;
-
   color: palevioletred;
   border: 2px solid palevioletred;
   margin-right: 0px;
@@ -67,47 +75,44 @@ class Login extends Component {
     return (
       <StyledLogin>
         <StyledForm onSubmit={this.onSubmit}>
-          {/* <fieldset> */}
-
-          <StyledH1>
-            <img src={logo} alt={"logo"} width={50} />
-            Movie Inside
-          </StyledH1>
-          {this.props.errors.length > 0 && (
-            <ul>
-              {this.props.errors.map(error => (
-                <li key={error.field}>{error.message}</li>
-              ))}
-            </ul>
-          )}
-          <p>
-            {/* <label htmlFor="username">Username</label> */}
+          <StyledFieldSet>
+            <StyledH1>
+              <img src={logo} alt={"logo"} width={50} />
+              Movie Inside
+            </StyledH1>
+            {this.props.errors.length > 0 && (
+              <ul>
+                {this.props.errors.map(error => (
+                  <li key={error.field}>{error.message}</li>
+                ))}
+              </ul>
+            )}
             <div style={{ color: "white" }}>
               <Icon size={64} icon={ic_person} />
-              <Input
+              <StyledInput
                 type="text"
                 id="username"
                 onChange={e => this.setState({ username: e.target.value })}
               />
             </div>
-          </p>
-          <p>
             <div style={{ color: "white" }}>
               <Icon size={64} icon={ic_vpn_key} />
-              <Input
+              <StyledInput
                 type="password"
                 id="password"
                 onChange={e => this.setState({ password: e.target.value })}
               />
             </div>
-          </p>
-          <AlignSubmit>
-            <StyledButton type="submit">Login</StyledButton>
-          </AlignSubmit>
-          <p>
-            Don't have an account? <Link to="/register">Register</Link>
-          </p>
-          {/* </fieldset> */}
+            <AlignSubmit>
+              <StyledButton type="submit">Login</StyledButton>
+            </AlignSubmit>
+            <div style={{ color: "white" }}>
+              계정이 없으시다구요?
+              <Link to="/register">
+                <StyledButton type="submit">등록</StyledButton>
+              </Link>
+            </div>
+          </StyledFieldSet>
         </StyledForm>
       </StyledLogin>
     );
