@@ -6,7 +6,7 @@ import {
   MovieSearchInfo,
   MovieSimpleInfo
 } from "../contents/movieInfo";
-import MovieDetails from "./MovieDetails";
+import MovieDetails from "./movieDetails";
 
 const SearchResult = ({ keyword, data }) => {
   const [isDetails, setIsDetails] = useState(false);
