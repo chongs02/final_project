@@ -9,7 +9,7 @@ import { loadUser } from "./actions/auth";
 import store from "./store";
 import Login from "./components/users/login";
 import Register from "./components/users/register";
-import Main from "./components/layouts/Main";
+import Main from "./components/storyboard/Main";
 import MyPage from "./components/users/MyPage";
 import { createGlobalStyle } from "styled-components";
 
