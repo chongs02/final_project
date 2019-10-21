@@ -10,9 +10,6 @@ import store from "./store";
 import Login from "./components/storyboard/login";
 import Register from "./components/storyboard/register";
 import Main from "./components/storyboard/main";
-import MyPage from "./components/storyboard/myPage";
-import MovieDetails from "./components/storyboard/movieDetails";
-import Logout from "./components/storyboard/logout";
 
 import { createGlobalStyle } from "styled-components";
 
@@ -59,9 +56,6 @@ class RootContainerComponent extends React.Component {
             <PrivateRoute exact path="/" component={Main} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/mypage" component={MyPage} />
-            <Route exact path="/movieDetails" component={MovieDetails} />
-            <Route exact path="/logout" component={Logout} />
           </Switch>
         </BrowserRouter>
       </React.Fragment>

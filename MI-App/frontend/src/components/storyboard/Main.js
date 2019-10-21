@@ -4,13 +4,16 @@ import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
 import SearchResult from "./searchResult";
 
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+import MyPage from "./myPage";
+import MovieDetails from "./movieDetails";
+import Logout from "./logout";
 import Nav from "../contents/nav";
 
 class Main extends Component {
   state = {
     keyword: "",
-    isSearch: false,
-    isChanged: false
+    currentView: null
   };
 
   componentDidMount() {
@@ -19,16 +22,12 @@ class Main extends Component {
 
   handleChange = e => {
     this.setState({
-      keyword: e.target.value,
-      isChanged: false
+      keyword: e.target.value
     });
   };
 
   handleClick = () => {
-    this.setState({
-      isSearch: true,
-      isChanged: true
-    });
+    this.renderSearchResult();
   };
 
   handleKeyPress = e => {
@@ -38,27 +37,38 @@ class Main extends Component {
   };
 
   renderSearchResult = () => {
-    return (
+    let component = (
       <SearchResult
         keyword={this.state.keyword}
         data={this.props.statemovieInfo}
+        isSearch={this.state.isSearch}
       />
     );
+    this.setState({
+      currentView: component
+    });
   };
 
   render() {
-    const { keyword, isSearch, isChanged } = this.state;
-    console.log(isSearch, isChanged);
+    const { keyword, currentView } = this.state;
+    // console.log(currentView);
     return (
       <React.Fragment>
-        <Nav
-          value={keyword}
-          isSearch={isSearch}
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-          onClick={this.handleClick}
-        ></Nav>
-        {isSearch || isChanged ? this.renderSearchResult() : <div />}
+        <BrowserRouter>
+          <Nav
+            value={keyword}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+            onClick={this.handleClick}
+          ></Nav>
+          {currentView}
+
+          <Switch>
+            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/movieDetails" component={MovieDetails} />
+            <Route exact path="/logout" component={Logout} />
+          </Switch>
+        </BrowserRouter>
       </React.Fragment>
     );
   }
