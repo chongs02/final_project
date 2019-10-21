@@ -1,11 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 
-const MovieDetails = () => {
-  return (
-    <div>
-      <h2>영화 상세 정보</h2>
-    </div>
-  );
-};
+class MovieDetails extends Component {
+  render() {
+    return (
+      <div>
+        <h2>영화 상세 정보</h2>
+      </div>
+    );
+  }
+}
 
 export default MovieDetails;

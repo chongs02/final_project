@@ -17,6 +17,7 @@ class RootContainerComponent extends React.Component {
   componentDidMount() {
     this.props.loadUser();
   }
+
   PrivateRoute = ({ component: ChildComponent, ...rest }) => {
     return (
       <Route
@@ -33,6 +34,7 @@ class RootContainerComponent extends React.Component {
       />
     );
   };
+
   render() {
     let { PrivateRoute } = this;
     return (
@@ -48,6 +50,7 @@ class RootContainerComponent extends React.Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     auth: state.auth

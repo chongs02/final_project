@@ -52,6 +52,7 @@ class Main extends Component {
         <span>{user ? `welcome ${user.username}` : ""}</span>
         <button onClick={this.props.logout}>Logout</button>
         <Link to="/mypage">Mypage</Link>
+        <Link to="/movieDetails">영화상세정보</Link>
       </div>
     );
 
