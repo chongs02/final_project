@@ -5,7 +5,9 @@ import { login } from "../../actions/auth";
 import { ic_person } from "react-icons-kit/md/ic_person";
 import { Icon } from "react-icons-kit";
 import { ic_vpn_key } from "react-icons-kit/md/ic_vpn_key";
+
 import logo from "../../statics/logo.png";
+
 import {
   AlignSubmit,
   StyledButton,
@@ -14,7 +16,7 @@ import {
   StyledForm,
   StyledLoginRegister,
   StyledInput
-} from "../storyboard/StyleComponent";
+} from "../contents/StyleComponent";
 
 class Login extends Component {
   state = {

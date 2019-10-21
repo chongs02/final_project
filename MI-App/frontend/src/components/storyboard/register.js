@@ -18,7 +18,7 @@ import {
   StyledForm,
   StyledLoginRegister,
   StyledInput
-} from "../storyboard/StyleComponent";
+} from "../contents/StyleComponent";
 
 class Register extends Component {
   state = {

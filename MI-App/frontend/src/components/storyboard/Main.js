@@ -2,37 +2,57 @@ import React, { Component } from "react";
 import { Link, Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
-import MovieInfo from "./MovieInfo";
+import { movieInfo } from "../../actions/movieInfo";
+import SearchResult from "./SearchResult";
+// import MovieInfo from "./MovieInfo";
 
 class Main extends Component {
   state = {
-    keyword: ""
+    keyword: "",
+    isSearch: false
   };
+
+  componentDidMount() {
+    this.props.movieInfo();
+  }
 
   handleChange = e => {
     this.setState({
-      keyword: e.target.value
+      keyword: e.target.value,
+      isSearch: false
     });
+  };
+
+  renderSearchResult = () => {
+    return (
+      <SearchResult
+        keyword={this.state.keyword}
+        data={this.props.statemovieInfo}
+      />
+    );
+  };
+
+  handleSearchClick = () => {
+    this.setState({
+      isSearch: true
+    });
+  };
+
+  handleKeyPress = e => {
+    if (e.charCode === 13) {
+      this.handleSearchClick();
+    }
   };
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    const { keyword } = this.state;
-
-    const mapToComponent = data => {
-      data = data.filter(title => {
-        return title.movieNm.indexOf(keyword) > -1;
-      });
-      return data.map((title, i) => {
-        return <MovieInfo title={title.movieNm} key={i}></MovieInfo>;
-      });
-    };
 
     const AuthLink = (
       <div>
         <span>{user ? `welcome ${user.username}` : ""}</span>
         <button onClick={this.props.logout}>Logout</button>
         <Link to="/mypage">Mypage</Link>
+        <Link to="/movieDetails">영화상세정보</Link>
       </div>
     );
 
@@ -48,17 +68,14 @@ class Main extends Component {
         <input
           className="search"
           type="text"
-          placeholder="검색하시오"
+          placeholder="영화를 검색하세요"
           value={this.state.keword}
           onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
         ></input>
-        <button>검색</button>
+        <button onClick={this.handleSearchClick}>검색</button>
         <div>{isAuthenticated ? AuthLink : GuestLink}</div>
-        {this.props.isLoaded ? (
-          mapToComponent(this.props.movieInfo)
-        ) : (
-          <div>Loading</div>
-        )}
+        {this.state.isSearch ? this.renderSearchResult() : <div />}
       </nav>
     );
   }
@@ -68,12 +85,13 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     movieData: state.getScore.movieData,
-    movieInfo: state.getMovieInfo.movieInfo,
-    isLoaded: state.getScore.isLoaded
+    statemovieInfo: state.getMovieInfo.movieInfo,
+    InfoLoaded: state.getMovieInfo.InfoLoaded,
+    scoreLoaded: state.getScore.scoreLoaded
   };
 };
 
 export default connect(
   mapStateToProps,
-  { logout }
+  { logout, movieInfo }
 )(Main);

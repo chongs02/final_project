@@ -7,10 +7,12 @@ import { Provider, connect } from "react-redux";
 import { loadUser } from "./actions/auth";
 
 import store from "./store";
-import Login from "./components/users/login";
-import Register from "./components/users/register";
+import Login from "./components/storyboard/login";
+import Register from "./components/storyboard/register";
 import Main from "./components/storyboard/Main";
-import MyPage from "./components/users/MyPage";
+import MyPage from "./components/storyboard/MyPage";
+import MovieDetails from "./components/storyboard/MovieDetails";
+
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -28,6 +30,7 @@ class RootContainerComponent extends React.Component {
   componentDidMount() {
     this.props.loadUser();
   }
+
   PrivateRoute = ({ component: ChildComponent, ...rest }) => {
     return (
       <Route
@@ -44,6 +47,7 @@ class RootContainerComponent extends React.Component {
       />
     );
   };
+
   render() {
     let { PrivateRoute } = this;
     return (
@@ -55,12 +59,14 @@ class RootContainerComponent extends React.Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/movieDetails" component={MovieDetails} />
           </Switch>
         </BrowserRouter>
       </React.Fragment>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     auth: state.auth

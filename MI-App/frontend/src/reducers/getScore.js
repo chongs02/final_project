@@ -2,7 +2,7 @@ import * as types from "../actions/actionTypes";
 
 const initialState = {
   movieData: [],
-  isLoaded: false
+  scoreLoaded: false
 };
 
 export default function getScore(state = initialState, action) {
@@ -11,7 +11,7 @@ export default function getScore(state = initialState, action) {
       return {
         ...state,
         movieData: action.payload,
-        isLoaded: true
+        scoreLoaded: true
       };
     default:
       return state;
