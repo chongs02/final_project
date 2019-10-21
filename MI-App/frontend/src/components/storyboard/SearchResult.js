@@ -1,26 +1,54 @@
 import React, { useState } from "react";
-import MovieInfo from "../contents/MovieInfo";
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+
+import {
+  MovieInfo,
+  MovieSearchInfo,
+  MovieSimpleInfo
+} from "../contents/MovieInfo";
+import MovieDetails from "./MovieDetails";
 
 const SearchResult = ({ keyword, data }) => {
-  // handleClick = key => {
-  //   console.log(key.id, "is selected");
-  //   return key;
-  // };
+  const [isDetails, setIsDetails] = useState(false);
+  const [selected, setSelected] = useState([]);
 
-  data = data.filter(title => {
-    return title.movieNm.toLowerCase().indexOf(keyword) > -1;
+  const handleClick = i => {
+    setIsDetails(true);
+    setSelected([data[i]]);
+  };
+
+  data = data.filter(info => {
+    return info.movieNm.toLowerCase().indexOf(keyword) > -1;
   });
 
-  return data.map((title, i) => {
-    // const id = title.id;
+  const detail = (
+    <div>
+      {isDetails ? (
+        selected.map(info => {
+          console.log(info);
+          return (
+            <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />
+          );
+        })
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );
+
+  const search = data.map((info, i) => {
+    console.log(data);
     return (
-      <MovieInfo
-        title={title}
-        key={title.id}
-        // onClick={() => this.handleClick(id)}
-      ></MovieInfo>
+      <MovieSearchInfo
+        key={info.movieCd}
+        movieCd={info.movieCd}
+        info={info}
+        onClick={() => handleClick(i)}
+      />
     );
   });
+
+  return <div>{isDetails ? detail : search}</div>;
 };
 
 export default SearchResult;

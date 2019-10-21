@@ -23,15 +23,6 @@ class Main extends Component {
     });
   };
 
-  renderSearchResult = () => {
-    return (
-      <SearchResult
-        keyword={this.state.keyword}
-        data={this.props.statemovieInfo}
-      />
-    );
-  };
-
   handleSearchClick = () => {
     this.setState({
       isSearch: true
@@ -42,6 +33,15 @@ class Main extends Component {
     if (e.charCode === 13) {
       this.handleSearchClick();
     }
+  };
+
+  renderSearchResult = () => {
+    return (
+      <SearchResult
+        keyword={this.state.keyword}
+        data={this.props.statemovieInfo}
+      />
+    );
   };
 
   render() {
