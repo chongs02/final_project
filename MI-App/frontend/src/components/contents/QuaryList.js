@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { getScore } from "../actions/movieScore";
-import {movieInfo} from "../actions/movieInfo"
+import { movieInfo } from "../actions/movieInfo";
 
 // django csrftoken
 // axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -11,18 +10,16 @@ import {movieInfo} from "../actions/movieInfo"
 class QueryList extends Component {
   componentDidMount() {
     this.props.getScore();
-    this.props.movieInfo()
+    this.props.movieInfo();
   }
 
   moviecomponent = () => {
     const movieData = this.props.movieData;
     const data = movieData.map(item => {
-      console.log(item)
-      return (
-          <h1 key={item.id}>{item.movie_title}</h1>
-      );
+      console.log(item);
+      return <h1 key={item.id}>{item.movie_title}</h1>;
     });
-    return data
+    return data;
   };
 
   render() {
@@ -43,7 +40,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getScore,movieInfo }
+  { getScore, movieInfo }
 )(QueryList);
 
 // <React.Fragment>
