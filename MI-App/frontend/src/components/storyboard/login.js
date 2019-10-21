@@ -16,7 +16,7 @@ import {
   StyledForm,
   StyledLoginRegister,
   StyledInput
-} from "../contents/StyleComponent";
+} from "../contents/styleComponent";
 
 class Login extends Component {
   state = {

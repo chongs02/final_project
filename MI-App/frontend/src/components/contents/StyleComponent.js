@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const StyledNav = styled.nav`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const StyledInput = styled.input`
   padding: 0.5em;
   margin: 0.5em;
@@ -7,6 +14,7 @@ export const StyledInput = styled.input`
   background: papayawhip;
   border: none;
   border-radius: 3px;
+  width: ${props => props.size};
 `;
 
 export const StyledLoginRegister = styled.div`
