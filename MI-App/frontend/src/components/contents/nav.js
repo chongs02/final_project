@@ -11,24 +11,6 @@ import { home } from "react-icons-kit/icomoon/home";
 import { StyledInput, StyledNav, StyledButton } from "./styleComponent";
 
 const Nav = props => {
-  const [keyword, setKeyword] = useState("");
-  const [isSearch, setIsSearch] = useState(false);
-
-  const handleChange = e => {
-    setKeyword(e.target.value);
-    setIsSearch(false);
-  };
-
-  const handleSearchClick = () => {
-    setIsSearch(true);
-  };
-
-  const handleKeyPress = e => {
-    if (e.charCode === 13) {
-      this.handleSearchClick();
-    }
-  };
-
   return (
     <StyledNav className="nav">
       <div style={{ marginRight: "20px" }}>
@@ -40,12 +22,12 @@ const Nav = props => {
         className="search"
         type="text"
         placeholder="영화를 검색하세요"
-        value={keyword}
-        onChange={handleChange}
-        onKeyPress={handleKeyPress}
+        value={props.value}
+        onChange={props.onChange}
+        onKeyPress={props.onKeyPress}
         size="50%"
       ></StyledInput>
-      <StyledButton onClick={handleSearchClick}>검색</StyledButton>
+      <StyledButton onClick={props.onClick}>검색</StyledButton>
       <div
         style={{
           textAlign: "right",
