@@ -9,12 +9,33 @@ import Nav from "../contents/nav";
 class Main extends Component {
   state = {
     keyword: "",
-    isSearch: false
+    isSearch: false,
+    isChanged: false
   };
 
   componentDidMount() {
     this.props.movieInfo();
   }
+
+  handleChange = e => {
+    this.setState({
+      keyword: e.target.value,
+      isChanged: false
+    });
+  };
+
+  handleClick = () => {
+    this.setState({
+      isSearch: true,
+      isChanged: true
+    });
+  };
+
+  handleKeyPress = e => {
+    if (e.charCode === 13) {
+      this.handleClick();
+    }
+  };
 
   renderSearchResult = () => {
     return (
@@ -26,25 +47,18 @@ class Main extends Component {
   };
 
   render() {
-    // const AuthLink = (
-    //   <div>
-    //     {/* <span>{user ? `welcome ${user.username}` : ""}</span>
-    //     <button onClick={this.props.logout}>Logout</button>
-    //     <Link to="/mypage">Mypage</Link> */}
-    //   </div>
-    // );
-
-    // const GuestLink = (
-    //   <div>
-    //     <Link to="/login">Log In</Link>
-    //     <Link to="/register">Register</Link>
-    //   </div>
-    // );
-
+    const { keyword, isSearch, isChanged } = this.state;
+    console.log(isSearch, isChanged);
     return (
       <React.Fragment>
-        <Nav></Nav>
-        {this.state.isSearch ? this.renderSearchResult() : <div />}
+        <Nav
+          value={keyword}
+          isSearch={isSearch}
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
+          onClick={this.handleClick}
+        ></Nav>
+        {isSearch || isChanged ? this.renderSearchResult() : <div />}
       </React.Fragment>
     );
   }
