@@ -42,7 +42,7 @@ class Register extends Component {
       <StyledLoginRegister>
         <StyledForm onSubmit={this.onSubmit}>
           <StyledFieldSet>
-            <legend style={{ color: "white" }}>등록</legend>
+            <legend>등록</legend>
             <StyledH1>
               <img
                 src={logo}
@@ -59,7 +59,7 @@ class Register extends Component {
                 ))}
               </ul>
             )}
-            <div style={{ color: "white" }}>
+            <div>
               <Icon size={64} icon={ic_person} />
 
               <StyledInput
@@ -68,7 +68,7 @@ class Register extends Component {
                 onChange={e => this.setState({ username: e.target.value })}
               />
             </div>
-            <div style={{ color: "white" }}>
+            <div>
               <Icon size={64} icon={ic_vpn_key} />
               <StyledInput
                 type="password"
@@ -79,10 +79,10 @@ class Register extends Component {
             <AlignSubmit>
               <StyledButton type="submit">등록</StyledButton>
             </AlignSubmit>
-            <div style={{ color: "white", textAlign: "right" }}>
+            <div style={{ textAlign: "right" }}>
               계정이 있으시다구요?
               <Link to="/login">
-                <StyledButton type="submit">Login</StyledButton>
+                s<StyledButton type="submit">Login</StyledButton>
               </Link>
             </div>
           </StyledFieldSet>
