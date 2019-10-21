@@ -5,6 +5,21 @@ import { Link, Redirect } from "react-router-dom";
 
 import { register } from "../../actions/auth";
 
+import { ic_person } from "react-icons-kit/md/ic_person";
+import { Icon } from "react-icons-kit";
+import { ic_vpn_key } from "react-icons-kit/md/ic_vpn_key";
+import logo from "../../statics/logo.png";
+
+import {
+  AlignSubmit,
+  StyledButton,
+  StyledH1,
+  StyledFieldSet,
+  StyledForm,
+  StyledLoginRegister,
+  StyledInput
+} from "../storyboard/StyleComponent";
+
 class Register extends Component {
   state = {
     username: "",
@@ -24,41 +39,55 @@ class Register extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <form onSubmit={this.onSubmit}>
-        <fieldset>
-          <legend>Register</legend>
-          {this.props.errors.length > 0 && (
-            <ul>
-              {this.props.errors.map(error => (
-                <li key={error.field}>{error.message}</li>
-              ))}
-            </ul>
-          )}
-          <p>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              onChange={e => this.setState({ username: e.target.value })}
-            />
-          </p>
-          <p>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              onChange={e => this.setState({ password: e.target.value })}
-            />
-          </p>
-          <p>
-            <button type="submit">Register</button>
-          </p>
+      <StyledLoginRegister>
+        <StyledForm onSubmit={this.onSubmit}>
+          <StyledFieldSet>
+            <legend style={{ color: "white" }}>등록</legend>
+            <StyledH1>
+              <img
+                src={logo}
+                alt={"logo"}
+                width={50}
+                style={{ verticalAlign: "middle" }}
+              />
+              <span>Movie Inside</span>
+            </StyledH1>
+            {this.props.errors.length > 0 && (
+              <ul>
+                {this.props.errors.map(error => (
+                  <li key={error.field}>{error.message}</li>
+                ))}
+              </ul>
+            )}
+            <div style={{ color: "white" }}>
+              <Icon size={64} icon={ic_person} />
 
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
-        </fieldset>
-      </form>
+              <StyledInput
+                type="text"
+                id="username"
+                onChange={e => this.setState({ username: e.target.value })}
+              />
+            </div>
+            <div style={{ color: "white" }}>
+              <Icon size={64} icon={ic_vpn_key} />
+              <StyledInput
+                type="password"
+                id="password"
+                onChange={e => this.setState({ password: e.target.value })}
+              />
+            </div>
+            <AlignSubmit>
+              <StyledButton type="submit">등록</StyledButton>
+            </AlignSubmit>
+            <div style={{ color: "white", textAlign: "right" }}>
+              계정이 있으시다구요?
+              <Link to="/login">
+                <StyledButton type="submit">Login</StyledButton>
+              </Link>
+            </div>
+          </StyledFieldSet>
+        </StyledForm>
+      </StyledLoginRegister>
     );
   }
 }

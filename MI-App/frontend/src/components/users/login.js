@@ -2,61 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { login } from "../../actions/auth";
-import styled from "styled-components";
 import { ic_person } from "react-icons-kit/md/ic_person";
 import { Icon } from "react-icons-kit";
 import { ic_vpn_key } from "react-icons-kit/md/ic_vpn_key";
 import logo from "../../statics/logo.png";
-
-const StyledInput = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  color: palevioletred;
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-`;
-
-const StyledLogin = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledForm = styled.form`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledFieldSet = styled.fieldset`
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledH1 = styled.h1`
-  color: white;
-  text-align: right;
-  display: inline-block;
-`;
-
-const StyledButton = styled.button`
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border-radius: 3px;
-  color: palevioletred;
-  border: 2px solid palevioletred;
-  margin-right: 0px;
-  font-family: "font";
-`;
-
-const AlignSubmit = styled.div`
-  text-align: right;
-`;
+import {
+  AlignSubmit,
+  StyledButton,
+  StyledH1,
+  StyledFieldSet,
+  StyledForm,
+  StyledLoginRegister,
+  StyledInput
+} from "../storyboard/StyleComponent";
 
 class Login extends Component {
   state = {
@@ -74,12 +32,19 @@ class Login extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <StyledLogin>
+      <StyledLoginRegister>
         <StyledForm onSubmit={this.onSubmit}>
           <StyledFieldSet>
+            <legend style={{ color: "white" }}>Login</legend>
+
             <StyledH1>
-              <img src={logo} alt={"logo"} width={50} />
-              Movie Inside
+              <img
+                src={logo}
+                alt={"logo"}
+                width={50}
+                style={{ verticalAlign: "middle" }}
+              />
+              <span>Movie Inside</span>
             </StyledH1>
             {this.props.errors.length > 0 && (
               <ul>
@@ -115,7 +80,7 @@ class Login extends Component {
             </div>
           </StyledFieldSet>
         </StyledForm>
-      </StyledLogin>
+      </StyledLoginRegister>
     );
   }
 }
