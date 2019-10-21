@@ -5,7 +5,7 @@ import {
   MovieInfo,
   MovieSearchInfo,
   MovieSimpleInfo
-} from "../contents/MovieInfo";
+} from "../contents/movieInfo";
 import MovieDetails from "./MovieDetails";
 
 const SearchResult = ({ keyword, data }) => {

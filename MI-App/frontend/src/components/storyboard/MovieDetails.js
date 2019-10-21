@@ -1,5 +1,5 @@
 import React from "react";
-import MovieInfo from "../contents/MovieInfo";
+import MovieInfo from "../contents/movieInfo";
 
 const MovieDetails = ({ info }) => {
   console.log(info);
