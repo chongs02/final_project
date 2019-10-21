@@ -3,14 +3,16 @@ import React, { Component } from "react";
 // 상세 정보 페이지 영화 상세 정보
 export class MovieInfo extends React.Component {
   render() {
-    console.log(this.props.info);
     return (
       <div>
         <p>{this.props.info.movieNm}</p>
         <p>{this.props.info.movieNmEn}</p>
         <p>{this.props.info.nations}</p>
         <p>{this.props.info.prdtStatNm}</p>
-        <p>{this.props.info.repGenre}</p>
+        <p>{this.props.info.genre}</p>
+        <p>{this.props.info.directors}</p>
+        <p>{this.props.info.showTm}</p>
+        <p>{this.props.info.watchGradeNm.split(",")[0]}</p>
       </div>
     );
   }

@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 import {
   MovieInfo,
   MovieSearchInfo,
   MovieSimpleInfo
 } from "../contents/movieInfo";
-import MovieDetails from "./movieDetails";
 
 const SearchResult = ({ keyword, data }) => {
   const [isDetails, setIsDetails] = useState(false);
@@ -17,27 +15,25 @@ const SearchResult = ({ keyword, data }) => {
     setSelected([data[i]]);
   };
 
-  data = data.filter(info => {
-    return info.movieNm.toLowerCase().indexOf(keyword) > -1;
+  const filterData = data => {
+    const newData = data.filter(info => {
+      return info.movieNm.toLowerCase().indexOf(keyword) > -1;
+    });
+    return newData;
+  };
+  data = filterData(data);
+
+  useEffect(() => {
+    return () => {
+      setIsDetails(false);
+    };
+  }, [keyword]);
+
+  const detail = selected.map(info => {
+    return <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />;
   });
 
-  const detail = (
-    <div>
-      {isDetails ? (
-        selected.map(info => {
-          console.log(info);
-          return (
-            <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />
-          );
-        })
-      ) : (
-        <div></div>
-      )}
-    </div>
-  );
-
   const search = data.map((info, i) => {
-    console.log(data);
     return (
       <MovieSearchInfo
         key={info.movieCd}

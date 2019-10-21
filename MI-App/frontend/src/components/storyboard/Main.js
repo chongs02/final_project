@@ -4,47 +4,71 @@ import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
 import SearchResult from "./searchResult";
 
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+import MyPage from "./myPage";
+import MovieDetails from "./movieDetails";
+import Logout from "./logout";
 import Nav from "../contents/nav";
 
 class Main extends Component {
   state = {
     keyword: "",
-    isSearch: false
+    currentView: null
   };
 
   componentDidMount() {
     this.props.movieInfo();
   }
 
+  handleChange = e => {
+    this.setState({
+      keyword: e.target.value
+    });
+  };
+
+  handleClick = () => {
+    this.renderSearchResult();
+  };
+
+  handleKeyPress = e => {
+    if (e.charCode === 13) {
+      this.handleClick();
+    }
+  };
+
   renderSearchResult = () => {
-    return (
+    let component = (
       <SearchResult
         keyword={this.state.keyword}
         data={this.props.statemovieInfo}
+        isSearch={this.state.isSearch}
       />
     );
+    this.setState({
+      currentView: component
+    });
   };
 
   render() {
-    // const AuthLink = (
-    //   <div>
-    //     {/* <span>{user ? `welcome ${user.username}` : ""}</span>
-    //     <button onClick={this.props.logout}>Logout</button>
-    //     <Link to="/mypage">Mypage</Link> */}
-    //   </div>
-    // );
-
-    // const GuestLink = (
-    //   <div>
-    //     <Link to="/login">Log In</Link>
-    //     <Link to="/register">Register</Link>
-    //   </div>
-    // );
-
+    const { keyword, currentView } = this.state;
+    // console.log(currentView);
     return (
       <React.Fragment>
-        <Nav></Nav>
-        {this.state.isSearch ? this.renderSearchResult() : <div />}
+        <BrowserRouter>
+          <Nav
+            value={keyword}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+            onClick={this.handleClick}
+          ></Nav>
+          {currentView}
+
+          <Switch>
+            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/movieDetails" component={MovieDetails} />
+            <Route exact path="/logout" component={Logout} />
+          </Switch>
+        </BrowserRouter>
       </React.Fragment>
     );
   }
