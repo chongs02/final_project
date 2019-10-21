@@ -9,9 +9,11 @@ import { loadUser } from "./actions/auth";
 import store from "./store";
 import Login from "./components/storyboard/login";
 import Register from "./components/storyboard/register";
-import Main from "./components/storyboard/Main";
-import MyPage from "./components/storyboard/MyPage";
-import MovieDetails from "./components/storyboard/MovieDetails";
+import Main from "./components/storyboard/main";
+import MyPage from "./components/storyboard/myPage";
+import MovieDetails from "./components/storyboard/movieDetails";
+import Logout from "./components/storyboard/logout";
+import Nav from "./components/contents/nav";
 
 import { createGlobalStyle } from "styled-components";
 
@@ -60,6 +62,7 @@ class RootContainerComponent extends React.Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/movieDetails" component={MovieDetails} />
+            <Route exact path="/logout" component={Logout} />
           </Switch>
         </BrowserRouter>
       </React.Fragment>

@@ -3,8 +3,9 @@ import { Link, Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
-import SearchResult from "./SearchResult";
-// import MovieInfo from "./MovieInfo";
+import SearchResult from "./searchResult";
+
+import Nav from "../contents/nav";
 
 class Main extends Component {
   state = {
@@ -16,13 +17,6 @@ class Main extends Component {
     this.props.movieInfo();
   }
 
-  handleChange = e => {
-    this.setState({
-      keyword: e.target.value,
-      isSearch: false
-    });
-  };
-
   renderSearchResult = () => {
     return (
       <SearchResult
@@ -32,51 +26,29 @@ class Main extends Component {
     );
   };
 
-  handleSearchClick = () => {
-    this.setState({
-      isSearch: true
-    });
-  };
-
-  handleKeyPress = e => {
-    if (e.charCode === 13) {
-      this.handleSearchClick();
-    }
-  };
-
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
-    const AuthLink = (
-      <div>
-        <span>{user ? `welcome ${user.username}` : ""}</span>
-        <button onClick={this.props.logout}>Logout</button>
-        <Link to="/mypage">Mypage</Link>
-        <Link to="/movieDetails">영화상세정보</Link>
-      </div>
-    );
+    // const AuthLink = (
+    //   <div>
+    //     {/* <span>{user ? `welcome ${user.username}` : ""}</span>
+    //     <button onClick={this.props.logout}>Logout</button>
+    //     <Link to="/mypage">Mypage</Link> */}
+    //   </div>
+    // );
 
-    const GuestLink = (
-      <div>
-        <Link to="/login">Log In</Link>
-        <Link to="/register">Register</Link>
-      </div>
-    );
+    // const GuestLink = (
+    //   <div>
+    //     <Link to="/login">Log In</Link>
+    //     <Link to="/register">Register</Link>
+    //   </div>
+    // );
 
     return (
-      <nav className="nav">
-        <input
-          className="search"
-          type="text"
-          placeholder="영화를 검색하세요"
-          value={this.state.keword}
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-        ></input>
-        <button onClick={this.handleSearchClick}>검색</button>
-        <div>{isAuthenticated ? AuthLink : GuestLink}</div>
+      <React.Fragment>
+        <Nav></Nav>
         {this.state.isSearch ? this.renderSearchResult() : <div />}
-      </nav>
+      </React.Fragment>
     );
   }
 }
