@@ -13,7 +13,6 @@ import Main from "./components/storyboard/main";
 import MyPage from "./components/storyboard/myPage";
 import MovieDetails from "./components/storyboard/movieDetails";
 import Logout from "./components/storyboard/logout";
-import Nav from "./components/contents/nav";
 
 import { createGlobalStyle } from "styled-components";
 

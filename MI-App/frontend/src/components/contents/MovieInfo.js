@@ -1,24 +1,31 @@
 import React, { Component } from "react";
 
 // 상세 정보 페이지 영화 상세 정보
-class MovieInfo extends React.Component {
+export class MovieInfo extends React.Component {
   render() {
-    return <div>{this.props.title.movieNm}</div>;
+    console.log(this.props.info);
+    return (
+      <div>
+        <p>{this.props.info.movieNm}</p>
+        <p>{this.props.info.movieNmEn}</p>
+        <p>{this.props.info.nations}</p>
+        <p>{this.props.info.prdtStatNm}</p>
+        <p>{this.props.info.repGenre}</p>
+      </div>
+    );
   }
 }
 
 // 메인 페이지 영화 간단 정보
-class MovieSimpleInfo extends Component {
+export class MovieSimpleInfo extends Component {
   render() {
-    return <div>{this.props.title.movieNm}</div>;
+    return <div>{this.props.info.movieNm}</div>;
   }
 }
 
 // 서치 페이지 영화 요약 정보
-class MovieSearchInfo extends Component {
+export class MovieSearchInfo extends Component {
   render() {
-    return <div>{this.props.title.movieNm}</div>;
+    return <div onClick={this.props.onClick}>{this.props.info.movieNm}</div>;
   }
 }
-
-export default MovieInfo;

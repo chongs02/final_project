@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link, Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
@@ -27,8 +26,6 @@ class Main extends Component {
   };
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
-
     // const AuthLink = (
     //   <div>
     //     {/* <span>{user ? `welcome ${user.username}` : ""}</span>
