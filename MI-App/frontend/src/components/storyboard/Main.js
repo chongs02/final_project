@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
