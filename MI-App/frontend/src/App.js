@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
                 }
                 body{
                   height: 100%;
-                  
+                  color: white;
                   background-color: black;
                 }
                 `;

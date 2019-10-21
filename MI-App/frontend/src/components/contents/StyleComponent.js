@@ -32,7 +32,6 @@ export const StyledFieldSet = styled.fieldset`
 `;
 
 export const StyledH1 = styled.h1`
-  color: white;
   text-align: right;
   display: inline-block;
 `;
