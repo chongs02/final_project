@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 
-import {
-  MovieInfo,
-  MovieSearchInfo,
-  MovieSimpleInfo
-} from "../contents/movieInfo";
-import MovieDetails from "./movieDetails";
+import { MovieInfo, MovieSearchInfo } from "../contents/movieInfo";
 
 const SearchResult = ({ keyword, data }) => {
   const [isDetails, setIsDetails] = useState(false);
