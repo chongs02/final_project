@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MovieInfo from "./MovieInfo";
+import MovieInfo from "../contents/MovieInfo";
 
 const SearchResult = ({ keyword, data }) => {
   // handleClick = key => {

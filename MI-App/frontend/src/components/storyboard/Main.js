@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Link, Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
-import MovieInfo from "../MovieInfo";
 import { movieInfo } from "../../actions/movieInfo";
-import SearchResult from "../SearchResult";
+import SearchResult from "./SearchResult";
+// import MovieInfo from "./MovieInfo";
 
 class Main extends Component {
   state = {

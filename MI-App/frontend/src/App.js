@@ -7,11 +7,24 @@ import { Provider, connect } from "react-redux";
 import { loadUser } from "./actions/auth";
 
 import store from "./store";
-import Login from "./components/users/login";
-import Register from "./components/users/register";
-import Main from "./components/layouts/Main";
-import MyPage from "./components/users/MyPage";
-import MovieDetails from "./components/MovieDetails";
+import Login from "./components/storyboard/login";
+import Register from "./components/storyboard/register";
+import Main from "./components/storyboard/Main";
+import MyPage from "./components/storyboard/MyPage";
+import MovieDetails from "./components/storyboard/MovieDetails";
+
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+                html {
+                  height: 100%;
+                }
+                body{
+                  height: 100%;
+                  
+                  background-color: black;
+                }
+                `;
 
 class RootContainerComponent extends React.Component {
   componentDidMount() {
@@ -38,15 +51,18 @@ class RootContainerComponent extends React.Component {
   render() {
     let { PrivateRoute } = this;
     return (
-      <BrowserRouter>
-        <Switch>
-          <PrivateRoute exact path="/" component={Main} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/mypage" component={MyPage} />
-          <Route exact path="/movieDetails" component={MovieDetails} />
-        </Switch>
-      </BrowserRouter>
+      <React.Fragment>
+        <GlobalStyle></GlobalStyle>
+        <BrowserRouter>
+          <Switch>
+            <PrivateRoute exact path="/" component={Main} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/movieDetails" component={MovieDetails} />
+          </Switch>
+        </BrowserRouter>
+      </React.Fragment>
     );
   }
 }
