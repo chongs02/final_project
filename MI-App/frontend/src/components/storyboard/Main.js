@@ -5,17 +5,16 @@ import { movieInfo } from "../../actions/movieInfo";
 import SearchResult from "./searchResult";
 import update from "react-addons-update";
 
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+import MyPage from "./myPage";
+import MovieDetails from "./movieDetails";
+import Logout from "./logout";
 import Nav from "../contents/nav";
-
-let search = false;
 
 class Main extends Component {
   state = {
     keyword: "",
-    isSearch: false,
-    history: [],
-    count: 0
-    // currentView: null
+    currentView: null
   };
 
   componentDidMount() {
@@ -34,34 +33,13 @@ class Main extends Component {
   }
 
   handleChange = e => {
-    search = false;
-
-    const { history, count } = this.state;
-
     this.setState({
-      isSearch: false,
-      keyword: e.target.value,
-      history: history:
-
-      // history: update(history, {
-      //   [count]: current
-      // })
+      keyword: e.target.value
     });
   };
 
   handleClick = () => {
-    search = true;
-
-    const { history } = this.state;
-    const current = this.renderSearchResult();
-
-    this.setState({
-      isSearch: true,
-      history: history.concat(current),
-      count: this.state.count + 1
-
-      // currentView: this.renderSearchResult()
-    });
+    this.renderSearchResult();
   };
 
   handleKeyPress = e => {
@@ -71,44 +49,38 @@ class Main extends Component {
   };
 
   renderSearchResult = () => {
-    return (
+    let component = (
       <SearchResult
         keyword={this.state.keyword}
         data={this.props.statemovieInfo}
-        isSearch={search}
+        isSearch={this.state.isSearch}
       />
     );
+    this.setState({
+      currentView: component
+    });
   };
 
   render() {
-    const { keyword, isSearch, history, count } = this.state;
-    const current = history[count - 1];
-
-    let currentView;
-    if (count < 2) {
-      currentView = current;
-    } else {
-      currentView = history[count - 2];
-    }
-
-    // let currentView = this.renderSearchResult();
-
-    console.log(isSearch, ": main");
-    console.log(history, "history");
-    console.log(current, "current");
-    console.log(count, "count");
-    console.log(currentView, "currentView");
-
+    const { keyword, currentView } = this.state;
+    // console.log(currentView);
     return (
       <React.Fragment>
-        <Nav
-          value={keyword}
-          isSearch={isSearch}
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-          onClick={this.handleClick}
-        ></Nav>
-        {search ? current : currentView}
+        <BrowserRouter>
+          <Nav
+            value={keyword}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+            onClick={this.handleClick}
+          ></Nav>
+          {currentView}
+
+          <Switch>
+            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/movieDetails" component={MovieDetails} />
+            <Route exact path="/logout" component={Logout} />
+          </Switch>
+        </BrowserRouter>
       </React.Fragment>
     );
   }
