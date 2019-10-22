@@ -4,16 +4,16 @@ from rest_framework.response import Response
 from django.contrib.auth import logout
 
 from knox.models import AuthToken
-from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, AccountSerializer
-from .models import Account
+from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
+from .models import Profile
 
 
-class AccountViewSet(viewsets.ModelViewSet):
+class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
 
-    serializer_class = AccountSerializer
+    serializer_class = ProfileSerializer
 
     def get_queryset(self):
         return self.request.user.account.all()
