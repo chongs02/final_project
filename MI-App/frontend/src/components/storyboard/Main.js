@@ -4,7 +4,7 @@ import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
 import SearchResult from "./searchResult";
 
-import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import MyPage from "./myPage";
 import MovieDetails from "./movieDetails";
 import Logout from "./logout";
@@ -41,7 +41,6 @@ class Main extends Component {
       <SearchResult
         keyword={this.state.keyword}
         data={this.props.statemovieInfo}
-        isSearch={this.state.isSearch}
       />
     );
     this.setState({

@@ -5,11 +5,7 @@ from .models import Profile
 
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def create_block(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def seve_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+        instance.user_set.create(
+            user=instance.user, password=instance.password)

@@ -16,10 +16,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
 
     def get_queryset(self):
-        return self.request.user.account.all()
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        print(self.request.user)
+        return Profile.objects.filter(user=self.request.user)
 
 
 class RegistrationAPI(generics.GenericAPIView):
