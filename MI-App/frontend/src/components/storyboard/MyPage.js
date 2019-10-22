@@ -7,7 +7,7 @@ class MyPage extends React.Component {
     this.props.loadUserProfile();
   }
 
-  moviecomponent = () => {
+  movieComponent = () => {
     const profile = this.props.profile;
     const data = profile.map(item => {
       console.log(item);
@@ -20,7 +20,7 @@ class MyPage extends React.Component {
     console.log(this.props.profile);
     return (
       <div>
-        {this.props.profile === null ? "Loading" : this.moviecomponent()}
+        {this.props.profile === null ? "Loading" : this.movieComponent()}
       </div>
     );
   }
@@ -29,7 +29,8 @@ class MyPage extends React.Component {
 const mapStateToProps = state => {
   return {
     profile: state.auth.profile,
-    profileLoading: state.auth.profileLoading
+    profileLoading: state.auth.profileLoading,
+    naverMovie: state.naverMovie.naverMovie
   };
 };
 
