@@ -7,6 +7,9 @@ export const LOGIN_FAILED = "LOGIN_FAILED";
 export const REGISTRATION_FAILED = "REGISTRATION_FAILED";
 export const LOGOUT_SUCCESSFUL = "LOGOUT_SUCCESSFUL";
 
+export const USER_PROFILE_LOADING = "USER_PROFILE_LOADING";
+export const USER_PROFILE_LOADED = "USER_PROFILE_LOADED";
+
 //
 export const GET_ERRORS = "GET_ERRORS";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
@@ -14,4 +17,4 @@ export const CREATE_MESSAGE = "CREATE_MESSAGE";
 //Moviescore
 
 export const GET_SCORE = "GET_SCORE";
-export const GET_MOVIE_INFO = "GET_MOVIE_INFO"
+export const GET_MOVIE_INFO = "GET_MOVIE_INFO";

@@ -4,20 +4,33 @@ const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   isLoading: false,
-  user: null
+  user: null,
+  profileLoading: false,
+  profile: null
 };
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case "USER_LOADING":
+    case types.USER_LOADING:
       return { ...state, isLoading: true };
 
-    case "USER_LOADED":
+    case types.USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         isLoading: false,
         user: action.payload
+      };
+
+    case types.USER_PROFILE_LOADING:
+      return { ...state, profileLoading: true };
+
+    case types.USER_PROFILE_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        profileLoading: false,
+        profile: action.payload
       };
 
     case types.LOGIN_SUCCESSFUL:
