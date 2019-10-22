@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
@@ -12,14 +12,13 @@ import { StyledInput, StyledNav, StyledButton } from "./styleComponent";
 
 const Nav = props => {
   return (
-    <StyledNav className="nav">
+    <StyledNav>
       <div style={{ marginRight: "20px" }}>
-        <NavLink to="/">
+        <NavLink exact to="/">
           <Icon size={24} icon={home} />
         </NavLink>
       </div>
       <StyledInput
-        className="search"
         type="text"
         placeholder="영화를 검색하세요"
         value={props.value}
@@ -27,7 +26,9 @@ const Nav = props => {
         onKeyPress={props.onKeyPress}
         size="50%"
       ></StyledInput>
-      <StyledButton onClick={props.onClick}>검색</StyledButton>
+      <NavLink exact to="/search">
+        <StyledButton onClick={props.onClick}>검색</StyledButton>
+      </NavLink>
       <div
         style={{
           textAlign: "right",
@@ -37,12 +38,12 @@ const Nav = props => {
         }}
       >
         <div style={{ marginLeft: "20px" }}>
-          <NavLink to="/mypage">
+          <NavLink exact to="/mypage">
             <Icon size={24} icon={userIcon} />
           </NavLink>
         </div>
         <div style={{ marginLeft: "20px" }}>
-          <NavLink to="/logout">
+          <NavLink exact to="/logout">
             <Icon size={24} icon={power} />
           </NavLink>
         </div>

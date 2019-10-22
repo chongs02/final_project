@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
-import SearchResult from "./searchResult";
 
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Nav from "../contents/nav";
+import SearchResult from "./searchResult";
+import MyPage from "./myPage";
+import Logout from "./logout";
 
 class Main extends Component {
   state = {
     keyword: "",
-    isSearch: false,
-    isChanged: false
+    renderKeyword: ""
   };
 
   componentDidMount() {
@@ -19,16 +21,15 @@ class Main extends Component {
 
   handleChange = e => {
     this.setState({
-      keyword: e.target.value,
-      isChanged: false
+      keyword: e.target.value
     });
   };
 
   handleClick = () => {
     this.setState({
-      isSearch: true,
-      isChanged: true
+      renderKeyword: this.state.keyword
     });
+    document.querySelector("button").click();
   };
 
   handleKeyPress = e => {
@@ -37,28 +38,34 @@ class Main extends Component {
     }
   };
 
-  renderSearchResult = () => {
-    return (
-      <SearchResult
-        keyword={this.state.keyword}
-        data={this.props.statemovieInfo}
-      />
-    );
-  };
-
   render() {
-    const { keyword, isSearch, isChanged } = this.state;
-    console.log(isSearch, isChanged);
+    const { keyword, renderKeyword } = this.state;
+
     return (
       <React.Fragment>
-        <Nav
-          value={keyword}
-          isSearch={isSearch}
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-          onClick={this.handleClick}
-        ></Nav>
-        {isSearch || isChanged ? this.renderSearchResult() : <div />}
+        <BrowserRouter>
+          <Nav
+            value={keyword}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+            onClick={this.handleClick}
+          ></Nav>
+
+          <Switch>
+            <Route
+              exact
+              path="/search"
+              render={() => (
+                <SearchResult
+                  keyword={renderKeyword}
+                  data={this.props.statemovieInfo}
+                />
+              )}
+            />
+            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/logout" component={Logout} />
+          </Switch>
+        </BrowserRouter>
       </React.Fragment>
     );
   }
