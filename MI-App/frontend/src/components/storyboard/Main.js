@@ -2,34 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
-import SearchResult from "./searchResult";
-import update from "react-addons-update";
 
-import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
-import MyPage from "./myPage";
-import MovieDetails from "./movieDetails";
-import Logout from "./logout";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Nav from "../contents/nav";
+import SearchResult from "./searchResult";
+import MyPage from "./myPage";
+import Logout from "./logout";
 
 class Main extends Component {
   state = {
     keyword: "",
-    currentView: null
+    renderKeyword: ""
   };
 
   componentDidMount() {
     this.props.movieInfo();
-  }
-
-  handleEdit(name, phone) {
-    this.setState({
-      contactData: update(this.state.contactData, {
-        [this.state.selectedKey]: {
-          name: { $set: name },
-          phone: { $set: phone }
-        }
-      })
-    });
   }
 
   handleChange = e => {
@@ -39,7 +26,10 @@ class Main extends Component {
   };
 
   handleClick = () => {
-    this.renderSearchResult();
+    this.setState({
+      renderKeyword: this.state.keyword
+    });
+    document.querySelector("button").click();
   };
 
   handleKeyPress = e => {
@@ -48,22 +38,9 @@ class Main extends Component {
     }
   };
 
-  renderSearchResult = () => {
-    let component = (
-      <SearchResult
-        keyword={this.state.keyword}
-        data={this.props.statemovieInfo}
-        isSearch={this.state.isSearch}
-      />
-    );
-    this.setState({
-      currentView: component
-    });
-  };
-
   render() {
-    const { keyword, currentView } = this.state;
-    // console.log(currentView);
+    const { keyword, renderKeyword } = this.state;
+
     return (
       <React.Fragment>
         <BrowserRouter>
@@ -73,11 +50,19 @@ class Main extends Component {
             onKeyPress={this.handleKeyPress}
             onClick={this.handleClick}
           ></Nav>
-          {currentView}
 
           <Switch>
+            <Route
+              exact
+              path="/search"
+              render={() => (
+                <SearchResult
+                  keyword={renderKeyword}
+                  data={this.props.statemovieInfo}
+                />
+              )}
+            />
             <Route exact path="/mypage" component={MyPage} />
-            <Route exact path="/movieDetails" component={MovieDetails} />
             <Route exact path="/logout" component={Logout} />
           </Switch>
         </BrowserRouter>
