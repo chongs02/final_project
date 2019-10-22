@@ -25,7 +25,7 @@ class MovieInfo(models.Model):
     companyNmEn = models.TextField()
     companyPartNm = models.TextField()
     watchGradeNm = models.TextField()
-    posterUrl = models.TextField(blank = True)
+    poster = models.TextField(blank = True)
 
     # owner = models.ForeignKey(User, related_name="moviescore",
     #                           on_delete=models.CASCADE, null=True)
