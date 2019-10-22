@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'knox',
+    'django_filters'
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    # 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 
 }
 # CORS_ALLOW_CREDENTIALS = True

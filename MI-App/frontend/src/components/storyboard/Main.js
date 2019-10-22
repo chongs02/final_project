@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
+import { loadUserProfile } from "../../actions/auth";
 
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Nav from "../contents/nav";
@@ -14,9 +15,8 @@ class Main extends Component {
     keyword: "",
     renderKeyword: ""
   };
-
   componentDidMount() {
-    this.props.movieInfo();
+    this.props.loadUserProfile();
   }
 
   handleChange = e => {
@@ -29,6 +29,7 @@ class Main extends Component {
     this.setState({
       renderKeyword: this.state.keyword
     });
+    this.props.movieInfo(this.state.keyword);
     document.querySelector("button").click();
   };
 
@@ -83,5 +84,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { logout, movieInfo }
+  { logout, movieInfo, loadUserProfile }
 )(Main);
