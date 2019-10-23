@@ -16,7 +16,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
 
     def get_queryset(self):
-        print(self.request.user)
+        # print(self.request.user)
         return Profile.objects.filter(user=self.request.user)
 
 

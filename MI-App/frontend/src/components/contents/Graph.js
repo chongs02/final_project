@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
 
-class Content extends Component {
+class Graph extends Component {
   chartRef;
 
   componentDidMount() {
@@ -71,4 +71,4 @@ class Content extends Component {
     );
   }
 }
-export default Content;
+export default Graph;
