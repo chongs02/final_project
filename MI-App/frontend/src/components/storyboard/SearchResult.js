@@ -15,14 +15,6 @@ const SearchResult = ({ keyword, data }) => {
     setSelected([data[i]]);
   };
 
-  const filterData = data => {
-    const newData = data.filter(info => {
-      return info.movieNm.toLowerCase().indexOf(keyword) > -1;
-    });
-    return newData;
-  };
-  data = filterData(data);
-
   useEffect(() => {
     return () => {
       setIsDetails(false);

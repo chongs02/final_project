@@ -8,7 +8,6 @@ from movieInfo.views import MovieInfoView
 
 router = routers.DefaultRouter()
 router.register('movieScore', MovieScoreView, 'movieScore')
-router.register('movieInfo', MovieInfoView, 'movieInfo')
 
 
 class HomeTemplateView(TemplateView):
@@ -18,6 +17,7 @@ class HomeTemplateView(TemplateView):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('movie-api/', include(router.urls)),
+    path('movieInfo/', MovieInfoView.as_view()),
     path('api/', include('users.urls')),
     path('', HomeTemplateView.as_view(), name='home'),
 ]

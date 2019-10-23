@@ -1,40 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { loadUserProfile } from "../../actions/auth";
+import { movieInfo } from "../../actions/movieInfo";
+import UserMovie from "../contents/userMovie";
 
-class MyPage extends React.Component {
-  componentDidMount() {
-    this.props.loadUserProfile();
-  }
-
-  movieComponent = () => {
-    const profile = this.props.profile;
-    const data = profile.map(item => {
-      console.log(item);
-      return <h1 key={item.id}>{item.watchedMovie}</h1>;
-    });
-    return data;
+const MyPage = props => {
+  const moviecomponent = () => {
+    const profile = props.profile;
+    if (profile !== null) {
+      profile.forEach(element => {
+        props.movieInfo(element.watchedMovie);
+      });
+    }
   };
 
-  render() {
-    console.log(this.props.profile);
-    return (
-      <div>
-        {this.props.profile === null ? "Loading" : this.movieComponent()}
-      </div>
-    );
-  }
-}
+  // moviecomponent();
+
+  useEffect(() => {
+    moviecomponent();
+  }, []);
+
+  return (
+    <div>
+      <UserMovie></UserMovie>
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
   return {
     profile: state.auth.profile,
     profileLoading: state.auth.profileLoading,
-    naverMovie: state.naverMovie.naverMovie
+    movieInfoState: state.getMovieInfo.movieInfo
   };
 };
 
 export default connect(
   mapStateToProps,
-  { loadUserProfile }
+  { movieInfo }
 )(MyPage);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
@@ -11,6 +11,12 @@ import { home } from "react-icons-kit/icomoon/home";
 import { StyledInput, StyledNav, StyledButton } from "./styleComponent";
 
 const Nav = props => {
+  useEffect(() => {
+    document.getElementsByClassName("searchBar")[0].focus();
+
+    return () => {};
+  }, [props.onClick]);
+
   return (
     <StyledNav>
       <div style={{ marginRight: "20px" }}>
@@ -19,6 +25,7 @@ const Nav = props => {
         </NavLink>
       </div>
       <StyledInput
+        className="searchBar"
         type="text"
         placeholder="영화를 검색하세요"
         value={props.value}
