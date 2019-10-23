@@ -4,7 +4,7 @@ import errors from "./errors";
 import { combineReducers } from "redux";
 import { LOGOUT_SUCCESSFUL } from "../actions/actionTypes";
 import getScore from "./getScore";
-import getMovieInfo from "./movieInfo"
+import getMovieInfo from "./movieInfo";
 
 const appReducer = combineReducers({
   auth,

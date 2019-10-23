@@ -18,3 +18,7 @@ export const CREATE_MESSAGE = "CREATE_MESSAGE";
 
 export const GET_SCORE = "GET_SCORE";
 export const GET_MOVIE_INFO = "GET_MOVIE_INFO";
+
+//moviePoster
+
+export const GET_NAVER = "GET_NAVER";
