@@ -26,11 +26,7 @@ const SearchResult = ({ keyword, data }) => {
     <div>
       {selected.map(info => {
         return (
-          <MovieInfo
-            key={info[0].movieCd}
-            movieCd={info[0].movieCd}
-            info={info[0]}
-          />
+          <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />
         );
       })}
     </div>
@@ -41,12 +37,11 @@ const SearchResult = ({ keyword, data }) => {
       <div>상위 검색 결과</div>
       <StyledMovieList>
         {data.map((info, i) => {
-          console.log(info);
           return (
             <MovieSearchInfo
-              key={info[0].movieCd}
-              movieCd={info[0].movieCd}
-              info={info[0]}
+              key={info.movieCd}
+              movieCd={info.movieCd}
+              info={info}
               onClick={() => handleClick(i)}
             />
           );

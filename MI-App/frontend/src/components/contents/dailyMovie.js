@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  StyledMovieSearch,
   StyledMoviePoster,
   StyledMovieTitle,
   StyledMovieList
@@ -9,12 +8,11 @@ import {
 
 const DailyMovie = props => {
   const moviePostercomponent = () => {
-    const movieInfo = props.movieInfo;
     return (
-      <React.Fragment>
-        {movieInfo.map(item => {
+      <StyledMovieList>
+        {props.recentMovieInfo.map((item, i) => {
           return (
-            <div>
+            <div key={i}>
               <StyledMoviePoster
                 src={item[0].poster}
                 alt={item[0].movieNm}
@@ -24,17 +22,21 @@ const DailyMovie = props => {
             </div>
           );
         })}
-      </React.Fragment>
+      </StyledMovieList>
     );
   };
 
-  return <div>{props.InfoLoaded ? moviePostercomponent() : "ready"}</div>;
+  return (
+    <React.Fragment>
+      <div>{props.recentInfoLoaded ? moviePostercomponent() : "ready"}</div>
+    </React.Fragment>
+  );
 };
-//
+
 const mapStateToProps = state => {
   return {
-    movieInfo: state.getMovieInfo.movieInfo,
-    InfoLoaded: state.getMovieInfo.InfoLoaded
+    recentMovieInfo: state.getMovieInfo.recentMovieInfo,
+    recentInfoLoaded: state.getMovieInfo.recentInfoLoaded
   };
 };
 export default connect(mapStateToProps)(DailyMovie);

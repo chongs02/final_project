@@ -9,6 +9,8 @@ import SearchResult from "./searchResult";
 import MyPage from "./myPage";
 import Logout from "./logout";
 import DailyBoxOffice from "../contents/dailyBoxOffice";
+import { clearMovieInfo } from "../../actions/movieInfo";
+import { StyledHeader } from "../contents/styleComponent";
 
 class Main extends Component {
   state = {
@@ -85,5 +87,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { logout, movieInfo }
+  { logout, movieInfo, clearMovieInfo }
 )(Main);

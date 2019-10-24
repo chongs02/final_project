@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { movieInfo } from "../../actions/movieInfo";
+import { recentMovieInfo } from "../../actions/movieInfo";
 import DailyMovie from "./dailyMovie";
 import axios from "axios";
 
@@ -47,7 +47,7 @@ const DailyBoxOffice = props => {
     if (dailyMovie !== null) {
       dailyMovie.forEach(element => {
         function a() {
-          props.movieInfo(element.movieCd);
+          props.recentMovieInfo(element.movieCd);
         }
         a();
       });
@@ -67,5 +67,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { movieInfo }
+  { recentMovieInfo }
 )(DailyBoxOffice);
