@@ -2,14 +2,15 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
-import { loadUserProfile } from "../../actions/auth";
 
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Nav from "../contents/nav";
 import SearchResult from "./searchResult";
 import MyPage from "./myPage";
 import Logout from "./logout";
-import DailyMovie from "../contents/dailyMovie";
+import DailyBoxOffice from "../contents/dailyBoxOffice";
+import { clearMovieInfo } from "../../actions/movieInfo";
+import { StyledHeader } from "../contents/styleComponent";
 
 class Main extends Component {
   state = {
@@ -17,9 +18,7 @@ class Main extends Component {
     renderKeyword: ""
   };
 
-  componentDidMount() {
-    this.props.loadUserProfile();
-  }
+  componentDidMount() {}
 
   handleChange = e => {
     this.setState({
@@ -47,29 +46,32 @@ class Main extends Component {
     return (
       <Fragment>
         <BrowserRouter>
-          <Nav
-            value={keyword}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-            onClick={this.handleClick}
-          ></Nav>
+          <div style={{ height: "100%" }}>
+            <div style={{ height: "10.5%" }} />
+            <Nav
+              value={keyword}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+              onClick={this.handleClick}
+            ></Nav>
 
-          <Switch>
-            <Route
-              exact
-              path="/search"
-              render={() => (
-                <SearchResult
-                  keyword={renderKeyword}
-                  data={this.props.statemovieInfo}
-                />
-              )}
-            />
-            <Route exact path="/mypage" component={MyPage} />
-            <Route exact path="/logout" component={Logout} />
-          </Switch>
+            <Switch>
+              <Route
+                exact
+                path="/search"
+                render={() => (
+                  <SearchResult
+                    keyword={renderKeyword}
+                    data={this.props.statemovieInfo}
+                  />
+                )}
+              />
+              <Route exact path="/mypage" component={MyPage} />
+              <Route exact path="/logout" component={Logout} />
+            </Switch>
 
-          <DailyMovie></DailyMovie>
+            <DailyBoxOffice></DailyBoxOffice>
+          </div>
         </BrowserRouter>
       </Fragment>
     );
@@ -88,5 +90,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { logout, movieInfo, loadUserProfile }
+  { logout, movieInfo, clearMovieInfo }
 )(Main);

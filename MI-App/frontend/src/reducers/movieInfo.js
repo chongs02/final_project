@@ -1,7 +1,10 @@
 import * as types from "../actions/actionTypes";
+import update from "react-addons-update";
 
 const initialState = {
   movieInfo: [],
+  recentMovieInfo: [],
+  recentInfoLoaded: false,
   InfoLoaded: false
 };
 
@@ -12,6 +15,22 @@ export default function getMovieInfo(state = initialState, action) {
         ...state,
         movieInfo: action.payload,
         InfoLoaded: true
+      };
+    case types.GET_RECENT_MOVIE_INFO:
+      return {
+        ...state,
+        recentMovieInfo: update(state.recentMovieInfo, {
+          $push: action.payload
+        }),
+        // recentMovieInfo: [...state.recentMovieInfo, action.payload],
+        recentInfoLoaded: true
+      };
+
+    case types.CLEAR_MOVIE_INFO:
+      return {
+        ...state,
+        movieInfo: [],
+        InfoLoaded: false
       };
     default:
       return state;

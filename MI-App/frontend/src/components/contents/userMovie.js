@@ -1,14 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
 
 const UserMovie = props => {
-  return <div>나와앗!!!!</div>;
+  console.log(props);
+  return (
+    <div>
+      {/* {props.InfoLoaded ? (
+        <div>
+          {props.movieInfo.map(item => {
+            <div>{item.movieNm}</div>;
+          })}
+        </div>
+      ) : (
+        <div>loading</div>
+      )} */}
+    </div>
+  );
 };
 
-const mapStateToProps = state => {
-  return {
-    movieInfo: state.getMovieInfo.movieInfo
-  };
-};
-
-export default connect(mapStateToProps)(UserMovie);
+export default UserMovie;
