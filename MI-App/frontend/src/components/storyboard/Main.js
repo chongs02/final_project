@@ -9,6 +9,7 @@ import Nav from "../contents/nav";
 import SearchResult from "./searchResult";
 import MyPage from "./myPage";
 import Logout from "./logout";
+import DailyMovie from "../contents/dailyMovie";
 
 class Main extends Component {
   state = {
@@ -66,6 +67,8 @@ class Main extends Component {
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/logout" component={Logout} />
           </Switch>
+
+          <DailyMovie></DailyMovie>
         </BrowserRouter>
       </React.Fragment>
     );
