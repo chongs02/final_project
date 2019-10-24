@@ -8,7 +8,6 @@ export const movieInfo = searchInfo => async dispatch => {
   await axios
     .get(url)
     .then(response => {
-      console.log(response);
       dispatch({
         type: types.GET_MOVIE_INFO,
         payload: response.data

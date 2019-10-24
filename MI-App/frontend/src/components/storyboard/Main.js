@@ -15,6 +15,7 @@ class Main extends Component {
     keyword: "",
     renderKeyword: ""
   };
+
   componentDidMount() {
     this.props.loadUserProfile();
   }

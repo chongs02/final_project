@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { StyledMovieList } from "../contents/styleComponent";
 
 import {
   MovieInfo,
@@ -21,20 +22,30 @@ const SearchResult = ({ keyword, data }) => {
     };
   }, [keyword]);
 
-  const detail = selected.map(info => {
-    return <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />;
-  });
+  const detail = (
+    <div>
+      {selected.map(info => {
+        return (
+          <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />
+        );
+      })}
+    </div>
+  );
 
-  const search = data.map((info, i) => {
-    return (
-      <MovieSearchInfo
-        key={info.movieCd}
-        movieCd={info.movieCd}
-        info={info}
-        onClick={() => handleClick(i)}
-      />
-    );
-  });
+  const search = (
+    <StyledMovieList>
+      {data.map((info, i) => {
+        return (
+          <MovieSearchInfo
+            key={info.movieCd}
+            movieCd={info.movieCd}
+            info={info}
+            onClick={() => handleClick(i)}
+          />
+        );
+      })}
+    </StyledMovieList>
+  );
 
   return <div>{isDetails ? detail : search}</div>;
 };

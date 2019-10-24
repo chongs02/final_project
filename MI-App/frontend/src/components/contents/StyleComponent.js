@@ -59,3 +59,34 @@ export const StyledButton = styled.button`
 export const AlignSubmit = styled.div`
   text-align: right;
 `;
+
+export const StyledMovieList = styled.div`
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding: 5px;
+  padding-top: 20px;
+  width: 100%;
+`;
+
+export const StyledMovieSearch = styled.div`
+  width: 120px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+`;
+
+export const StyledMovieInfo = styled.div`
+  width: 43%;
+  background-color: white;
+  margin-bottom: 70px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-weight: 300;
+  padding: 50px;
+  border-radius: 5px;
+  color: #adaeb9;
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+`;
