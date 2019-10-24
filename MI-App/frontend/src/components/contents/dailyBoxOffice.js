@@ -32,11 +32,13 @@ const DailyBoxOffice = props => {
     await axios
       .get(url)
       .then(response => {
+        // console.log(response.data.boxOfficeResult.dailyBoxOfficeList);
         array.push(response.data.boxOfficeResult.dailyBoxOfficeList);
       })
       .catch(err => {
         console.log(err);
       });
+
     return array[0];
   };
 
@@ -44,7 +46,10 @@ const DailyBoxOffice = props => {
     const dailyMovie = await getDailyMovie();
     if (dailyMovie !== null) {
       dailyMovie.forEach(element => {
-        props.movieInfo(element.movieCd);
+        function a() {
+          props.movieInfo(element.movieCd);
+        }
+        a();
       });
     }
   };

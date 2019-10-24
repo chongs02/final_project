@@ -10,7 +10,7 @@ export default function getMovieInfo(state = initialState, action) {
     case types.GET_MOVIE_INFO:
       return {
         ...state,
-        movieInfo: action.payload,
+        movieInfo: [...state.movieInfo, action.payload],
         InfoLoaded: true
       };
     default:
