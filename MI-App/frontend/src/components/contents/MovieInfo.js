@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyledMovieInfo, StyledMovieSearch } from "../contents/styleComponent";
+import { StyledMovieInfo, StyledMovieSearch } from "./styleComponent";
 
 // 메인 페이지 영화 간단 정보
 export class MovieSimpleInfo extends Component {
@@ -29,7 +29,11 @@ export class MovieSearchInfo extends Component {
           alt={info.movieNm}
           title={info.movieCd}
         />
-        <p style={{ textAlign: "center", margin: "10px" }}>{info.movieNm}</p>
+        <p
+          style={{ textAlign: "center", margin: "10px", wordBreak: "keep-all" }}
+        >
+          {info.movieNm}
+        </p>
       </StyledMovieSearch>
     );
   }

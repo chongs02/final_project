@@ -2,13 +2,19 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { movieInfo } from "../../actions/movieInfo";
 import UserMovie from "../contents/userMovie";
+import { loadUserProfile } from "../../actions/auth";
 
 const MyPage = props => {
-  const moviecomponent = () => {
+  console.log(props);
+  const moviecomponent = async () => {
+    await props.loadUserProfile();
+
     const profile = props.profile;
+    console.log(profile);
     if (profile !== null) {
-      profile.forEach(element => {
-        props.movieInfo(element.watchedMovie);
+      profile.forEach(async element => {
+        console.log(element);
+        await props.movieInfo(element.watchedMovie);
       });
     }
   };
@@ -36,5 +42,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { movieInfo }
+  { movieInfo, loadUserProfile }
 )(MyPage);
