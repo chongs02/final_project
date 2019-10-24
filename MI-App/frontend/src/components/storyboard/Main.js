@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
@@ -16,6 +16,7 @@ class Main extends Component {
     keyword: "",
     renderKeyword: ""
   };
+
   componentDidMount() {
     this.props.loadUserProfile();
   }
@@ -44,7 +45,7 @@ class Main extends Component {
     const { keyword, renderKeyword } = this.state;
 
     return (
-      <React.Fragment>
+      <Fragment>
         <BrowserRouter>
           <Nav
             value={keyword}
@@ -70,7 +71,7 @@ class Main extends Component {
 
           <DailyMovie></DailyMovie>
         </BrowserRouter>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
