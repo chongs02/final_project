@@ -19,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
                 }
                 body{
                   height: 100%;
-                  color: white;
-                  background-color: black;
+                  color: black;
+                  background-color: white;
                 }
                 `;
 

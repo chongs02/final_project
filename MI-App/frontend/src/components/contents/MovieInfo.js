@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { StyledMovieInfo, StyledMovieSearch } from "../contents/styleComponent";
+import {
+  StyledMovieInfo,
+  StyledMovieSearch,
+  StyledMoviePoster,
+  StyledMovieTitle
+} from "./styleComponent";
 
 // 메인 페이지 영화 간단 정보
 export class MovieSimpleInfo extends Component {
@@ -7,8 +12,12 @@ export class MovieSimpleInfo extends Component {
     const { info } = this.props;
     return (
       <div>
-        <img src={info.poster} alt={info.movieNm} title={info.movieCd} />
-        <p>{info.movieNm}</p>
+        <StyledMoviePoster
+          src={info.poster}
+          alt={info.movieNm}
+          title={info.movieCd}
+        />
+        <StyledMovieTitle>{info.movieNm}</StyledMovieTitle>
       </div>
     );
   }
@@ -20,16 +29,12 @@ export class MovieSearchInfo extends Component {
     const { info } = this.props;
     return (
       <StyledMovieSearch onClick={this.props.onClick}>
-        <img
-          style={{
-            display: "flex",
-            margin: "0 auto"
-          }}
+        <StyledMoviePoster
           src={info.poster}
           alt={info.movieNm}
           title={info.movieCd}
         />
-        <p style={{ textAlign: "center", margin: "10px" }}>{info.movieNm}</p>
+        <StyledMovieTitle>{info.movieNm}</StyledMovieTitle>
       </StyledMovieSearch>
     );
   }

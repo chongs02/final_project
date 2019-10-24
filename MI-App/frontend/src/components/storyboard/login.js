@@ -6,7 +6,7 @@ import { ic_person } from "react-icons-kit/md/ic_person";
 import { Icon } from "react-icons-kit";
 import { ic_vpn_key } from "react-icons-kit/md/ic_vpn_key";
 
-import logo from "../../statics/logo.png";
+import logo from "../../statics/logo04.png";
 
 import {
   AlignSubmit,
@@ -43,10 +43,10 @@ class Login extends Component {
               <img
                 src={logo}
                 alt={"logo"}
-                width={50}
+                width={40}
                 style={{ verticalAlign: "middle" }}
               />
-              <span>Movie Inside</span>
+              <span style={{ marginLeft: "5px" }}>Movie Inside</span>
             </StyledH1>
             {this.props.errors.length > 0 && (
               <ul>
