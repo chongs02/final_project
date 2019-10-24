@@ -22,3 +22,6 @@ export const GET_MOVIE_INFO = "GET_MOVIE_INFO";
 //moviePoster
 
 export const GET_NAVER = "GET_NAVER";
+
+//dailyMovie
+export const GET_DAILY_MOVIE = "GET_DAILY_MOVIE";

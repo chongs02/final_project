@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 const UserMovie = props => {
-  console.log(props);
-
   return <div>나와앗!!!!</div>;
 };
 
