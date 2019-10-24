@@ -8,7 +8,7 @@ const DailyBoxOffice = props => {
   //어제날짜
   const dateInfo = () => {
     let nowDate = new Date();
-    let yesterDate = nowDate.getTime() - 1 * 24 * 60 * 60 * 1000;
+    let yesterDate = nowDate.getTime() - 2 * 24 * 60 * 60 * 1000;
     nowDate.setTime(yesterDate);
     let dd = nowDate.getDate();
     let mm = nowDate.getMonth() + 1;

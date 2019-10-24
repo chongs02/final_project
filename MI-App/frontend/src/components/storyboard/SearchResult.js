@@ -7,7 +7,9 @@ import {
   MovieSimpleInfo
 } from "../contents/movieInfo";
 
-const SearchResult = ({ keyword, data }) => {
+const SearchResult = props => {
+  // console.log(props);
+  const { keyword, data } = props;
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
 
@@ -51,8 +53,7 @@ const SearchResult = ({ keyword, data }) => {
   );
 
   return (
-    <div style={{ height: "100%", top: "300px" }}>
-      <div style={{ height: "10.5%" }} />
+    <div style={{ flex: 1 }}>
       <div>{isDetails ? detail : search}</div>
     </div>
   );
