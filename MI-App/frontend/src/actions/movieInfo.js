@@ -3,6 +3,7 @@ import axios from "axios";
 import { getErrors } from "./messages";
 
 export const movieInfo = searchInfo => async dispatch => {
+  console.log(searchInfo);
   let url = "/movieInfo/";
   url = url + "?search=" + searchInfo;
   await axios
@@ -37,7 +38,7 @@ export const recentMovieInfo = searchInfo => async dispatch => {
 };
 
 export const clearMovieInfo = () => dispatch => {
-  dispatch({
+  return {
     type: types.CLEAR_MOVIE_INFO
-  });
+  };
 };

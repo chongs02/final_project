@@ -6,41 +6,23 @@ import { loadUserProfile } from "../../actions/auth";
 
 const MyPage = props => {
   console.log(props);
-  const moviecomponent = async () => {
-    await props.loadUserProfile();
-
-    const profile = props.profile;
-    console.log(profile);
-    if (profile !== null) {
-      profile.forEach(async element => {
-        console.log(element);
-        await props.movieInfo(element.watchedMovie);
-      });
-    }
-  };
-
-  // moviecomponent();
-
   useEffect(() => {
-    moviecomponent();
+    props.loadUserProfile();
   }, []);
 
-  return (
-    <div>
-      <UserMovie></UserMovie>
-    </div>
-  );
+  return <UserMovie data={props.movieInfo}></UserMovie>;
 };
 
 const mapStateToProps = state => {
   return {
     profile: state.auth.profile,
     profileLoading: state.auth.profileLoading,
-    movieInfoState: state.getMovieInfo.movieInfo
+    movieInfo: state.getMovieInfo.movieInfo,
+    InfoLoaded: state.getMovieInfo.InfoLoaded
   };
 };
 
 export default connect(
   mapStateToProps,
-  { movieInfo, loadUserProfile }
+  { loadUserProfile }
 )(MyPage);
