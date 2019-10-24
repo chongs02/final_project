@@ -37,6 +37,7 @@ export const StyledLoginRegister = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  back
 `;
 
 export const StyledForm = styled.form`

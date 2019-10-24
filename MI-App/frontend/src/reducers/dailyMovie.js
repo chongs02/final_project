@@ -4,7 +4,7 @@ const initialState = {
   dailyMovie: []
 };
 
-export default function getScore(state = initialState, action) {
+export default function getDailyMovie(state = initialState, action) {
   switch (action.type) {
     case types.GET_DAILY_MOVIE:
       return {

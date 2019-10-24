@@ -41,7 +41,7 @@ export class MovieSearchInfo extends Component {
 }
 
 // 상세 정보 페이지 영화 상세 정보
-export class MovieInfo extends React.Component {
+export class MovieInfo extends Component {
   render() {
     const { info } = this.props;
     return (
