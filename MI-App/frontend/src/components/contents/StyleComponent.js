@@ -22,18 +22,7 @@ export const StyledNav = styled.nav`
   height: 100%;
 `;
 
-export const StyledInput = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  color: palevioletred;
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-  width: ${props => props.size};
-`;
-
 export const StyledLoginRegister = styled.div`
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,6 +30,7 @@ export const StyledLoginRegister = styled.div`
 `;
 
 export const StyledForm = styled.form`
+  margin-top: -198px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -52,8 +42,13 @@ export const StyledFieldSet = styled.fieldset`
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  border-style: groove;
+  border-style: none;
+  background-color: white;
+  padding: 30px;
+  box-shadow: 0 0 20px 0 rgba(23, 50, 68, 0.25);
 `;
+
+// groove
 
 export const StyledH1 = styled.h1`
   width: 100%;
@@ -64,20 +59,51 @@ export const StyledH1 = styled.h1`
   font-family: london;
 `;
 
-export const StyledButton = styled.button`
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border-radius: 3px;
+export const StyledInput = styled.input`
+  padding: 0.5em;
+  margin: 0.5em;
   color: palevioletred;
-  border: 2px solid palevioletred;
-  margin-right: 0px;
-  font-family: "font";
+  background: papayawhip;
+  border: none;
+  border-radius: 3px;
+  font-familiy: nanum;
+  width: ${props => props.size};
+`;
+
+export const StyledMainButton = styled.button`
+  cursor: pointer;
+  width: 97%;
+  height: 100%;
+  color: white;
+  font-size: 0.9em;
+  font-family: nanum;
+  margin: 0px;
+  padding: 0.25em 1em;
+  border-radius: 10px;
+  background-color: #fd7272;
+  border: none;
+  vertical-align: middle;
+`;
+
+export const StyledSubButton = styled.button`
+  cursor: pointer;
+  color: #eb3b5a;
+  font-size: 0.9em;
+  font-family: nanum;
+  margin: 0px;
+  padding: 0.25em 1em;
+  border: none;
+  background-color: white;
   vertical-align: middle;
 `;
 
 export const AlignSubmit = styled.div`
-  text-align: right;
+  margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const StyledMovieList = styled.section`
@@ -86,7 +112,6 @@ export const StyledMovieList = styled.section`
   flex-wrap: wrap;
   padding: 5px;
   width: 100%;
-  font
 `;
 
 export const StyledMovieSearch = styled.div`

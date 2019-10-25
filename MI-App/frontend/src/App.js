@@ -16,12 +16,12 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
                 @font-face {
                   font-family: 'london';
-                  src: url('./statics/LondonBetween.ttf') format('london');
+                  src: url('./statics/fonts/LondonBetween.ttf');
                 }
                 
                 @font-face {
                   font-family: 'nanum';
-                  src: url('./statics/LondonBetween.ttf') format('nanum');
+                  src: url('./statics/fonts/LondonBetween.ttf');
                 }
 
                 html {
@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
                   color: black;
                   background-color: white;
                   font-family: nanum;
+                  margin:0px;
                 }
                 `;
 

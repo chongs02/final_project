@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  StyledMoviePoster,
-  StyledMovieTitle,
-  StyledMovieList,
-  StyledMovieSearch
-} from "./styleComponent";
-import { MovieInfo } from "./movieInfo";
+import { StyledMovieList } from "./styleComponent";
+import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
 
 const DailyMovie = props => {
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
 
+  const { recentInfoLoaded, recentMovieInfo } = props;
+
   const handleClick = i => {
     setIsDetails(true);
-    setSelected([props.recentMovieInfo[i]]);
+    setSelected([recentMovieInfo[i]]);
   };
 
   useEffect(() => {
@@ -27,7 +24,11 @@ const DailyMovie = props => {
     <div>
       {selected.map(info => {
         return (
-          <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />
+          <MovieDetailsInfo
+            key={info.movieCd}
+            movieCd={info.movieCd}
+            info={info}
+          />
         );
       })}
     </div>
@@ -35,21 +36,20 @@ const DailyMovie = props => {
 
   const moviePostercomponent = () => {
     return (
-      <StyledMovieList>
-        {props.recentMovieInfo.map((item, i) => {
-          // console.log(props);
-          return (
-            <StyledMovieSearch key={i} onClick={() => handleClick(i)}>
-              <StyledMoviePoster
-                src={item.poster}
-                alt={item.movieNm}
-                title={item.movieCd}
+      <div>
+        <div style={{ color: "#c44569" }}>최신 개봉 영화</div>
+        <StyledMovieList>
+          {recentMovieInfo.map((info, i) => {
+            return (
+              <MovieSearchInfo
+                key={i}
+                info={info}
+                onClick={() => handleClick(i)}
               />
-              <StyledMovieTitle>{item.movieNm}</StyledMovieTitle>
-            </StyledMovieSearch>
-          );
-        })}
-      </StyledMovieList>
+            );
+          })}
+        </StyledMovieList>
+      </div>
     );
   };
 
@@ -57,7 +57,7 @@ const DailyMovie = props => {
     <React.Fragment>
       <div style={{ flex: 1 }}>
         <div>{isDetails ? detail : <div></div>}</div>
-        <div>{props.recentInfoLoaded ? moviePostercomponent() : "ready"}</div>
+        <div>{recentInfoLoaded ? moviePostercomponent() : "ready"}</div>
       </div>
     </React.Fragment>
   );

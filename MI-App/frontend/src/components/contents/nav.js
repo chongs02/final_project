@@ -12,7 +12,7 @@ import {
   StyledHeader,
   StyledInput,
   StyledNav,
-  StyledButton
+  StyledMainButton
 } from "./styleComponent";
 
 const Nav = props => {
@@ -40,7 +40,7 @@ const Nav = props => {
           size="50%"
         ></StyledInput>
         <NavLink exact to="/search">
-          <StyledButton onClick={props.onClick}>검색</StyledButton>
+          <StyledMainButton onClick={props.onClick}>검색</StyledMainButton>
         </NavLink>
         <div
           style={{
