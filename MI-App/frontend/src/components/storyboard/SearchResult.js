@@ -34,7 +34,7 @@ const SearchResult = ({ keyword, data }) => {
 
   const search = (
     <div>
-      <div>상위 검색 결과</div>
+      <div style={{ color: "#c44569" }}>상위 검색 결과</div>
       <StyledMovieList>
         {data.map((info, i) => {
           return (
@@ -51,8 +51,8 @@ const SearchResult = ({ keyword, data }) => {
   );
 
   return (
-    <div style={{ height: "100%", top: "300px" }}>
-      <div style={{ height: "10.5%" }} />
+    <div style={{ height: "100%" }}>
+      <div style={{ height: "10.5%" }}> 하이루</div>
       <div>{isDetails ? detail : search}</div>
     </div>
   );

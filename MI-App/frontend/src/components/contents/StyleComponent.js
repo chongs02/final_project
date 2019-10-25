@@ -61,6 +61,7 @@ export const StyledH1 = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: london;
 `;
 
 export const StyledButton = styled.button`
@@ -85,13 +86,15 @@ export const StyledMovieList = styled.section`
   flex-wrap: wrap;
   padding: 5px;
   width: 100%;
+  font
 `;
 
 export const StyledMovieSearch = styled.div`
+  cursor: pointer;
   width: 120px;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  margin: 10px;
 `;
 
 export const StyledMovieInfo = styled.div`
@@ -118,6 +121,7 @@ export const StyledMoviePoster = styled.img`
 
 export const StyledMovieTitle = styled.p`
   text-align: center;
-  margin: 10px;
+  margin: 0px;
+  margin-top: 10px;
   word-break: keep-all;
 `;
