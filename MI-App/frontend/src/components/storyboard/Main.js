@@ -58,12 +58,7 @@ class Main extends Component {
               <Route
                 exact
                 path="/search"
-                render={() => (
-                  <SearchResult
-                    keyword={renderKeyword}
-                    data={this.props.statemovieInfo}
-                  />
-                )}
+                render={() => <SearchResult keyword={renderKeyword} />}
               />
               <Route exact path="/mypage" component={MyPage} />
               <Route exact path="/logout" component={Logout} />
@@ -81,7 +76,6 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     movieData: state.getScore.movieData,
-    statemovieInfo: state.getMovieInfo.movieInfo,
     InfoLoaded: state.getMovieInfo.InfoLoaded,
     scoreLoaded: state.getScore.scoreLoaded
   };

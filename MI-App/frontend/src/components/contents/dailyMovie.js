@@ -25,6 +25,7 @@ const DailyMovie = props => {
       {selected.map(info => {
         return (
           <MovieDetailsInfo
+            user={props.username}
             key={info.movieCd}
             movieCd={info.movieCd}
             info={info}
@@ -44,6 +45,7 @@ const DailyMovie = props => {
               <MovieSearchInfo
                 key={i}
                 info={info}
+                user={props.user.username}
                 onClick={() => handleClick(i)}
               />
             );
@@ -66,7 +68,8 @@ const DailyMovie = props => {
 const mapStateToProps = state => {
   return {
     recentMovieInfo: state.getMovieInfo.recentMovieInfo,
-    recentInfoLoaded: state.getMovieInfo.recentInfoLoaded
+    recentInfoLoaded: state.getMovieInfo.recentInfoLoaded,
+    user: state.auth.user
   };
 };
 export default connect(mapStateToProps)(DailyMovie);

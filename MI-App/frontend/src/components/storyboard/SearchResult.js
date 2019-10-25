@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { StyledMovieList } from "../contents/styleComponent";
-
+import { connect } from "react-redux";
 import { MovieDetailsInfo, MovieSearchInfo } from "../contents/movieInfo";
 
 const SearchResult = props => {
+  console.log(props);
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
 
-  const { keyword, data } = props;
+  const { keyword, movieInfo } = props;
 
   const handleClick = i => {
     setIsDetails(true);
-    setSelected([data[i]]);
+    setSelected([props.movieInfo[i]]);
   };
 
   useEffect(() => {
@@ -38,12 +39,13 @@ const SearchResult = props => {
     <div>
       <div style={{ color: "#c44569" }}>상위 검색 결과</div>
       <StyledMovieList>
-        {data.map((info, i) => {
+        {movieInfo.map((info, i) => {
           return (
             <MovieSearchInfo
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              user={props.user.username}
               onClick={() => handleClick(i)}
             />
           );
@@ -59,4 +61,14 @@ const SearchResult = props => {
   );
 };
 
-export default SearchResult;
+const mapStateToProps = state => {
+  return {
+    movieInfo: state.getMovieInfo.movieInfo,
+    user: state.auth.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(SearchResult);
