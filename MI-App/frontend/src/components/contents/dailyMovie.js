@@ -9,7 +9,6 @@ import {
 import { MovieInfo } from "./movieInfo";
 
 const DailyMovie = props => {
-  console.log(props);
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
 

@@ -5,7 +5,6 @@ class Graph extends Component {
   chartRef;
 
   componentDidMount() {
-    console.log(this.props);
     // Chart.defaults.global.defaultFontColor = 'white';
     let ctx = document.getElementById("myChart");
 
