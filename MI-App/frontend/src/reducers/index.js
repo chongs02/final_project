@@ -5,15 +5,13 @@ import { combineReducers } from "redux";
 import { LOGOUT_SUCCESSFUL } from "../actions/actionTypes";
 import getScore from "./getScore";
 import getMovieInfo from "./movieInfo";
-import getDailyMovie from "./dailyMovie";
 
 const appReducer = combineReducers({
   auth,
   messages,
   errors,
   getScore,
-  getMovieInfo,
-  getDailyMovie
+  getMovieInfo
 });
 
 const rootReducer = (state, action) => {

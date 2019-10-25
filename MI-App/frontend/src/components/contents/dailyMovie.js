@@ -1,45 +1,74 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { getDailyMovie } from "../../actions/dailyMovie";
+import {
+  StyledMoviePoster,
+  StyledMovieTitle,
+  StyledMovieList,
+  StyledMovieSearch
+} from "./styleComponent";
+import { MovieInfo } from "./movieInfo";
 
 const DailyMovie = props => {
-  console.log(props.dailyMovie);
+  console.log(props);
+  const [isDetails, setIsDetails] = useState(false);
+  const [selected, setSelected] = useState([]);
 
-  const dateInfo = () => {
-    let nowDate = new Date();
-    let yesterDate = nowDate.getTime() - 1 * 24 * 60 * 60 * 1000;
-    nowDate.setTime(yesterDate);
-
-    let dd = nowDate.getDate();
-    let mm = nowDate.getMonth() + 1;
-    let yyyy = nowDate.getFullYear();
-
-    if (dd < 10) {
-      dd = "0" + dd;
-    }
-
-    if (mm < 10) {
-      mm = "0" + mm;
-    }
-    nowDate = yyyy.toString() + mm.toString() + dd.toString();
-    console.log(nowDate);
-    return nowDate;
+  const handleClick = i => {
+    setIsDetails(true);
+    setSelected([props.recentMovieInfo[i]]);
   };
 
   useEffect(() => {
-    props.getDailyMovie(dateInfo());
+    return () => {
+      setIsDetails(false);
+    };
   }, []);
 
-  return <div>dailymovie</div>;
+  const detail = (
+    <div>
+      {selected.map(info => {
+        return (
+          <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />
+        );
+      })}
+    </div>
+  );
+
+  const moviePostercomponent = () => {
+    return (
+      <StyledMovieList>
+        {props.recentMovieInfo.map((item, i) => {
+          // console.log(props);
+          return (
+            <StyledMovieSearch key={i} onClick={() => handleClick(i)}>
+              <StyledMoviePoster
+                src={item.poster}
+                alt={item.movieNm}
+                title={item.movieCd}
+              />
+              <StyledMovieTitle>{item.movieNm}</StyledMovieTitle>
+            </StyledMovieSearch>
+          );
+        })}
+      </StyledMovieList>
+    );
+  };
+
+  return (
+    <React.Fragment>
+      <div style={{ flex: 1 }}>
+        <div>{isDetails ? detail : <div></div>}</div>
+
+        <div>{props.recentInfoLoaded ? moviePostercomponent() : "ready"}</div>
+      </div>
+    </React.Fragment>
+  );
 };
 
 const mapStateToProps = state => {
   return {
-    dailyMovie: state.getDailyMovie.dailyMovie
+    recentMovieInfo: state.getMovieInfo.recentMovieInfo,
+    recentInfoLoaded: state.getMovieInfo.recentInfoLoaded
   };
 };
-
-export default connect(
-  mapStateToProps,
-  { getDailyMovie }
-)(DailyMovie);
+export default connect(mapStateToProps)(DailyMovie);

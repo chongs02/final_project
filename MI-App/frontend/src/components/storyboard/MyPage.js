@@ -2,39 +2,27 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { movieInfo } from "../../actions/movieInfo";
 import UserMovie from "../contents/userMovie";
+import { loadUserProfile } from "../../actions/auth";
 
 const MyPage = props => {
-  const moviecomponent = () => {
-    const profile = props.profile;
-    if (profile !== null) {
-      profile.forEach(element => {
-        props.movieInfo(element.watchedMovie);
-      });
-    }
-  };
-
-  // moviecomponent();
-
+  console.log(props);
   useEffect(() => {
-    moviecomponent();
+    props.loadUserProfile();
   }, []);
 
-  return (
-    <div>
-      <UserMovie></UserMovie>
-    </div>
-  );
+  return <UserMovie data={props.movieInfo}></UserMovie>;
 };
 
 const mapStateToProps = state => {
   return {
     profile: state.auth.profile,
     profileLoading: state.auth.profileLoading,
-    movieInfoState: state.getMovieInfo.movieInfo
+    movieInfo: state.getMovieInfo.movieInfo,
+    InfoLoaded: state.getMovieInfo.InfoLoaded
   };
 };
 
 export default connect(
   mapStateToProps,
-  { movieInfo }
+  { loadUserProfile }
 )(MyPage);

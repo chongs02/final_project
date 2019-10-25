@@ -1,6 +1,7 @@
 import * as types from "./actionTypes";
 import axios from "axios";
 import { getErrors } from "./messages";
+import { movieInfo, clearMovieInfo } from "./movieInfo";
 
 // django csrftoken
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -120,6 +121,9 @@ export const loadUserProfile = () => async (dispatch, getState) => {
       dispatch({
         type: types.USER_PROFILE_LOADED,
         payload: res.data
+      });
+      res.data.forEach(element => {
+        movieInfo(element.watchedMovie);
       });
     })
     .catch(err => {
