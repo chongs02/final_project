@@ -28,9 +28,7 @@ export class MovieSimpleInfo extends Component {
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-export const seenMovie = async (user, watchedMovie) => {
-  console.log(user);
-  console.log(watchedMovie);
+export const seenMovie = async watchedMovie => {
   const token = localStorage.getItem("token");
   const config = {
     headers: {
@@ -63,7 +61,7 @@ export class MovieSearchInfo extends Component {
           <StyledMovieTitle>{info.movieNm}</StyledMovieTitle>
         </StyledMovieSearch>
         <div>
-          <button onClick={() => seenMovie(user, value)}>Seen</button>
+          <button onClick={() => seenMovie(value)}>Seen</button>
           <button>Good</button>
           <button>Bad</button>
         </div>
