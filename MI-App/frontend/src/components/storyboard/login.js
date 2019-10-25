@@ -4,13 +4,11 @@ import { Link, Redirect } from "react-router-dom";
 
 import { login } from "../../actions/auth";
 
-import { ic_person } from "react-icons-kit/md/ic_person";
-import { Icon } from "react-icons-kit";
-import { ic_vpn_key } from "react-icons-kit/md/ic_vpn_key";
-
 import logo from "../../statics/logos/logo04.png";
+import logo2 from "../../statics/logos/logo03.png";
 import bgImg01 from "../../statics/bgImgs/3.jpg";
 import bgImg02 from "../../statics/bgImgs/7.jpg";
+// import bgImg03 from "../../statics/bgImgs/9.jpg";
 
 import {
   AlignSubmit,
@@ -20,7 +18,8 @@ import {
   StyledFieldSet,
   StyledForm,
   StyledLoginRegister,
-  StyledInput
+  StyledInput,
+  StyledBottomNav
 } from "../contents/styleComponent";
 
 class Login extends Component {
@@ -50,6 +49,9 @@ class Login extends Component {
           </div>
         </div>
         <StyledLoginRegister>
+          {/* <div style={{ height: "100%" }}>
+            <img src={bgImg03} alt={"thirdImg"} width="100%" height="100%" />
+          </div> */}
           <StyledForm onSubmit={this.onSubmit}>
             <StyledFieldSet>
               <StyledH1>
@@ -78,35 +80,55 @@ class Login extends Component {
                   ))}
                 </ul>
               )}
-              <div style={{ display: "block" }}>
-                <Icon size={64} icon={ic_person} />
-                <StyledInput
-                  type="text"
-                  id="username"
-                  placeholder="아이디"
-                  onChange={e => this.setState({ username: e.target.value })}
-                />
-                <label>아이디</label>
-              </div>
-              <div>
-                <Icon size={64} icon={ic_vpn_key} />
-                <StyledInput
-                  type="password"
-                  id="password"
-                  placeholder="비밀번호"
-                  onChange={e => this.setState({ password: e.target.value })}
-                />
+              <div
+                style={{
+                  display: "block",
+                  marginTop: "20%"
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    marginBottom: "10%"
+                  }}
+                >
+                  <StyledInput
+                    type="text"
+                    id="username"
+                    placeholder="아이디"
+                    onChange={e => this.setState({ username: e.target.value })}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    marginBottom: "10%"
+                  }}
+                >
+                  <StyledInput
+                    type="password"
+                    id="password"
+                    placeholder="비밀번호"
+                    onChange={e => this.setState({ password: e.target.value })}
+                  />
+                </div>
               </div>
               <AlignSubmit>
                 <StyledMainButton type="submit">로그인</StyledMainButton>
               </AlignSubmit>
               <div
                 style={{
-                  margin: "20px",
+                  margin: 0,
+                  marginTop: "15%",
                   display: "flex",
                   textAlign: "center",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
+                  color: "#718093"
                 }}
               >
                 계정이 없으시다구요?
@@ -117,6 +139,20 @@ class Login extends Component {
             </StyledFieldSet>
           </StyledForm>
         </StyledLoginRegister>
+        <StyledBottomNav>
+          <div>
+            <img
+              src={logo2}
+              alt={"logo2"}
+              width={30}
+              style={{ verticalAlign: "middle", backgroundColor: "none" }}
+            />
+            <span style={{ marginLeft: "7px", marginRight: "20px" }}>
+              Movie Inside
+            </span>
+          </div>
+          <div>Copyright © 2019 HAND Inc.</div>
+        </StyledBottomNav>
       </div>
     );
   }

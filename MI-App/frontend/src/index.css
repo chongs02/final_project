@@ -8,6 +8,11 @@
   src: url("./statics/fonts/LondonBetween.ttf");
 }
 
+@font-face {
+  font-family: "londonMM";
+  src: url("./statics/fonts/LondonMM.ttf");
+}
+
 #root {
   height: 100%;
 }
