@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { StyledMovieList } from "../contents/styleComponent";
 
-import {
-  MovieInfo,
-  MovieSearchInfo,
-  MovieSimpleInfo
-} from "../contents/movieInfo";
+import { MovieDetailsInfo, MovieSearchInfo } from "../contents/movieInfo";
 
 const SearchResult = props => {
-  const { keyword, data } = props;
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
+
+  const { keyword, data } = props;
 
   const handleClick = i => {
     setIsDetails(true);
@@ -27,7 +24,11 @@ const SearchResult = props => {
     <div>
       {selected.map(info => {
         return (
-          <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />
+          <MovieDetailsInfo
+            key={info.movieCd}
+            movieCd={info.movieCd}
+            info={info}
+          />
         );
       })}
     </div>

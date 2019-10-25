@@ -1,17 +1,17 @@
 @font-face {
   font-family: "nanum";
-  src: url("./statics/NanumSquareB.ttf");
+  src: url("./statics/fonts/NanumSquareB.ttf");
 }
 
 @font-face {
   font-family: "london";
-  src: url("./statics/LondonBetween.ttf");
+  src: url("./statics/fonts/LondonBetween.ttf");
 }
 
 #root {
   height: 100%;
 }
-/* 
-body {
-  font-family: nanum;
+
+/* body {
+  background-image: ;
 } */
