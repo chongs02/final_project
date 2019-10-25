@@ -9,6 +9,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = '__all__'
 
+    def create(self, validated_data):
+        profile_instance = Profile.objects.create(
+            user=self.context['request'].user, **validated_data)
+        return profile_instance
+
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:

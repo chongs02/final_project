@@ -20,5 +20,3 @@ export const GET_SCORE = "GET_SCORE";
 export const GET_MOVIE_INFO = "GET_MOVIE_INFO";
 export const CLEAR_MOVIE_INFO = "CLEAR_MOVIE_INFO";
 export const GET_RECENT_MOVIE_INFO = "GET_RECENT_MOVIE_INFO";
-
-//dailyMovie

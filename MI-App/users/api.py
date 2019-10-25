@@ -1,8 +1,8 @@
 from rest_framework import permissions, generics, viewsets, response
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 from django.contrib.auth import logout
-
 from knox.models import AuthToken
 from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer
 from .models import Profile
@@ -16,8 +16,11 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
 
     def get_queryset(self):
-        # print(self.request.user)
         return Profile.objects.filter(user=self.request.user)
+
+    # @action(methods=['post'], detail=True)
+    # def post(self, request, *args, **kwargs):
+    #     print(request.data)
 
 
 class RegistrationAPI(generics.GenericAPIView):
