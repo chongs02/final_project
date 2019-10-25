@@ -122,9 +122,6 @@ export const loadUserProfile = () => async (dispatch, getState) => {
         type: types.USER_PROFILE_LOADED,
         payload: res.data
       });
-      res.data.forEach(element => {
-        movieInfo(element.watchedMovie);
-      });
     })
     .catch(err => {
       console.log(err);

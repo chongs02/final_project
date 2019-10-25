@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, memo } from "react";
 import { connect } from "react-redux";
-import { movieInfo } from "../../actions/movieInfo";
 import UserMovie from "../contents/userMovie";
 import { loadUserProfile } from "../../actions/auth";
 
-const MyPage = props => {
-  console.log(props);
+const MyPage = memo(props => {
   useEffect(() => {
     props.loadUserProfile();
   }, []);
 
-  return <UserMovie data={props.movieInfo}></UserMovie>;
-};
+  return (
+    <div>
+      <UserMovie profile={props.profile}></UserMovie>
+    </div>
+  );
+});
 
 const mapStateToProps = state => {
   return {

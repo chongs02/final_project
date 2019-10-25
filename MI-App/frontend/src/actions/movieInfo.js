@@ -3,7 +3,6 @@ import axios from "axios";
 import { getErrors } from "./messages";
 
 export const movieInfo = searchInfo => async dispatch => {
-  console.log(searchInfo);
   let url = "/movieInfo/";
   url = url + "?search=" + searchInfo;
   await axios
