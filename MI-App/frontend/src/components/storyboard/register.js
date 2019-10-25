@@ -4,11 +4,8 @@ import { Link, Redirect } from "react-router-dom";
 
 import { register } from "../../actions/auth";
 
-import { ic_person } from "react-icons-kit/md/ic_person";
-import { Icon } from "react-icons-kit";
-import { ic_vpn_key } from "react-icons-kit/md/ic_vpn_key";
-
 import logo from "../../statics/logos/logo04.png";
+import logo2 from "../../statics/logos/logo03.png";
 import bgImg01 from "../../statics/bgImgs/3.jpg";
 import bgImg02 from "../../statics/bgImgs/7.jpg";
 
@@ -20,7 +17,8 @@ import {
   StyledFieldSet,
   StyledForm,
   StyledLoginRegister,
-  StyledInput
+  StyledInput,
+  StyledBottomNav
 } from "../contents/styleComponent";
 
 class Register extends Component {
@@ -80,45 +78,79 @@ class Register extends Component {
                   ))}
                 </ul>
               )}
-              <div>
-                <Icon size={64} icon={ic_person} />
-
-                <StyledInput
-                  type="text"
-                  id="username"
-                  placeholder="아이디를 입력하세요"
-                  onChange={e => this.setState({ username: e.target.value })}
-                />
-              </div>
-              <div>
-                <Icon size={64} icon={ic_vpn_key} />
-                <StyledInput
-                  type="password"
-                  id="password"
-                  placeholder="비밀번호를 입력하세요"
-                  onChange={e => this.setState({ password: e.target.value })}
-                />
+              <div
+                style={{
+                  display: "block",
+                  marginTop: "20%"
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    marginBottom: "10%"
+                  }}
+                >
+                  <StyledInput
+                    type="text"
+                    id="username"
+                    placeholder="아이디"
+                    onChange={e => this.setState({ username: e.target.value })}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    marginBottom: "10%"
+                  }}
+                >
+                  <StyledInput
+                    type="password"
+                    id="password"
+                    placeholder="비밀번호"
+                    onChange={e => this.setState({ password: e.target.value })}
+                  />
+                </div>
               </div>
               <AlignSubmit>
                 <StyledMainButton type="submit">회원가입</StyledMainButton>
               </AlignSubmit>
               <div
                 style={{
-                  margin: "20px",
+                  margin: 0,
+                  marginTop: "15%",
                   display: "flex",
                   textAlign: "center",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
+                  color: "#718093"
                 }}
               >
                 계정이 있으시다구요?
                 <Link to="/login">
-                  <StyledSubButton type="submit">뒤로가기</StyledSubButton>
+                  <StyledSubButton type="submit">로그인</StyledSubButton>
                 </Link>
               </div>
             </StyledFieldSet>
           </StyledForm>
         </StyledLoginRegister>
+        <StyledBottomNav>
+          <div>
+            <img
+              src={logo2}
+              alt={"logo2"}
+              width={30}
+              style={{ verticalAlign: "middle", backgroundColor: "none" }}
+            />
+            <span style={{ marginLeft: "7px", marginRight: "20px" }}>
+              Movie Inside
+            </span>
+          </div>
+          <div>Copyright © 2019 HAND Inc.</div>
+        </StyledBottomNav>
       </div>
     );
   }
