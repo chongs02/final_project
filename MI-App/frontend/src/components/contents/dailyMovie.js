@@ -58,7 +58,6 @@ const DailyMovie = props => {
     <React.Fragment>
       <div style={{ flex: 1 }}>
         <div>{isDetails ? detail : <div></div>}</div>
-
         <div>{props.recentInfoLoaded ? moviePostercomponent() : "ready"}</div>
       </div>
     </React.Fragment>
