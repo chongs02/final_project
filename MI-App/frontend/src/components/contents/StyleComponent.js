@@ -23,14 +23,16 @@ export const StyledNav = styled.nav`
 `;
 
 export const StyledLoginRegister = styled.div`
+  position: relative;
+  height: 42%;
   display: flex;
   justify-content: center;
   align-items: center;
-  back
 `;
 
 export const StyledForm = styled.form`
-  margin-top: -198px;
+  position: absolute;
+  margin-top: -200px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -38,6 +40,7 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledFieldSet = styled.fieldset`
+  width: 240px;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -60,14 +63,16 @@ export const StyledH1 = styled.h1`
 `;
 
 export const StyledInput = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  color: palevioletred;
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
+  font-size: 0.9em;
+  height: 30px;
+  width: 90%;
+  border: 0;
+  scolor: #25282f;
+  background-color: white;
+  border-bottom: 1px solid rgba(37, 40, 47, 0.1);
+  -webkit-appearance: none;
   font-familiy: nanum;
-  width: ${props => props.size};
+  outline: none;
 `;
 
 export const StyledMainButton = styled.button`
@@ -83,6 +88,7 @@ export const StyledMainButton = styled.button`
   background-color: #fd7272;
   border: none;
   vertical-align: middle;
+  outline: none;
 `;
 
 export const StyledSubButton = styled.button`
@@ -95,10 +101,11 @@ export const StyledSubButton = styled.button`
   border: none;
   background-color: white;
   vertical-align: middle;
+  outline: none;
 `;
 
 export const AlignSubmit = styled.div`
-  margin-top: 20px;
+  margin-top: 15%;
   width: 100%;
   height: 40px;
   display: flex;
@@ -149,4 +156,20 @@ export const StyledMovieTitle = styled.p`
   margin: 0px;
   margin-top: 10px;
   word-break: keep-all;
+`;
+
+export const StyledBottomNav = styled.nav`
+  height: 8%;
+  padding-bottom: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+  background-color: #303952;
+  font-size: 17px;
+  font-family: londonMM;
+  color: #60a3bc;
 `;
