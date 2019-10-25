@@ -82,7 +82,7 @@ class Register extends Component {
             <div style={{ textAlign: "right" }}>
               계정이 있으시다구요?
               <Link to="/login">
-                s<StyledButton type="submit">Login</StyledButton>
+                <StyledButton type="submit">Login</StyledButton>
               </Link>
             </div>
           </StyledFieldSet>
