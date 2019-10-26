@@ -6,8 +6,8 @@ import { register } from "../../actions/auth";
 
 import logo from "../../statics/logos/logo04.png";
 import logo2 from "../../statics/logos/logo03.png";
-import bgImg01 from "../../statics/bgImgs/3.jpg";
-import bgImg02 from "../../statics/bgImgs/7.jpg";
+import bgImg01 from "../../statics/bgImgs/01.jpg";
+import bgImg02 from "../../statics/bgImgs/10.jpg";
 
 import {
   AlignSubmit,

@@ -7,7 +7,7 @@ import {
   StyledMovieList,
   StyledMovieSearch
 } from "./styleComponent";
-import { MovieInfo } from "./movieInfo";
+import { MovieDetailsInfo } from "./movieInfo";
 
 const UserMovie = memo(props => {
   const profile = usePrevious(props.profile);
@@ -60,7 +60,11 @@ const UserMovie = memo(props => {
     <div>
       {selected.map(info => {
         return (
-          <MovieInfo key={info.movieCd} movieCd={info.movieCd} info={info} />
+          <MovieDetailsInfo
+            key={info.movieCd}
+            movieCd={info.movieCd}
+            info={info}
+          />
         );
       })}
     </div>

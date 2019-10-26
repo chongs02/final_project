@@ -6,8 +6,8 @@ import { login } from "../../actions/auth";
 
 import logo from "../../statics/logos/logo04.png";
 import logo2 from "../../statics/logos/logo03.png";
-import bgImg01 from "../../statics/bgImgs/3.jpg";
-import bgImg02 from "../../statics/bgImgs/7.jpg";
+import bgImg01 from "../../statics/bgImgs/01.jpg";
+import bgImg02 from "../../statics/bgImgs/10.jpg";
 // import bgImg03 from "../../statics/bgImgs/9.jpg";
 
 import {
@@ -118,7 +118,9 @@ class Login extends Component {
                 </div>
               </div>
               <AlignSubmit>
-                <StyledMainButton type="submit">로그인</StyledMainButton>
+                <StyledMainButton type="submit" fontSize={"0.9em"}>
+                  로그인
+                </StyledMainButton>
               </AlignSubmit>
               <div
                 style={{
@@ -133,7 +135,9 @@ class Login extends Component {
               >
                 계정이 없으시다구요?
                 <Link to="/register">
-                  <StyledSubButton type="submit">회원가입</StyledSubButton>
+                  <StyledSubButton type="submit" fontSize={"0.9em"}>
+                    회원가입
+                  </StyledSubButton>
                 </Link>
               </div>
             </StyledFieldSet>
