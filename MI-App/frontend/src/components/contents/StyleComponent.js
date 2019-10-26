@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+// @media (min-width: 1023px)
+// <style>
+// .SearchContainer {
+//     width: 640px;
+// }
+
 export const StyledHeader = styled.header`
   position: fixed;
   top: 0px;
@@ -8,17 +14,22 @@ export const StyledHeader = styled.header`
   color: rgb(255, 255, 255);
   text-align: center;
   width: 100%;
-  height: 10%;
+  height: 8%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px,
     rgb(210, 210, 210) 0px 0px 0px 0px;
-  background: rgb(255, 255, 255);
+  background: rgb(255, 255, 255, 0.8);
   transition: background-color 200ms ease 0s;
 `;
 
 export const StyledNav = styled.nav`
+  overflow: hidden;
+  padding-left: 40px;
+  padding-right: 40px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
   height: 100%;
 `;
 
@@ -37,6 +48,19 @@ export const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledSearchForm = styled.form`
+  height: 60%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  border-bottom: 1px solid rgba(37, 40, 47, 0.1);
+  box-shadow: 0 0 7px 0.5px rgba(23, 50, 68, 0.25);
 `;
 
 export const StyledFieldSet = styled.fieldset`
@@ -75,15 +99,33 @@ export const StyledInput = styled.input`
   outline: none;
 `;
 
+export const StyledSearchInput = styled.input`
+  font-size: 1em;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  color: black;
+  background-color: white;
+  outline: none;
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: rgb(132, 129, 122, 0.5);
+  }
+`;
+// rgba(162, 155, 254, 0.5);
+
 export const StyledMainButton = styled.button`
   cursor: pointer;
   width: 97%;
   height: 100%;
   color: white;
-  font-size: 0.9em;
+  font-size: ${props => props.fontSize};
   font-family: nanum;
   margin: 0px;
-  padding: 0.25em 1em;
   border-radius: 10px;
   background-color: #fd7272;
   border: none;
@@ -94,13 +136,24 @@ export const StyledMainButton = styled.button`
 export const StyledSubButton = styled.button`
   cursor: pointer;
   color: #eb3b5a;
-  font-size: 0.9em;
+  font-size: ${props => props.fontSize};
   font-family: nanum;
   margin: 0px;
   padding: 0.25em 1em;
   border: none;
   background-color: white;
   vertical-align: middle;
+  outline: none;
+`;
+
+export const StyledSearchButton = styled.button`
+  cursor: pointer;
+  color: #eb3b5a;
+  font-size: 0.9em;
+  font-family: nanum;
+  margin: 0px;
+  border: none;
+  background-color: white;
   outline: none;
 `;
 
@@ -170,6 +223,6 @@ export const StyledBottomNav = styled.nav`
   text-align: center;
   background-color: #303952;
   font-size: 17px;
-  font-family: londonMM;
+  font-family: "londonMM";
   color: #60a3bc;
 `;

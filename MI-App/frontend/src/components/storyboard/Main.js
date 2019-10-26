@@ -45,15 +45,14 @@ class Main extends Component {
     return (
       <Fragment>
         <BrowserRouter>
-          <div style={{ height: "100%" }}>
-            <div style={{ height: "10.5%" }} />
-            <Nav
-              value={keyword}
-              onChange={this.handleChange}
-              onKeyPress={this.handleKeyPress}
-              onClick={this.handleClick}
-            ></Nav>
-
+          <Nav
+            value={keyword}
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+            onClick={this.handleClick}
+          ></Nav>
+          <div style={{ height: "100%", marginLeft: "2%", marginRight: "2%" }}>
+            <div style={{ height: "10%" }} />
             <Switch>
               <Route
                 exact
