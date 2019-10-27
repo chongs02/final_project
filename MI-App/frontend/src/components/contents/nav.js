@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
-import { Icon } from "react-icons-kit";
-import { androidSearch } from "react-icons-kit/ionicons/androidSearch";
 
 import {
   StyledHeader,
@@ -15,6 +13,8 @@ import {
 } from "./styleComponent";
 
 import logo from "../../statics/logos/logo04.png";
+import { Icon } from "react-icons-kit";
+import { androidSearch } from "react-icons-kit/ionicons/androidSearch";
 
 const Nav = props => {
   useEffect(() => {
@@ -68,9 +68,10 @@ const Nav = props => {
             onKeyPress={props.onKeyPress}
             // size="50%"
           ></StyledSearchInput>
-          <div style={{ width: "40px", height: "30px", paddingRight: "10px" }}>
+          <div style={{ width: "40px", height: "30px", paddingRight: "5px" }}>
             <NavLink exact to="/search">
               <div
+                id="search"
                 style={{ color: "rgb(132, 129, 122, 0.4)", height: "30px" }}
                 onClick={props.onClick}
               >

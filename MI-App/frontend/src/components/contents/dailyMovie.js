@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { StyledMovieList } from "./styleComponent";
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
+
+import {
+  StyledMovieList,
+  StyledContent,
+  StyledContentTitle
+} from "./styleComponent";
 
 const DailyMovie = props => {
   const [isDetails, setIsDetails] = useState(false);
@@ -21,7 +26,7 @@ const DailyMovie = props => {
   }, []);
 
   const detail = (
-    <div>
+    <StyledContent>
       {selected.map(info => {
         return (
           <MovieDetailsInfo
@@ -32,13 +37,13 @@ const DailyMovie = props => {
           />
         );
       })}
-    </div>
+    </StyledContent>
   );
 
   const moviePostercomponent = () => {
     return (
-      <div>
-        <div style={{ color: "#c44569" }}>최신 개봉 영화</div>
+      <StyledContent>
+        <StyledContentTitle>최신 개봉 영화</StyledContentTitle>
         <StyledMovieList>
           {recentMovieInfo.map((info, i) => {
             return (
@@ -51,7 +56,7 @@ const DailyMovie = props => {
             );
           })}
         </StyledMovieList>
-      </div>
+      </StyledContent>
     );
   };
 

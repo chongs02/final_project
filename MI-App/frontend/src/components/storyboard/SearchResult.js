@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { StyledMovieList } from "../contents/styleComponent";
 import { connect } from "react-redux";
 import { MovieDetailsInfo, MovieSearchInfo } from "../contents/movieInfo";
 
+import {
+  StyledMovieList,
+  StyledContent,
+  StyledContentTitle
+} from "../contents/styleComponent";
+
 const SearchResult = props => {
-  console.log(props);
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
 
@@ -22,7 +26,7 @@ const SearchResult = props => {
   }, [keyword]);
 
   const detail = (
-    <div>
+    <StyledContent>
       {selected.map(info => {
         return (
           <MovieDetailsInfo
@@ -32,12 +36,12 @@ const SearchResult = props => {
           />
         );
       })}
-    </div>
+    </StyledContent>
   );
 
   const search = (
-    <div>
-      <div style={{ color: "#c44569" }}>상위 검색 결과</div>
+    <StyledContent>
+      <StyledContentTitle>상위 검색 결과</StyledContentTitle>
       <StyledMovieList>
         {movieInfo.map((info, i) => {
           return (
@@ -51,7 +55,7 @@ const SearchResult = props => {
           );
         })}
       </StyledMovieList>
-    </div>
+    </StyledContent>
   );
 
   return (

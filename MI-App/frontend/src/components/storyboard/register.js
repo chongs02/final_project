@@ -29,7 +29,6 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const { username, password } = this.state;
     const newUser = { username, password };
     this.props.register(newUser);
@@ -131,7 +130,9 @@ class Register extends Component {
               >
                 계정이 있으시다구요?
                 <Link to="/login">
-                  <StyledSubButton type="submit">로그인</StyledSubButton>
+                  <StyledSubButton fontSize={"0.9em"} type="submit">
+                    로그인
+                  </StyledSubButton>
                 </Link>
               </div>
             </StyledFieldSet>

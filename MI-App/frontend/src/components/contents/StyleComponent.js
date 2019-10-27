@@ -11,12 +11,10 @@ export const StyledHeader = styled.header`
   top: 0px;
   left: 0px;
   z-index: 51;
-  color: rgb(255, 255, 255);
   text-align: center;
   width: 100%;
   height: 8%;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px,
-    rgb(210, 210, 210) 0px 0px 0px 0px;
+  border-bottom: 1px solid rgba(37, 40, 47, 0.1);
   background: rgb(255, 255, 255, 0.8);
   transition: background-color 200ms ease 0s;
 `;
@@ -86,6 +84,18 @@ export const StyledH1 = styled.h1`
   font-family: london;
 `;
 
+export const StyledContent = styled.div`
+  border-bottom: 1px solid rgba(37, 40, 47, 0.1);
+`;
+
+export const StyledContentTitle = styled.div`
+  margin: 10px 0px;
+  margin-top: 20px;
+  color: #fc427b;
+  font-family: nanumB;
+  font-size: 1.2em;
+`;
+
 export const StyledInput = styled.input`
   font-size: 0.9em;
   height: 30px;
@@ -102,6 +112,7 @@ export const StyledInput = styled.input`
 export const StyledSearchInput = styled.input`
   font-size: 1em;
   font-weight: bold;
+  font-family: nanumB;
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
@@ -111,12 +122,12 @@ export const StyledSearchInput = styled.input`
   background-color: white;
   outline: none;
 
-  ::placeholder,
+  ::placeholder ;
   ::-webkit-input-placeholder {
     color: rgb(132, 129, 122, 0.5);
   }
 `;
-// rgba(162, 155, 254, 0.5);
+// rgba(162; 155; 254; 0.5);
 
 export const StyledMainButton = styled.button`
   cursor: pointer;
@@ -146,15 +157,18 @@ export const StyledSubButton = styled.button`
   outline: none;
 `;
 
-export const StyledSearchButton = styled.button`
+export const StyledMovieButton = styled.button`
+  margin-left: 6px;
+  margin-right: 6px;
+  padding: 0px;
   cursor: pointer;
-  color: #eb3b5a;
-  font-size: 0.9em;
-  font-family: nanum;
-  margin: 0px;
   border: none;
   background-color: white;
   outline: none;
+`;
+
+export const StyledMovieIcon = styled.div`
+  color: ${props => props.color};
 `;
 
 export const AlignSubmit = styled.div`
@@ -180,16 +194,15 @@ export const StyledMovieSearch = styled.div`
   align-items: center;
   justify-content: center;
   margin: 10px;
+  margin-bottom: 5px;
 `;
 
 export const StyledMovieInfo = styled.div`
   background-color: white;
-  margin-bottom: 70px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   font-weight: 100;
-  padding: 50px;
   border-radius: 5px;
   color: #adaeb9;
   box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),

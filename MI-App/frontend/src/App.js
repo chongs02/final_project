@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
 
                 @font-face {
                   font-family: 'nanum';
-                  src: url('./statics/fonts/LondonBetween.ttf') format('nanum');
+                  src: url('./statics/fonts/NanumSquareB.ttf') format('nanum');
                 }
 
                 html {

@@ -30,7 +30,8 @@ class Main extends Component {
       renderKeyword: this.state.keyword
     });
     this.props.movieInfo(this.state.keyword);
-    document.querySelector("button").click();
+    // 여기 수정 필요함
+    document.getElementById("search").click();
   };
 
   handleKeyPress = e => {
@@ -52,7 +53,7 @@ class Main extends Component {
             onClick={this.handleClick}
           ></Nav>
           <div style={{ height: "100%", marginLeft: "2%", marginRight: "2%" }}>
-            <div style={{ height: "10%" }} />
+            <div style={{ height: "8%" }} />
             <Switch>
               <Route
                 exact
@@ -62,7 +63,6 @@ class Main extends Component {
               <Route exact path="/mypage" component={MyPage} />
               <Route exact path="/logout" component={Logout} />
             </Switch>
-
             <DailyBoxOffice></DailyBoxOffice>
           </div>
         </BrowserRouter>
