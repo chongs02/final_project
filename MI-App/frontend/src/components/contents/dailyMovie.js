@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
 
 import {
@@ -60,11 +61,27 @@ const DailyMovie = props => {
     );
   };
 
+  const noResult = (
+    <StyledContent>
+      <StyledContentTitle>최신 개봉 영화</StyledContentTitle>
+      <div
+        style={{
+          display: "flex",
+          height: "188.6px",
+          margin: "30px 0px",
+          paddingLeft: "20px"
+        }}
+      >
+        Loading...
+      </div>
+    </StyledContent>
+  );
+
   return (
     <React.Fragment>
       <div style={{ flex: 1 }}>
         <div>{isDetails ? detail : <div></div>}</div>
-        <div>{recentInfoLoaded ? moviePostercomponent() : "ready"}</div>
+        <div>{recentInfoLoaded ? moviePostercomponent() : noResult}</div>
       </div>
     </React.Fragment>
   );

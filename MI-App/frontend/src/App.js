@@ -72,6 +72,7 @@ class RootContainerComponent extends React.Component {
         <BrowserRouter>
           <Switch>
             <PrivateRoute exact path="/" component={Main} />
+            <Route exact path="/main" component={Main} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
           </Switch>

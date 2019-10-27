@@ -82,7 +82,7 @@ export const loadUser = () => async (dispatch, getState) => {
   await axios
     .get("/api/user/", tokenConfig(getState))
     .then(res => {
-      console.log(res);
+      // console.log(res);
       dispatch({
         type: types.USER_LOADED,
         payload: res.data

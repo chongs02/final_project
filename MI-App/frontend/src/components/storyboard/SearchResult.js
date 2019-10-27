@@ -58,9 +58,35 @@ const SearchResult = props => {
     </StyledContent>
   );
 
+  const noResult = (
+    <StyledContent>
+      <StyledContentTitle>상위 검색 결과</StyledContentTitle>
+      <div
+        style={{
+          display: "flex",
+          height: "188.6px",
+          margin: "30px 0px",
+          paddingLeft: "20px"
+        }}
+      >
+        검색 결과가 없습니다
+      </div>
+    </StyledContent>
+  );
+
   return (
     <div style={{ flex: 1 }}>
-      <div>{isDetails ? detail : search}</div>
+      {keyword ? (
+        <div>
+          {movieInfo.length > 0 ? (
+            <div>{isDetails ? detail : search}</div>
+          ) : (
+            noResult
+          )}
+        </div>
+      ) : (
+        noResult
+      )}
     </div>
   );
 };

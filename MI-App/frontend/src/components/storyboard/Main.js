@@ -3,21 +3,21 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
 
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 import Nav from "../contents/nav";
 import SearchResult from "./searchResult";
 import MyPage from "./myPage";
 import Logout from "./logout";
 import DailyBoxOffice from "../contents/dailyBoxOffice";
 import { clearMovieInfo } from "../../actions/movieInfo";
+import { MovieDetailsInfo } from "../contents/movieInfo";
 
 class Main extends Component {
   state = {
     keyword: "",
-    renderKeyword: ""
+    renderKeyword: "",
+    isPageChange: false
   };
-
-  componentDidMount() {}
 
   handleChange = e => {
     this.setState({
@@ -25,12 +25,13 @@ class Main extends Component {
     });
   };
 
-  handleClick = () => {
+  handleClick = clickType => {
+    const { keyword } = this.state;
+
     this.setState({
-      renderKeyword: this.state.keyword
+      renderKeyword: keyword
     });
-    this.props.movieInfo(this.state.keyword);
-    // 여기 수정 필요함
+    this.props.movieInfo(keyword);
     document.getElementById("search").click();
   };
 
@@ -42,6 +43,8 @@ class Main extends Component {
 
   render() {
     const { keyword, renderKeyword } = this.state;
+
+    console.log(window.location.href);
 
     return (
       <Fragment>

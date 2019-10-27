@@ -27,13 +27,14 @@ const Nav = props => {
     <StyledHeader>
       <StyledNav>
         <div style={{ marginRight: "20px" }}>
-          <NavLink exact to="/" style={{ textDecoration: "none" }}>
+          <NavLink exact to="/main" style={{ textDecoration: "none" }}>
             <div
               style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
               }}
+              onClick={props.onClick}
             >
               <img
                 src={logo}
@@ -70,13 +71,20 @@ const Nav = props => {
           ></StyledSearchInput>
           <div style={{ width: "40px", height: "30px", paddingRight: "5px" }}>
             <NavLink exact to="/search">
-              <div
+              <button
                 id="search"
-                style={{ color: "rgb(132, 129, 122, 0.4)", height: "30px" }}
+                style={{
+                  padding: "0px",
+                  border: "0",
+                  background: "white",
+                  color: "rgb(132, 129, 122, 0.4)",
+                  height: "30px",
+                  outline: "none"
+                }}
                 onClick={props.onClick}
               >
                 <Icon size={"30px"} icon={androidSearch} />
-              </div>
+              </button>
             </NavLink>
           </div>
         </StyledSearchForm>

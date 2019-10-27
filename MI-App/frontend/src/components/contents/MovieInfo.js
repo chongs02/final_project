@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+
 import {
   StyledMovieInfo,
   StyledMovieSearch,
@@ -8,13 +9,13 @@ import {
   StyledMovieIcon
 } from "./styleComponent";
 import axios from "axios";
-import { tokenConfig } from "../../actions/auth";
+// import { tokenConfig } from "../../actions/auth";
 
 import { Icon } from "react-icons-kit";
 import { check } from "react-icons-kit/fa/check";
 import { heart } from "react-icons-kit/fa/heart";
 import { heartO } from "react-icons-kit/fa/heartO";
-import { u1F611 } from "react-icons-kit/noto_emoji_regular/u1F611";
+// import { u1F611 } from "react-icons-kit/noto_emoji_regular/u1F611";
 import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 
 // 메인 페이지 영화 간단 정보
@@ -58,6 +59,7 @@ export const seenMovie = async watchedMovie => {
 export class MovieSearchInfo extends Component {
   render() {
     const { info, user } = this.props;
+    // console.log(info, "movieinfo");
 
     return (
       <Fragment>

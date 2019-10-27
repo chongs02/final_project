@@ -6,17 +6,23 @@ import { loadUserProfile } from "../../actions/auth";
 import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
 
 const MyPage = memo(props => {
-  console.log(props);
+  // console.log(props);
 
   useEffect(() => {
     props.loadUserProfile();
   }, []);
 
   return (
-    <StyledContent>
-      <StyledContentTitle>내가 본 영화</StyledContentTitle>
-      <UserMovie profile={props.profile}></UserMovie>
-    </StyledContent>
+    <div>
+      {props.profile ? (
+        <StyledContent>
+          <StyledContentTitle>내가 본 영화</StyledContentTitle>
+          <UserMovie profile={props.profile}></UserMovie>
+        </StyledContent>
+      ) : (
+        <div></div>
+      )}
+    </div>
   );
 });
 
