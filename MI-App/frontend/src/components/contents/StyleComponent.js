@@ -198,13 +198,18 @@ export const StyledMovieSearch = styled.div`
 `;
 
 export const StyledMovieInfo = styled.div`
+  width: 60%;
+  height: 50%;
+  padding: 10px;
+  margin: 5px;
+  margin-bottom: 20px;
   background-color: white;
   display: flex;
+  justify-content: flex;
   align-items: flex-start;
-  justify-content: space-between;
   font-weight: 100;
   border-radius: 5px;
-  color: #adaeb9;
+  color: black;
   box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
     0 8px 16px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
 `;
@@ -217,11 +222,25 @@ export const StyledMoviePoster = styled.img`
     0 8px 16px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
 `;
 
+export const StyledMovieDetailPoster = styled.img`
+  display: block;
+  width: 150px;
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+`;
+
 export const StyledMovieTitle = styled.p`
   text-align: center;
   margin: 0px;
   margin-top: 10px;
   word-break: keep-all;
+`;
+
+export const StyledH5 = styled.h5`
+  margin: 0px;
+  color: #778ca3;
 `;
 
 export const StyledBottomNav = styled.nav`

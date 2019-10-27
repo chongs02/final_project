@@ -58,7 +58,7 @@ const DailyBoxOffice = props => {
     boxOfficeDetail();
   }, []);
 
-  return <DailyMovie></DailyMovie>;
+  return <DailyMovie page={props.page}></DailyMovie>;
 };
 
 const mapStateToProps = state => {

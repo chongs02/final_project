@@ -24,7 +24,7 @@ const DailyMovie = props => {
     return () => {
       setIsDetails(false);
     };
-  }, []);
+  }, [props.page]);
 
   const detail = (
     <StyledContent>
@@ -79,8 +79,8 @@ const DailyMovie = props => {
 
   return (
     <React.Fragment>
-      <div style={{ flex: 1 }}>
-        <div>{isDetails ? detail : <div></div>}</div>
+      <div style={{}}>
+        <div style={{}}>{isDetails ? detail : <div></div>}</div>
         <div>{recentInfoLoaded ? moviePostercomponent() : noResult}</div>
       </div>
     </React.Fragment>
@@ -94,4 +94,5 @@ const mapStateToProps = state => {
     user: state.auth.user
   };
 };
+
 export default connect(mapStateToProps)(DailyMovie);

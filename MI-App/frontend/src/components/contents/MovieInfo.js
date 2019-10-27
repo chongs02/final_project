@@ -4,9 +4,12 @@ import {
   StyledMovieInfo,
   StyledMovieSearch,
   StyledMoviePoster,
+  StyledMovieDetailPoster,
   StyledMovieTitle,
   StyledMovieButton,
-  StyledMovieIcon
+  StyledMovieIcon,
+  StyledContentTitle,
+  StyledH5
 } from "./styleComponent";
 import axios from "axios";
 // import { tokenConfig } from "../../actions/auth";
@@ -72,7 +75,7 @@ export class MovieSearchInfo extends Component {
             />
             <StyledMovieTitle>{info.movieNm}</StyledMovieTitle>
           </StyledMovieSearch>
-          <MovieStatusButtons data={this.props} />
+          <MovieStatusButtons data={this.props} size={20} />
         </div>
       </Fragment>
     );
@@ -83,22 +86,155 @@ export class MovieSearchInfo extends Component {
 export class MovieDetailsInfo extends Component {
   render() {
     const { info } = this.props;
+    const openDt = info.openDt.toString().substring(0, 4);
+    const actors = info.actors
+      .replace(/['"]+/g, "")
+      .replace(/[\[\]']+/g, "", "");
+
     return (
-      <StyledMovieInfo>
-        <div>
-          <img src={info.poster} alt={info.movieNm} title={info.movieNm} />
-          <div>
-            <p>{info.movieNm}</p>
-            <p>{info.movieNmEn}</p>
-            <p>{info.nations}</p>
-            <p>{info.prdtStatNm}</p>
-            <p>{info.genre}</p>
-            <p>{info.directors}</p>
-            <p>{info.showTm}</p>
-            <p>{info.watchGradeNm.split(",")[0]}</p>
+      <div>
+        <StyledContentTitle>영화 상세 정보</StyledContentTitle>
+        <StyledMovieInfo>
+          <div style={{ width: "100%", margin: "5%" }}>
+            <div
+              style={{
+                display: "flex",
+                height: "50%",
+                paddingBottom: "5%",
+                borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
+              }}
+            >
+              <div
+                style={{
+                  width: "150px",
+                  height: "100%",
+                  marginRight: "5%"
+                }}
+              >
+                <StyledMovieDetailPoster
+                  src={info.poster}
+                  alt={info.movieNm}
+                  title={info.movieNm}
+                />
+              </div>
+              <div
+                style={{
+                  height: "100%",
+                  marginRight: "30px"
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    textAlign: "bottom",
+                    width: "100%"
+                  }}
+                >
+                  <h1
+                    style={{
+                      margin: "0px",
+                      fontFamily: "nanumB",
+                      alignSelf: "flex-end"
+                    }}
+                  >
+                    {info.movieNm}
+                  </h1>
+                  {/* <h3
+                    style={{
+                      margin: "0px 10px",
+                      color: "#84817a",
+                      alignSelf: "flex-end"
+                    }}
+                  >
+                    {info.movieNmEn}
+                  </h3> */}
+                </div>
+                <p
+                  style={{ color: "#57606f", margin: "0px", marginTop: "5px" }}
+                >
+                  {openDt}&nbsp;・&nbsp;{info.nations}
+                </p>
+                {/* <p>{info.prdtStatNm}</p> */}
+                <p
+                  style={{ color: "#57606f", margin: "0px", marginTop: "2px" }}
+                >
+                  {info.genre}
+                </p>
+                <div
+                  style={{
+                    width: "120px",
+                    marginTop: "20px"
+                  }}
+                >
+                  <MovieStatusButtons data={this.props} size={30} />
+                </div>
+                <h1
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    marginBottom: "0px",
+                    alignSelf: "flex-end"
+                  }}
+                >
+                  ⭐4.5
+                </h1>
+              </div>
+            </div>
+            <h3
+              style={{
+                fontFamily: "nanumB",
+                margin: "0px",
+                marginTop: "20px",
+                marginBottom: "10px"
+              }}
+            >
+              기본 정보
+            </h3>
+            <div>
+              <div
+                style={{
+                  paddingBottom: "5%",
+                  borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
+                }}
+              >
+                <div style={{ margin: "0px", marginBottom: "10px" }}>
+                  <h4
+                    style={{
+                      color: "#57606f",
+                      margin: "0"
+                    }}
+                  >
+                    {info.movieNmEn}
+                  </h4>
+                  <StyledH5>
+                    {openDt}&nbsp;・&nbsp;{info.nations}&nbsp;・&nbsp;
+                    {info.repGenre}
+                  </StyledH5>
+                  <StyledH5>{info.showTm}분</StyledH5>
+                  <StyledH5>{info.watchGradeNm.split(",")[0]}</StyledH5>
+                </div>
+                <StyledH5>
+                  1999년 이 영화는 어쩌구 저쩌구 이러쿵 저러쿵 샤바리샤바
+                </StyledH5>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontFamily: "nanumB",
+                    margin: "0px",
+                    marginTop: "20px",
+                    marginBottom: "10px"
+                  }}
+                >
+                  감독/배우
+                </h3>
+                <StyledH5>감독 - {info.directors}</StyledH5>
+                <StyledH5>배우 - {actors}</StyledH5>
+              </div>
+            </div>
           </div>
-        </div>
-      </StyledMovieInfo>
+        </StyledMovieInfo>
+      </div>
     );
   }
 }
@@ -152,7 +288,7 @@ export class MovieStatusButtons extends Component {
           <StyledMovieIcon
             color={isSeen ? "black" : "rgba(113, 128, 147, 0.2)"}
           >
-            <Icon size={"20"} icon={check} />
+            <Icon size={this.props.size} icon={check} />
           </StyledMovieIcon>
         </StyledMovieButton>
         <StyledMovieButton
@@ -164,7 +300,7 @@ export class MovieStatusButtons extends Component {
           <StyledMovieIcon
             color={isLike ? "#eb3b5a" : "rgba(113, 128, 147, 0.2)"}
           >
-            <Icon size={"20"} icon={isLike ? heart : heartO} />
+            <Icon size={this.props.size} icon={isLike ? heart : heartO} />
           </StyledMovieIcon>
         </StyledMovieButton>
         <StyledMovieButton
@@ -178,7 +314,7 @@ export class MovieStatusButtons extends Component {
               isHate ? "rgba(6, 82, 221, 0.8)" : "rgba(113, 128, 147, 0.2)"
             }
           >
-            <Icon size={"27"} icon={u1F608} />
+            <Icon size={this.props.size + 7} icon={u1F608} />
           </StyledMovieIcon>
         </StyledMovieButton>
       </div>

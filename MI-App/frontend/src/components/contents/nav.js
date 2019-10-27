@@ -8,8 +8,7 @@ import {
   StyledSearchInput,
   StyledNav,
   StyledSearchForm,
-  StyledSubButton,
-  StyledMainButton
+  StyledSubButton
 } from "./styleComponent";
 
 import logo from "../../statics/logos/logo04.png";
@@ -27,14 +26,14 @@ const Nav = props => {
     <StyledHeader>
       <StyledNav>
         <div style={{ marginRight: "20px" }}>
-          <NavLink exact to="/main" style={{ textDecoration: "none" }}>
+          <NavLink exact to={props.main} style={{ textDecoration: "none" }}>
             <div
               style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
               }}
-              onClick={props.onClick}
+              onClick={() => props.onClick("home")}
             >
               <img
                 src={logo}
@@ -81,7 +80,7 @@ const Nav = props => {
                   height: "30px",
                   outline: "none"
                 }}
-                onClick={props.onClick}
+                onClick={() => props.onClick("search")}
               >
                 <Icon size={"30px"} icon={androidSearch} />
               </button>
@@ -99,7 +98,12 @@ const Nav = props => {
           }}
         >
           <NavLink exact to="/mypage">
-            <StyledSubButton fontSize={"1em"}>마이페이지</StyledSubButton>
+            <StyledSubButton
+              fontSize={"1em"}
+              onClick={() => props.onClick("myPage")}
+            >
+              마이페이지
+            </StyledSubButton>
           </NavLink>
           <NavLink exact to="/logout">
             <StyledSubButton fontSize={"1em"}>로그아웃</StyledSubButton>
