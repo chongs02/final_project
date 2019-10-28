@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, useHistory, useLocation, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "../contents/movieInfo";
@@ -15,6 +15,13 @@ const SearchResult = props => {
   const [selected, setSelected] = useState([]);
 
   const { keyword, movieInfo } = props;
+
+  const history = useHistory();
+  const params = useParams();
+  const loc = useLocation();
+
+  console.log(history);
+  // console.log(loc);
 
   const handleClick = i => {
     setIsDetails(true);
