@@ -188,6 +188,24 @@ export const StyledMovieList = styled.section`
   width: 100%;
 `;
 
+export const StyledContentHover = styled.div`
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+
+  transition: all 0.4s ease-in-out;
+
+  :hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+  }
+`;
+
 export const StyledMovieSearch = styled.div`
   cursor: pointer;
   width: 120px;

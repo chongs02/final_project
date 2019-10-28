@@ -5,6 +5,7 @@ import { logout } from "../../actions/auth";
 
 import {
   StyledHeader,
+  StyledContentHover,
   StyledSearchInput,
   StyledNav,
   StyledSearchForm,
@@ -27,10 +28,12 @@ const Nav = props => {
         <div style={{ marginRight: "20px" }}>
           <NavLink exact to="/main" style={{ textDecoration: "none" }}>
             <div
+              id="home"
               style={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                marginRight: "20px"
               }}
             >
               <img
@@ -46,7 +49,6 @@ const Nav = props => {
                 style={{
                   height: "100%",
                   marginLeft: "5px",
-                  marginRight: "20px",
                   fontSize: "30px",
                   fontFamily: "london"
                 }}
@@ -95,12 +97,20 @@ const Nav = props => {
             height: "60%"
           }}
         >
-          <NavLink exact to="/myPage">
-            <StyledSubButton fontSize={"1em"}>마이페이지</StyledSubButton>
-          </NavLink>
-          <NavLink exact to="/logout">
-            <StyledSubButton fontSize={"1em"}>로그아웃</StyledSubButton>
-          </NavLink>
+          <StyledContentHover>
+            <NavLink exact to="/myPage">
+              <StyledSubButton id="myPage" fontSize={"1em"}>
+                마이페이지
+              </StyledSubButton>
+            </NavLink>
+          </StyledContentHover>
+          <StyledContentHover>
+            <NavLink exact to="/logout">
+              <StyledSubButton id="logout" fontSize={"1em"}>
+                로그아웃
+              </StyledSubButton>
+            </NavLink>
+          </StyledContentHover>
         </div>
       </StyledNav>
     </StyledHeader>

@@ -4,6 +4,7 @@ import axios from "axios";
 
 import {
   StyledMovieInfo,
+  StyledContentHover,
   StyledMovieSearch,
   StyledMoviePoster,
   StyledMovieDetailPoster,
@@ -51,9 +52,9 @@ export class MovieSearchInfo extends Component {
     const url = page + "/datails";
 
     return (
-      <div>
+      <StyledContentHover>
         <StyledMovieSearch onClick={this.props.onClick}>
-          <Link to={url}>
+          <Link to={url} style={{ color: "inherit", textDecoration: "none" }}>
             <StyledMoviePoster
               src={info.poster}
               alt={info.movieNm}
@@ -64,7 +65,7 @@ export class MovieSearchInfo extends Component {
         </StyledMovieSearch>
 
         <MovieStatusButtons data={this.props} size={20} />
-      </div>
+      </StyledContentHover>
     );
   }
 }

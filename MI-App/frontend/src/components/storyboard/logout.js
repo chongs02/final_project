@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 
+import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
+
 const Logout = props => {
   console.log(props);
   const [userName, setUserName] = useState("");
@@ -10,11 +12,11 @@ const Logout = props => {
     setUserName(props.auth.user.username);
     const timer = setTimeout(() => {
       props.logout();
-    }, 3000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
   return (
-    <div
+    <StyledContent
       style={{
         flex: 1,
         display: "flex",
@@ -22,8 +24,21 @@ const Logout = props => {
         justifyContent: "center"
       }}
     >
-      잘가요 내 소중한 {userName} 님 ^^
-    </div>
+      <StyledContentTitle>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center"
+          }}
+        >
+          <div style={{ marginRight: "10px" }}>Goodbye ~ </div>
+          <div style={{ color: "black" }}>{userName} !</div>
+        </div>
+      </StyledContentTitle>
+    </StyledContent>
   );
 };
 

@@ -25,6 +25,15 @@ const GlobalStyle = createGlobalStyle`
                   font-family: nanum;
                   margin:0px;
                 }
+
+                @keyframes fadeIn {
+                  from {
+                    opacity: 0;
+                  }
+                  to {
+                    opacity: 1;
+                  }
+                }
                 `;
 
 class RootContainerComponent extends Component {
