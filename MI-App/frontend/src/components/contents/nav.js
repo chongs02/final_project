@@ -2,24 +2,22 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
-import { Icon } from "react-icons-kit";
-import { androidSearch } from "react-icons-kit/ionicons/androidSearch";
 
 import {
   StyledHeader,
   StyledSearchInput,
   StyledNav,
   StyledSearchForm,
-  StyledSubButton,
-  StyledMainButton
+  StyledSubButton
 } from "./styleComponent";
 
 import logo from "../../statics/logos/logo04.png";
+import { Icon } from "react-icons-kit";
+import { androidSearch } from "react-icons-kit/ionicons/androidSearch";
 
 const Nav = props => {
   useEffect(() => {
     document.getElementsByClassName("searchBar")[0].focus();
-
     return () => {};
   }, [props.onClick]);
 
@@ -27,7 +25,7 @@ const Nav = props => {
     <StyledHeader>
       <StyledNav>
         <div style={{ marginRight: "20px" }}>
-          <NavLink exact to="/" style={{ textDecoration: "none" }}>
+          <NavLink exact to="/main" style={{ textDecoration: "none" }}>
             <div
               style={{
                 display: "flex",
@@ -68,14 +66,22 @@ const Nav = props => {
             onKeyPress={props.onKeyPress}
             // size="50%"
           ></StyledSearchInput>
-          <div style={{ width: "40px", height: "30px", paddingRight: "10px" }}>
+          <div style={{ width: "40px", height: "30px", paddingRight: "5px" }}>
             <NavLink exact to="/search">
-              <div
-                style={{ color: "rgb(132, 129, 122, 0.4)", height: "30px" }}
+              <button
+                id="search"
+                style={{
+                  padding: "0px",
+                  border: "0",
+                  background: "white",
+                  color: "rgb(132, 129, 122, 0.4)",
+                  height: "30px",
+                  outline: "none"
+                }}
                 onClick={props.onClick}
               >
                 <Icon size={"30px"} icon={androidSearch} />
-              </div>
+              </button>
             </NavLink>
           </div>
         </StyledSearchForm>
@@ -89,7 +95,7 @@ const Nav = props => {
             height: "60%"
           }}
         >
-          <NavLink exact to="/mypage">
+          <NavLink exact to="/myPage">
             <StyledSubButton fontSize={"1em"}>마이페이지</StyledSubButton>
           </NavLink>
           <NavLink exact to="/logout">

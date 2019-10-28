@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { StyledMovieList } from "./styleComponent";
+
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
+
+import {
+  StyledMovieList,
+  StyledContent,
+  StyledContentTitle
+} from "./styleComponent";
 
 const DailyMovie = props => {
   const [isDetails, setIsDetails] = useState(false);
@@ -20,29 +27,32 @@ const DailyMovie = props => {
     };
   }, []);
 
-  const detail = (
-    <div>
-      {selected.map(info => {
-        return (
-          <MovieDetailsInfo
-            user={props.username}
-            key={info.movieCd}
-            movieCd={info.movieCd}
-            info={info}
-          />
-        );
-      })}
-    </div>
-  );
+  const details = () => {
+    return (
+      <StyledContent>
+        {selected.map(info => {
+          return (
+            <MovieDetailsInfo
+              user={props.username}
+              key={info.movieCd}
+              movieCd={info.movieCd}
+              info={info}
+            />
+          );
+        })}
+      </StyledContent>
+    );
+  };
 
   const moviePostercomponent = () => {
     return (
-      <div>
-        <div style={{ color: "#c44569" }}>최신 개봉 영화</div>
+      <StyledContent>
+        <StyledContentTitle>최신 개봉 영화</StyledContentTitle>
         <StyledMovieList>
           {recentMovieInfo.map((info, i) => {
             return (
               <MovieSearchInfo
+                page={"/main"}
                 key={i}
                 info={info}
                 user={props.user.username}
@@ -51,17 +61,37 @@ const DailyMovie = props => {
             );
           })}
         </StyledMovieList>
-      </div>
+      </StyledContent>
     );
   };
 
-  return (
-    <React.Fragment>
-      <div style={{ flex: 1 }}>
-        <div>{isDetails ? detail : <div></div>}</div>
-        <div>{recentInfoLoaded ? moviePostercomponent() : "ready"}</div>
+  const noResult = (
+    <StyledContent>
+      <StyledContentTitle>최신 개봉 영화</StyledContentTitle>
+      <div
+        style={{
+          display: "flex",
+          height: "188.6px",
+          margin: "30px 0px",
+          paddingLeft: "20px"
+        }}
+      >
+        Loading...
       </div>
-    </React.Fragment>
+    </StyledContent>
+  );
+
+  return (
+    <div>
+      <div>
+        {isDetails ? (
+          <Route exact path="/main/:title" component={details} />
+        ) : (
+          <div></div>
+        )}
+      </div>
+      <div>{recentInfoLoaded ? moviePostercomponent() : noResult}</div>
+    </div>
   );
 };
 
@@ -72,4 +102,5 @@ const mapStateToProps = state => {
     user: state.auth.user
   };
 };
+
 export default connect(mapStateToProps)(DailyMovie);

@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: "nanumB";
+  src: url("./statics/fonts/NanumSquareEB.ttf");
+}
+
+@font-face {
   font-family: "london";
   src: url("./statics/fonts/LondonBetween.ttf");
 }

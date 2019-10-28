@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { StyledMovieList } from "../contents/styleComponent";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
+
 import { MovieDetailsInfo, MovieSearchInfo } from "../contents/movieInfo";
 
+import {
+  StyledMovieList,
+  StyledContent,
+  StyledContentTitle
+} from "../contents/styleComponent";
+
 const SearchResult = props => {
-  console.log(props);
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
 
@@ -12,7 +18,7 @@ const SearchResult = props => {
 
   const handleClick = i => {
     setIsDetails(true);
-    setSelected([props.movieInfo[i]]);
+    setSelected([movieInfo[i]]);
   };
 
   useEffect(() => {
@@ -21,42 +27,72 @@ const SearchResult = props => {
     };
   }, [keyword]);
 
-  const detail = (
-    <div>
-      {selected.map(info => {
-        return (
-          <MovieDetailsInfo
-            key={info.movieCd}
-            movieCd={info.movieCd}
-            info={info}
-          />
-        );
-      })}
-    </div>
-  );
-
-  const search = (
-    <div>
-      <div style={{ color: "#c44569" }}>상위 검색 결과</div>
-      <StyledMovieList>
-        {movieInfo.map((info, i) => {
+  const details = () => {
+    return (
+      <StyledContent>
+        {selected.map(info => {
           return (
-            <MovieSearchInfo
+            <MovieDetailsInfo
+              user={props.username}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
-              user={props.user.username}
-              onClick={() => handleClick(i)}
             />
           );
         })}
-      </StyledMovieList>
-    </div>
+      </StyledContent>
+    );
+  };
+
+  const search = () => {
+    return (
+      <StyledContent>
+        <StyledContentTitle>상위 검색 결과</StyledContentTitle>
+        <StyledMovieList>
+          {movieInfo.map((info, i) => {
+            return (
+              <MovieSearchInfo
+                page={"/search"}
+                key={i}
+                info={info}
+                user={props.user.username}
+                onClick={() => handleClick(i)}
+              />
+            );
+          })}
+        </StyledMovieList>
+      </StyledContent>
+    );
+  };
+
+  const noResult = (
+    <StyledContent>
+      <StyledContentTitle>상위 검색 결과</StyledContentTitle>
+      <div
+        style={{
+          display: "flex",
+          height: "188.6px",
+          margin: "30px 0px",
+          paddingLeft: "20px"
+        }}
+      >
+        검색 결과가 없습니다
+      </div>
+    </StyledContent>
   );
 
   return (
     <div style={{ flex: 1 }}>
-      <div>{isDetails ? detail : search}</div>
+      {isDetails ? (
+        <Route exact path="/search/:title" component={details} />
+      ) : (
+        <div />
+      )}
+      {keyword ? (
+        <div>{movieInfo.length > 0 ? search() : noResult}</div>
+      ) : (
+        noResult
+      )}
     </div>
   );
 };
@@ -68,7 +104,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {}
-)(SearchResult);
+export default connect(mapStateToProps)(SearchResult);

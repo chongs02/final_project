@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, Fragment } from "react";
 
 import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 
@@ -14,21 +14,6 @@ import Main from "./components/storyboard/main";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-                @font-face {
-                  font-family: 'london';
-                  src: url('./statics/fonts/LondonBetween.ttf') format('london');
-                }
-                
-                @font-face {
-                  font-family: 'londonMM';
-                  src: url('./statics/fonts/LondonMM.ttf') format('londonMM');
-                }
-
-                @font-face {
-                  font-family: 'nanum';
-                  src: url('./statics/fonts/LondonBetween.ttf') format('nanum');
-                }
-
                 html {
                   height: 100%;
                 }
@@ -42,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
                 }
                 `;
 
-class RootContainerComponent extends React.Component {
+class RootContainerComponent extends Component {
   componentDidMount() {
     this.props.loadUser();
   }
@@ -67,16 +52,17 @@ class RootContainerComponent extends React.Component {
   render() {
     let { PrivateRoute } = this;
     return (
-      <React.Fragment>
+      <Fragment>
         <GlobalStyle></GlobalStyle>
         <BrowserRouter>
           <Switch>
             <PrivateRoute exact path="/" component={Main} />
+            <PrivateRoute exact path="/main" component={Main} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
           </Switch>
         </BrowserRouter>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
@@ -92,7 +78,7 @@ let RootContainer = connect(
   { loadUser }
 )(RootContainerComponent);
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
