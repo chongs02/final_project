@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
+
 import { MovieDetailsInfo, MovieSearchInfo } from "../contents/movieInfo";
 
 import {
@@ -16,7 +18,7 @@ const SearchResult = props => {
 
   const handleClick = i => {
     setIsDetails(true);
-    setSelected([props.movieInfo[i]]);
+    setSelected([movieInfo[i]]);
   };
 
   useEffect(() => {
@@ -25,38 +27,43 @@ const SearchResult = props => {
     };
   }, [keyword]);
 
-  const detail = (
-    <StyledContent>
-      {selected.map(info => {
-        return (
-          <MovieDetailsInfo
-            key={info.movieCd}
-            movieCd={info.movieCd}
-            info={info}
-          />
-        );
-      })}
-    </StyledContent>
-  );
-
-  const search = (
-    <StyledContent>
-      <StyledContentTitle>상위 검색 결과</StyledContentTitle>
-      <StyledMovieList>
-        {movieInfo.map((info, i) => {
+  const details = () => {
+    return (
+      <StyledContent>
+        {selected.map(info => {
           return (
-            <MovieSearchInfo
+            <MovieDetailsInfo
+              user={props.username}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
-              user={props.user.username}
-              onClick={() => handleClick(i)}
             />
           );
         })}
-      </StyledMovieList>
-    </StyledContent>
-  );
+      </StyledContent>
+    );
+  };
+
+  const search = () => {
+    return (
+      <StyledContent>
+        <StyledContentTitle>상위 검색 결과</StyledContentTitle>
+        <StyledMovieList>
+          {movieInfo.map((info, i) => {
+            return (
+              <MovieSearchInfo
+                page={"/search"}
+                key={i}
+                info={info}
+                user={props.user.username}
+                onClick={() => handleClick(i)}
+              />
+            );
+          })}
+        </StyledMovieList>
+      </StyledContent>
+    );
+  };
 
   const noResult = (
     <StyledContent>
@@ -76,14 +83,13 @@ const SearchResult = props => {
 
   return (
     <div style={{ flex: 1 }}>
+      {isDetails ? (
+        <Route exact path="/search/:title" component={details} />
+      ) : (
+        <div />
+      )}
       {keyword ? (
-        <div>
-          {movieInfo.length > 0 ? (
-            <div>{isDetails ? detail : search}</div>
-          ) : (
-            noResult
-          )}
-        </div>
+        <div>{movieInfo.length > 0 ? search() : noResult}</div>
       ) : (
         noResult
       )}
@@ -98,7 +104,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {}
-)(SearchResult);
+export default connect(mapStateToProps)(SearchResult);

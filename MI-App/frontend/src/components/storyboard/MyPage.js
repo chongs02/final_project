@@ -1,26 +1,38 @@
 import React, { useEffect, memo } from "react";
 import { connect } from "react-redux";
-import UserMovie from "../contents/userMovie";
 import { loadUserProfile } from "../../actions/auth";
+
+import UserMovie from "../contents/userMovie";
 
 import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
 
 const MyPage = memo(props => {
-  // console.log(props);
-
   useEffect(() => {
     props.loadUserProfile();
   }, []);
 
+  const noResult = (
+    <StyledContent>
+      <StyledContentTitle>내가 본 영화</StyledContentTitle>
+      <div
+        style={{
+          display: "flex",
+          height: "188.6px",
+          margin: "30px 0px",
+          paddingLeft: "20px"
+        }}
+      >
+        본 영화가 없습니다
+      </div>
+    </StyledContent>
+  );
+
   return (
     <div>
       {props.profile ? (
-        <StyledContent>
-          <StyledContentTitle>내가 본 영화</StyledContentTitle>
-          <UserMovie profile={props.profile}></UserMovie>
-        </StyledContent>
+        <UserMovie profile={props.profile}></UserMovie>
       ) : (
-        <div></div>
+        noResult
       )}
     </div>
   );

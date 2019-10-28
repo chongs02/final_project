@@ -15,7 +15,7 @@ export const StyledHeader = styled.header`
   width: 100%;
   height: 8%;
   border-bottom: 1px solid rgba(37, 40, 47, 0.1);
-  background: rgb(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.5);
   transition: background-color 200ms ease 0s;
 `;
 
@@ -40,8 +40,8 @@ export const StyledLoginRegister = styled.div`
 `;
 
 export const StyledForm = styled.form`
+  margin-top: -150px;
   position: absolute;
-  margin-top: -200px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -152,7 +152,7 @@ export const StyledSubButton = styled.button`
   margin: 0px;
   padding: 0.25em 1em;
   border: none;
-  background-color: white;
+  background: rgba(255, 255, 255, 0);
   vertical-align: middle;
   outline: none;
 `;
@@ -241,6 +241,7 @@ export const StyledMovieTitle = styled.p`
 export const StyledH5 = styled.h5`
   margin: 0px;
   color: #778ca3;
+  word-break: keep-all;
 `;
 
 export const StyledBottomNav = styled.nav`

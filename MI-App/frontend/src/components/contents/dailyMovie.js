@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
@@ -24,22 +25,24 @@ const DailyMovie = props => {
     return () => {
       setIsDetails(false);
     };
-  }, [props.page]);
+  }, []);
 
-  const detail = (
-    <StyledContent>
-      {selected.map(info => {
-        return (
-          <MovieDetailsInfo
-            user={props.username}
-            key={info.movieCd}
-            movieCd={info.movieCd}
-            info={info}
-          />
-        );
-      })}
-    </StyledContent>
-  );
+  const details = () => {
+    return (
+      <StyledContent>
+        {selected.map(info => {
+          return (
+            <MovieDetailsInfo
+              user={props.username}
+              key={info.movieCd}
+              movieCd={info.movieCd}
+              info={info}
+            />
+          );
+        })}
+      </StyledContent>
+    );
+  };
 
   const moviePostercomponent = () => {
     return (
@@ -49,6 +52,7 @@ const DailyMovie = props => {
           {recentMovieInfo.map((info, i) => {
             return (
               <MovieSearchInfo
+                page={"/main"}
                 key={i}
                 info={info}
                 user={props.user.username}
@@ -78,12 +82,16 @@ const DailyMovie = props => {
   );
 
   return (
-    <React.Fragment>
-      <div style={{}}>
-        <div style={{}}>{isDetails ? detail : <div></div>}</div>
-        <div>{recentInfoLoaded ? moviePostercomponent() : noResult}</div>
+    <div>
+      <div>
+        {isDetails ? (
+          <Route exact path="/main/:title" component={details} />
+        ) : (
+          <div></div>
+        )}
       </div>
-    </React.Fragment>
+      <div>{recentInfoLoaded ? moviePostercomponent() : noResult}</div>
+    </div>
   );
 };
 

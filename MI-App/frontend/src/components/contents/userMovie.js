@@ -1,13 +1,15 @@
 import React, { useEffect, useState, memo, useRef } from "react";
+import { Route } from "react-router-dom";
 import axios from "axios";
 import update from "react-addons-update";
+
+import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
+
 import {
-  StyledMoviePoster,
-  StyledMovieTitle,
   StyledMovieList,
-  StyledMovieSearch
+  StyledContent,
+  StyledContentTitle
 } from "./styleComponent";
-import { MovieDetailsInfo } from "./movieInfo";
 
 const UserMovie = memo(props => {
   const profile = usePrevious(props.profile);
@@ -56,47 +58,55 @@ const UserMovie = memo(props => {
     setSelected([userMovieInfo[i]]);
   };
 
-  const detail = (
-    <div>
-      {selected.map(info => {
-        return (
-          <MovieDetailsInfo
-            key={info.movieCd}
-            movieCd={info.movieCd}
-            info={info}
-          />
-        );
-      })}
-    </div>
-  );
+  const details = () => {
+    return (
+      <StyledContent>
+        {selected.map(info => {
+          return (
+            <MovieDetailsInfo
+              user={props.username}
+              key={info.movieCd}
+              movieCd={info.movieCd}
+              info={info}
+            />
+          );
+        })}
+      </StyledContent>
+    );
+  };
 
   const userMoviecomponent = () => {
     return (
-      <StyledMovieList>
-        {userMovieInfo.map((item, i) => {
-          // console.log(props);
-          return (
-            <StyledMovieSearch key={i} onClick={() => handleClick(i)}>
-              <StyledMoviePoster
-                src={item.poster}
-                alt={item.movieNm}
-                title={item.movieCd}
-              />
-              <StyledMovieTitle>{item.movieNm}</StyledMovieTitle>
-            </StyledMovieSearch>
-          );
-        })}
-      </StyledMovieList>
+      <StyledContent>
+        <StyledContentTitle>내가 본 영화</StyledContentTitle>
+        <StyledMovieList>
+          {userMovieInfo.map((info, i) => {
+            // console.log(props);
+            return (
+              <MovieSearchInfo
+                page={"/myPage"}
+                key={i}
+                info={info}
+                onClick={() => handleClick(i)}
+              ></MovieSearchInfo>
+            );
+          })}
+        </StyledMovieList>
+      </StyledContent>
     );
   };
 
   return (
-    <React.Fragment>
-      <div style={{ flex: 1 }}>
-        <div>{isDetails ? detail : <div></div>}</div>
-        <div>{userMoviecomponent()}</div>
+    <div style={{ flex: 1 }}>
+      <div>
+        {isDetails ? (
+          <Route exact path="/myPage/:title" component={details} />
+        ) : (
+          <div></div>
+        )}
       </div>
-    </React.Fragment>
+      <div>{userMoviecomponent()}</div>
+    </div>
   );
 });
 

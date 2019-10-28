@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+import { Route, Link } from "react-router-dom";
+import axios from "axios";
 
 import {
   StyledMovieInfo,
@@ -11,7 +13,6 @@ import {
   StyledContentTitle,
   StyledH5
 } from "./styleComponent";
-import axios from "axios";
 // import { tokenConfig } from "../../actions/auth";
 
 import { Icon } from "react-icons-kit";
@@ -21,22 +22,6 @@ import { heartO } from "react-icons-kit/fa/heartO";
 // import { u1F611 } from "react-icons-kit/noto_emoji_regular/u1F611";
 import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 
-// 메인 페이지 영화 간단 정보
-export class MovieSimpleInfo extends Component {
-  render() {
-    const { info } = this.props;
-    return (
-      <div>
-        <StyledMoviePoster
-          src={info.poster}
-          alt={info.movieNm}
-          title={info.movieNm}
-        />
-        <StyledMovieTitle>{info.movieNm}</StyledMovieTitle>
-      </div>
-    );
-  }
-}
 // django csrftoken
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -58,26 +43,28 @@ export const seenMovie = async watchedMovie => {
   await axios.post("/api/profile/", body, config);
 };
 
-// 서치 페이지 영화 요약 정보
+// 검색 페이지 영화 요약 정보
 export class MovieSearchInfo extends Component {
   render() {
     const { info, user } = this.props;
-    // console.log(info, "movieinfo");
+    const { page } = this.props;
+    const url = page + "/datails";
 
     return (
-      <Fragment>
-        <div>
-          <StyledMovieSearch onClick={this.props.onClick}>
+      <div>
+        <StyledMovieSearch onClick={this.props.onClick}>
+          <Link to={url}>
             <StyledMoviePoster
               src={info.poster}
               alt={info.movieNm}
               title={info.movieNm}
             />
             <StyledMovieTitle>{info.movieNm}</StyledMovieTitle>
-          </StyledMovieSearch>
-          <MovieStatusButtons data={this.props} size={20} />
-        </div>
-      </Fragment>
+          </Link>
+        </StyledMovieSearch>
+
+        <MovieStatusButtons data={this.props} size={20} />
+      </div>
     );
   }
 }
