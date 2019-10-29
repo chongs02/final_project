@@ -2,7 +2,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import Profile
+# from .models import Liked
 
+# class LikedSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Liked
+#         fields = '__all__'
+
+#     def create(self, validated_data):
+#         liked_instance = Liked.objects.create(
+#             user=self.context['request'].user, **validated_data)
+#         return liked_instance    
+    
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

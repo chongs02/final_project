@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { Route, Link } from "react-router-dom";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -26,6 +26,23 @@ import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 // django csrftoken
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
+
+export const likeMovie = async likedMovie => {
+  const token = localStorage.getItem("token");
+  const config = {
+    haeders: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
+
+  const body = { likedMovie: likedMovie };
+
+  await axios.post("api/liked/", body, config);
+};
 
 export const seenMovie = async watchedMovie => {
   const token = localStorage.getItem("token");

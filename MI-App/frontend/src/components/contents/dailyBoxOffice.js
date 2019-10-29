@@ -27,8 +27,9 @@ const DailyBoxOffice = props => {
 
   const getDailyMovie = async () => {
     let date = dateInfo();
-    let url = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=430156241533f1d058c603178cc3ca0e&targetDt=${date}`;
+    let url = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=6c3bac1836c5bf83e8beef288cbd5665&targetDt=${date}`;
     let array = [];
+
     await axios
       .get(url)
       .then(response => {

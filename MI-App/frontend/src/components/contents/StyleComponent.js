@@ -15,7 +15,7 @@ export const StyledHeader = styled.header`
   width: 100%;
   height: 8%;
   border-bottom: 1px solid rgba(37, 40, 47, 0.1);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.8);
   transition: background-color 200ms ease 0s;
 `;
 
@@ -195,7 +195,7 @@ export const StyledContentHover = styled.div`
   -ms-transform: scale(1);
   -o-transform: scale(1);
 
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   :hover {
     transform: scale(1.1);
