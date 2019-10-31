@@ -14,5 +14,5 @@ urlpatterns = [
     path('user/', UserAPI.as_view()),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', include(router.urls)),
-    path('liked/', include(router.urls))
+    # path('liked/', include(router.urls))
 ]
