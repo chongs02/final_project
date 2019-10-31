@@ -27,9 +27,11 @@ const MyPage = memo(props => {
     </StyledContent>
   );
 
+  console.log(props.profile);
+
   return (
     <div>
-      {props.profile ? (
+      {props.profile && props.profile === [] ? (
         <UserMovie profile={props.profile}></UserMovie>
       ) : (
         noResult

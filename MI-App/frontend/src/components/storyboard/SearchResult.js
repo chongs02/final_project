@@ -16,9 +16,9 @@ const SearchResult = props => {
 
   const { keyword, movieInfo } = props;
 
-  const history = useHistory();
-  const params = useParams();
-  const loc = useLocation();
+  // const history = useHistory();
+  // const params = useParams();
+  // const loc = useLocation();
 
   // console.log(history);
   // console.log(loc);

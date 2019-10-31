@@ -18,8 +18,6 @@ const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
 
-  console.log(renderKeyword);
-
   const handleChange = e => {
     setKeyword(e.target.value);
   };
