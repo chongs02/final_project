@@ -20,7 +20,7 @@ const SearchResult = props => {
   const params = useParams();
   const loc = useLocation();
 
-  console.log(history);
+  // console.log(history);
   // console.log(loc);
 
   const handleClick = i => {
@@ -95,7 +95,7 @@ const SearchResult = props => {
       ) : (
         <div />
       )}
-      {keyword ? (
+      {keyword && keyword !== " " ? (
         <div>{movieInfo.length > 0 ? search() : noResult}</div>
       ) : (
         noResult

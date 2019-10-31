@@ -82,6 +82,7 @@ export const StyledH1 = styled.h1`
   justify-content: center;
   align-items: center;
   font-family: london;
+  color: #551a8b;
 `;
 
 export const StyledContent = styled.div`
@@ -195,7 +196,7 @@ export const StyledContentHover = styled.div`
   -ms-transform: scale(1);
   -o-transform: scale(1);
 
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   :hover {
     transform: scale(1.1);

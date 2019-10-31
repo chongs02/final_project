@@ -18,12 +18,15 @@ const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
 
+  console.log(renderKeyword);
+
   const handleChange = e => {
     setKeyword(e.target.value);
   };
 
   const handleClick = () => {
-    setRenderKeyword(keyword);
+    const filteredKeyword = keyword.replace(/ +/g, " ").trim();
+    setRenderKeyword(filteredKeyword);
     props.movieInfo(keyword);
   };
 
