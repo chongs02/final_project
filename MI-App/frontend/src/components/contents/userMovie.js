@@ -17,6 +17,18 @@ const UserMovie = memo(props => {
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
 
+  useEffect(() => {
+    if (profile !== props.profile && props.profile) {
+      props.profile.forEach(async element => {
+        await userMovie(element.watchedMovie);
+      });
+    }
+    return () => {
+      setUserMovieInfo([]);
+      setIsDetails(false);
+    };
+  }, [props.profile]);
+
   const userMovie = async searchInfo => {
     let url = "/movieInfo/";
     url = url + "?search=" + searchInfo;
@@ -31,18 +43,6 @@ const UserMovie = memo(props => {
         console.log(err);
       });
   };
-
-  useEffect(() => {
-    if (profile !== props.profile && props.profile) {
-      props.profile.forEach(async element => {
-        await userMovie(element.watchedMovie);
-      });
-    }
-    return () => {
-      setUserMovieInfo([]);
-      setIsDetails(false);
-    };
-  }, [props.profile]);
 
   function usePrevious(value) {
     const ref = useRef();
@@ -64,7 +64,6 @@ const UserMovie = memo(props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
-              user={props.username}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}

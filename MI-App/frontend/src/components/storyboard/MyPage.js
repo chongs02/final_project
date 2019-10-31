@@ -1,16 +1,11 @@
-import React, { useEffect, memo } from "react";
+import React, { memo } from "react";
 import { connect } from "react-redux";
-import { loadUserProfile } from "../../actions/auth";
 
 import UserMovie from "../contents/userMovie";
 
 import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
 
 const MyPage = memo(props => {
-  useEffect(() => {
-    props.loadUserProfile();
-  }, []);
-
   const noResult = (
     <StyledContent>
       <StyledContentTitle>내가 본 영화</StyledContentTitle>
@@ -27,19 +22,26 @@ const MyPage = memo(props => {
     </StyledContent>
   );
 
-  return <UserMovie profile={props.profile}></UserMovie>;
+  console.log(props.profile);
+
+  return (
+    <div>
+      {props.profile && props.profile !== [] ? (
+        <UserMovie profile={props.profile}></UserMovie>
+      ) : (
+        noResult
+      )}
+    </div>
+  );
 });
 
 const mapStateToProps = state => {
   return {
-    profile: state.auth.profile,
-    profileLoading: state.auth.profileLoading,
-    movieInfo: state.getMovieInfo.movieInfo,
-    InfoLoaded: state.getMovieInfo.InfoLoaded
+    profile: state.auth.profile
+    // profileLoading: state.auth.profileLoading,
+    // movieInfo: state.getMovieInfo.movieInfo,
+    // InfoLoaded: state.getMovieInfo.InfoLoaded
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { loadUserProfile }
-)(MyPage);
+export default connect(mapStateToProps)(MyPage);

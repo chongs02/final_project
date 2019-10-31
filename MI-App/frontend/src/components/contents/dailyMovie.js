@@ -33,7 +33,6 @@ const DailyMovie = props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
-              user={props.username}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
@@ -55,7 +54,6 @@ const DailyMovie = props => {
                 page={"/main"}
                 key={i}
                 info={info}
-                user={props.user.username}
                 onClick={() => handleClick(i)}
               />
             );
