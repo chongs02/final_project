@@ -181,7 +181,7 @@ export class MovieDetailsInfo extends Component {
                     alignSelf: "flex-end"
                   }}
                 >
-                  ⭐4.5
+                  ⭐{info.userRating}
                 </h1>
               </div>
             </div>
@@ -215,7 +215,7 @@ export class MovieDetailsInfo extends Component {
                     {openDt}&nbsp;・&nbsp;{info.nations}&nbsp;・&nbsp;
                     {info.repGenre}
                   </StyledH5>
-                  <StyledH5>{info.showTm}분</StyledH5>
+                  <StyledH5>{info.showTm ? `${info.showTm}분` : ""}</StyledH5>
                   <StyledH5>{info.watchGradeNm.split(",")[0]}</StyledH5>
                 </div>
                 <StyledH5>
