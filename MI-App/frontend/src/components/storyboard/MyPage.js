@@ -7,9 +7,9 @@ import UserMovie from "../contents/userMovie";
 import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
 
 const MyPage = memo(props => {
-  useEffect(() => {
-    props.loadUserProfile();
-  }, []);
+  // useEffect(() => {
+  //   props.loadUserProfile();
+  // }, []);
 
   const noResult = (
     <StyledContent>
@@ -31,7 +31,7 @@ const MyPage = memo(props => {
 
   return (
     <div>
-      {props.profile && props.profile === [] ? (
+      {props.profile && props.profile !== [] ? (
         <UserMovie profile={props.profile}></UserMovie>
       ) : (
         noResult
@@ -42,14 +42,14 @@ const MyPage = memo(props => {
 
 const mapStateToProps = state => {
   return {
-    profile: state.auth.profile,
-    profileLoading: state.auth.profileLoading,
-    movieInfo: state.getMovieInfo.movieInfo,
-    InfoLoaded: state.getMovieInfo.InfoLoaded
+    profile: state.auth.profile
+    // profileLoading: state.auth.profileLoading,
+    // movieInfo: state.getMovieInfo.movieInfo,
+    // InfoLoaded: state.getMovieInfo.InfoLoaded
   };
 };
 
 export default connect(
-  mapStateToProps,
-  { loadUserProfile }
+  mapStateToProps
+  // { loadUserProfile }
 )(MyPage);

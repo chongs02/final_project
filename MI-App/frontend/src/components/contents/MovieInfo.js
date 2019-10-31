@@ -1,6 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import axios from "axios";
+
+import { loadUserProfile } from "../../actions/auth";
 
 import {
   StyledMovieInfo,
@@ -27,22 +30,22 @@ import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-export const likeMovie = async likedMovie => {
-  const token = localStorage.getItem("token");
-  const config = {
-    haeders: {
-      "Content-Type": "application/json"
-    }
-  };
+// export const likeMovie = async likedMovie => {
+//   const token = localStorage.getItem("token");
+//   const config = {
+//     haeders: {
+//       "Content-Type": "application/json"
+//     }
+//   };
 
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
+//   if (token) {
+//     config.headers["Authorization"] = `Token ${token}`;
+//   }
 
-  const body = { likedMovie: likedMovie };
+//   const body = { likedMovie: likedMovie };
 
-  await axios.post("api/liked/", body, config);
-};
+//   await axios.post("api/liked/", body, config);
+// };
 
 export const seenMovie = async watchedMovie => {
   const token = localStorage.getItem("token");
@@ -60,7 +63,7 @@ export const seenMovie = async watchedMovie => {
 
   await axios.post("/api/profile/", body, config);
 };
-
+let i = 0;
 // 검색 페이지 영화 요약 정보
 export class MovieSearchInfo extends Component {
   render() {
@@ -88,6 +91,7 @@ export class MovieSearchInfo extends Component {
 }
 
 // 상세 정보 페이지 영화 상세 정보
+
 export class MovieDetailsInfo extends Component {
   render() {
     const { info } = this.props;
@@ -244,85 +248,91 @@ export class MovieDetailsInfo extends Component {
   }
 }
 
-export class MovieStatusButtons extends Component {
-  state = {
-    isSeen: false,
-    isLike: false,
-    isHate: false
-  };
+let MovieStatusButtons = memo(props => {
+  const profile = props.profile;
+  const { info, user } = props.data;
+  const value = info.movieCd;
+  let initialSeen;
 
-  handleClick = typeOfButton => {
+  if (profile && profile !== []) {
+    for (let i = 0; i < profile.length; i++) {
+      if (value === profile[i].watchedMovie) {
+        initialSeen = true;
+      }
+    }
+  }
+
+  const [isSeen, setIsSeen] = useState(initialSeen);
+  const [isLike, setIsLike] = useState(false);
+  const [isHate, setIsHate] = useState(false);
+
+  const handleClick = typeOfButton => {
     if (typeOfButton === "isSeen") {
-      this.setState({
-        isSeen: !this.state.isSeen
-      });
+      setIsSeen(!isSeen);
     } else if (typeOfButton === "isLike") {
-      this.setState({
-        isLike: !this.state.isLike,
-        isHate: false
-      });
+      setIsLike(!isLike);
+      setIsHate(false);
     } else {
-      this.setState({
-        isLike: false,
-        isHate: !this.state.isHate
-      });
+      setIsLike(false);
+      setIsHate(!isHate);
     }
   };
 
-  render() {
-    const { info, user } = this.props.data;
-    const value = info.movieCd;
-
-    const { isSeen, isLike, isHate } = this.state;
-
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
+      <StyledMovieButton
+        title={"이미 봤어요"}
+        onClick={() => {
+          handleClick("isSeen");
+          seenMovie(value);
         }}
       >
-        <StyledMovieButton
-          title={"이미 봤어요"}
-          onClick={() => {
-            this.handleClick("isSeen");
-            seenMovie(value);
-          }}
+        <StyledMovieIcon color={isSeen ? "black" : "rgba(113, 128, 147, 0.2)"}>
+          <Icon size={props.size} icon={check} />
+        </StyledMovieIcon>
+      </StyledMovieButton>
+      <StyledMovieButton
+        title={"좋아요"}
+        onClick={() => {
+          handleClick("isLike");
+        }}
+      >
+        <StyledMovieIcon
+          color={isLike ? "#eb3b5a" : "rgba(113, 128, 147, 0.2)"}
         >
-          <StyledMovieIcon
-            color={isSeen ? "black" : "rgba(113, 128, 147, 0.2)"}
-          >
-            <Icon size={this.props.size} icon={check} />
-          </StyledMovieIcon>
-        </StyledMovieButton>
-        <StyledMovieButton
-          title={"좋아요"}
-          onClick={() => {
-            this.handleClick("isLike");
-          }}
+          <Icon size={props.size} icon={isLike ? heart : heartO} />
+        </StyledMovieIcon>
+      </StyledMovieButton>
+      <StyledMovieButton
+        title={"별로에요"}
+        onClick={() => {
+          handleClick("isHate");
+        }}
+      >
+        <StyledMovieIcon
+          color={isHate ? "rgba(6, 82, 221, 0.8)" : "rgba(113, 128, 147, 0.2)"}
         >
-          <StyledMovieIcon
-            color={isLike ? "#eb3b5a" : "rgba(113, 128, 147, 0.2)"}
-          >
-            <Icon size={this.props.size} icon={isLike ? heart : heartO} />
-          </StyledMovieIcon>
-        </StyledMovieButton>
-        <StyledMovieButton
-          title={"별로에요"}
-          onClick={() => {
-            this.handleClick("isHate");
-          }}
-        >
-          <StyledMovieIcon
-            color={
-              isHate ? "rgba(6, 82, 221, 0.8)" : "rgba(113, 128, 147, 0.2)"
-            }
-          >
-            <Icon size={this.props.size + 7} icon={u1F608} />
-          </StyledMovieIcon>
-        </StyledMovieButton>
-      </div>
-    );
-  }
-}
+          <Icon size={props.size + 7} icon={u1F608} />
+        </StyledMovieIcon>
+      </StyledMovieButton>
+    </div>
+  );
+});
+
+const mapStateToProps = state => {
+  return {
+    profile: state.auth.profile
+    // profileLoading: state.auth.profileLoading,
+  };
+};
+
+MovieStatusButtons = connect(
+  mapStateToProps,
+  { loadUserProfile }
+)(MovieStatusButtons);

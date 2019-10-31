@@ -1,9 +1,10 @@
-import React, { useState, Fragment } from "react";
-import { Route, Switch, BrowserRouter, Link } from "react-router-dom";
+import React, { useState, useEffect, Fragment } from "react";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
+import { loadUserProfile } from "../../actions/auth";
 
 import Nav from "../contents/nav";
 import SearchResult from "./searchResult";
@@ -12,11 +13,13 @@ import Logout from "./logout";
 import DailyBoxOffice from "../contents/dailyBoxOffice";
 import { clearMovieInfo } from "../../actions/movieInfo";
 
-// import Temp from "./temp";
-
 const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
+
+  useEffect(() => {
+    props.loadUserProfile();
+  }, []);
 
   const handleChange = e => {
     setKeyword(e.target.value);
@@ -59,8 +62,6 @@ const Main = props => {
             />
             <Route path="/mypage" component={MyPage} />
             <Route exact path="/logout" component={Logout} />
-            {/* <Route path="/temp" component={Temp} />
-            <Link to="/temp">임시</Link> */}
           </Switch>
           <DailyBoxOffice />
         </div>
@@ -72,6 +73,7 @@ const Main = props => {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
+    profile: state.auth.profile,
     movieData: state.getScore.movieData,
     InfoLoaded: state.getMovieInfo.InfoLoaded,
     scoreLoaded: state.getScore.scoreLoaded
@@ -80,5 +82,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { logout, movieInfo, clearMovieInfo }
+  { logout, movieInfo, clearMovieInfo, loadUserProfile }
 )(Main);
