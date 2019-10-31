@@ -8,6 +8,8 @@ class Profile(models.Model):
 
     id = models.AutoField(primary_key=True)
     watchedMovie = models.CharField(max_length=8, blank=True, null=True)
+    like = models.CharField(max_length=8, blank=True, null=True)
+    hate = models.CharField(max_length=8, blank=True, null=True)
 
     def __str__(self):
         # print(self.user.username)

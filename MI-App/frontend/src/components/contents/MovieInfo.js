@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import EmotionGraph from "./graph";
+
 import {
   StyledMovieInfo,
   StyledContentHover,
@@ -27,24 +29,7 @@ import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-export const likeMovie = async likedMovie => {
-  const token = localStorage.getItem("token");
-  const config = {
-    haeders: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
-
-  const body = { likedMovie: likedMovie };
-
-  await axios.post("api/liked/", body, config);
-};
-
-export const seenMovie = async watchedMovie => {
+const getConfig = () => {
   const token = localStorage.getItem("token");
   const config = {
     headers: {
@@ -56,7 +41,26 @@ export const seenMovie = async watchedMovie => {
     config.headers["Authorization"] = `Token ${token}`;
   }
 
+  return config;
+};
+
+const seenMovie = async watchedMovie => {
+  const config = getConfig();
   const body = { watchedMovie: watchedMovie };
+
+  await axios.post("/api/profile/", body, config);
+};
+
+const likeMovie = async like => {
+  const config = getConfig();
+  const body = { like: like };
+
+  await axios.post("/api/profile/", body, config);
+};
+
+const hateMovie = async hate => {
+  const config = getConfig();
+  const body = { hate: hate };
 
   await axios.post("/api/profile/", body, config);
 };
@@ -65,6 +69,7 @@ export const seenMovie = async watchedMovie => {
 export class MovieSearchInfo extends Component {
   render() {
     const { info, user } = this.props;
+
     const { page } = this.props;
     const url = page + "/datails";
 
@@ -185,42 +190,59 @@ export class MovieDetailsInfo extends Component {
                 </h1>
               </div>
             </div>
-            <h3
-              style={{
-                fontFamily: "nanumB",
-                margin: "0px",
-                marginTop: "20px",
-                marginBottom: "10px"
-              }}
-            >
-              기본 정보
-            </h3>
             <div>
+              <h3
+                style={{
+                  fontFamily: "nanumB",
+                  margin: "0px",
+                  marginTop: "20px",
+                  marginBottom: "10px"
+                }}
+              >
+                기본 정보
+              </h3>
               <div
                 style={{
+                  display: "flex",
                   paddingBottom: "5%",
                   borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
                 }}
               >
-                <div style={{ margin: "0px", marginBottom: "10px" }}>
-                  <h4
-                    style={{
-                      color: "#57606f",
-                      margin: "0"
-                    }}
-                  >
-                    {info.movieNmEn}
-                  </h4>
-                  <StyledH5>
-                    {openDt}&nbsp;・&nbsp;{info.nations}&nbsp;・&nbsp;
-                    {info.repGenre}
-                  </StyledH5>
-                  <StyledH5>{info.showTm ? `${info.showTm}분` : ""}</StyledH5>
-                  <StyledH5>{info.watchGradeNm.split(",")[0]}</StyledH5>
+                <div style={{ display: "flex", width: "50%" }}>
+                  <div style={{}}>
+                    <div style={{ margin: "0px", marginBottom: "10px" }}>
+                      <h4
+                        style={{
+                          color: "#57606f",
+                          margin: "0"
+                        }}
+                      >
+                        {info.movieNmEn}
+                      </h4>
+                      <StyledH5>
+                        {openDt}&nbsp;・&nbsp;{info.nations}&nbsp;・&nbsp;
+                        {info.repGenre}
+                      </StyledH5>
+                      <StyledH5>
+                        {info.showTm ? `${info.showTm}분` : ""}
+                      </StyledH5>
+                      <StyledH5>{info.watchGradeNm.split(",")[0]}</StyledH5>
+                    </div>
+                    <StyledH5>
+                      1999년 이 영화는 어쩌구 저쩌구 이러쿵 저러쿵 샤바리샤바
+                    </StyledH5>
+                  </div>
                 </div>
-                <StyledH5>
-                  1999년 이 영화는 어쩌구 저쩌구 이러쿵 저러쿵 샤바리샤바
-                </StyledH5>
+                <div
+                  style={{
+                    display: "flex",
+                    width: "50%",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <EmotionGraph></EmotionGraph>
+                </div>
               </div>
               <div>
                 <h3
@@ -300,6 +322,7 @@ export class MovieStatusButtons extends Component {
           title={"좋아요"}
           onClick={() => {
             this.handleClick("isLike");
+            likeMovie(value);
           }}
         >
           <StyledMovieIcon
@@ -312,6 +335,7 @@ export class MovieStatusButtons extends Component {
           title={"별로에요"}
           onClick={() => {
             this.handleClick("isHate");
+            hateMovie(value);
           }}
         >
           <StyledMovieIcon

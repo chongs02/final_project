@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class MovieInfo(models.Model):
 
@@ -27,6 +28,13 @@ class MovieInfo(models.Model):
     watchGradeNm = models.TextField(blank=True, null=True, default='')
     poster = models.TextField(blank = True, null=True, default='')
     userRating = models.CharField(max_length=4, blank=True, null=True, default='')    
+
+    # name_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    # likes = models.ManyToManyField(User, related_name="likes", blank=True)
+
+    # @property
+    # def total_likes(self):
+    #     return self.likes.count()
 
     # owner = models.ForeignKey(User, related_name="moviescore",
     #                           on_delete=models.CASCADE, null=True)
