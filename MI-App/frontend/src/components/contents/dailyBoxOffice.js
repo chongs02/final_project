@@ -4,6 +4,8 @@ import { recentMovieInfo } from "../../actions/movieInfo";
 import DailyMovie from "./dailyMovie";
 import axios from "axios";
 
+const KEY = "a3639b253586ed914a06659d53a62177";
+
 const DailyBoxOffice = props => {
   //어제날짜
   const dateInfo = () => {
@@ -27,7 +29,7 @@ const DailyBoxOffice = props => {
 
   const getDailyMovie = async () => {
     let date = dateInfo();
-    let url = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=6c3bac1836c5bf83e8beef288cbd5665&targetDt=${date}`;
+    let url = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${KEY}&targetDt=${date}`;
     let array = [];
 
     await axios
