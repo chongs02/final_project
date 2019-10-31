@@ -6,18 +6,6 @@ from django.contrib.auth import logout
 from knox.models import AuthToken
 from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer #, LikedSerializer
 from .models import Profile
-# from .models import Liked
-
-# class LikedViewSet(viewsets.ModelViewSet):
-#     permission_classes = [
-#         permissions.IsAuthenticated
-#     ]
-
-#     serializer_class = LikedSerializer
-
-#     def get_queryset(self):
-#         return Liked.objects.filter(user=self.request.user)
-
 
 class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -29,9 +17,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Profile.objects.filter(user=self.request.user)
 
-    # @action(methods=['post'], detail=True)
-    # def post(self, request, *args, **kwargs):
-    #     print(request.data)
+
 
 
 class RegistrationAPI(generics.GenericAPIView):

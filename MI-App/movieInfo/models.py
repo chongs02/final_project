@@ -29,12 +29,12 @@ class MovieInfo(models.Model):
     poster = models.TextField(blank = True, null=True, default='')
     userRating = models.CharField(max_length=4, blank=True, null=True, default='')    
 
-    name_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    likes = models.ManyToManyField(User, related_name="likes", blank=True)
+    # name_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    # likes = models.ManyToManyField(User, related_name="likes", blank=True)
 
-    @property
-    def total_likes(self):
-        return self.likes.count()
+    # @property
+    # def total_likes(self):
+    #     return self.likes.count()
 
     # owner = models.ForeignKey(User, related_name="moviescore",
     #                           on_delete=models.CASCADE, null=True)
