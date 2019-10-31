@@ -115,7 +115,6 @@ const UserMovie = memo(props => {
         <StyledContentTitle>내가 본 영화</StyledContentTitle>
         <StyledMovieList>
           {uniqueInfo.map((info, i) => {
-            // console.log(props);
             return (
               <MovieSearchInfo
                 page={"/myPage"}

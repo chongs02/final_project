@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { logout } from "../../actions/auth";
 import { movieInfo } from "../../actions/movieInfo";
 import { loadUserProfile } from "../../actions/auth";
 
@@ -11,24 +10,28 @@ import SearchResult from "./searchResult";
 import MyPage from "./myPage";
 import Logout from "./logout";
 import DailyBoxOffice from "../contents/dailyBoxOffice";
-import { clearMovieInfo } from "../../actions/movieInfo";
 
 const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
+  const [renderMyPage, setRenderMyPage] = useState(false);
 
   useEffect(() => {
     props.loadUserProfile();
-  }, []);
+  }, [renderMyPage]);
 
   const handleChange = e => {
     setKeyword(e.target.value);
   };
 
-  const handleClick = () => {
-    const filteredKeyword = keyword.replace(/ +/g, " ").trim();
-    setRenderKeyword(filteredKeyword);
-    props.movieInfo(keyword);
+  const handleClick = clickType => {
+    if (clickType === "search") {
+      const filteredKeyword = keyword.replace(/ +/g, " ").trim();
+      setRenderKeyword(filteredKeyword);
+      props.movieInfo(keyword);
+    } else {
+      setRenderMyPage(!renderMyPage);
+    }
   };
 
   const handleKeyPress = e => {
@@ -44,7 +47,7 @@ const Main = props => {
           value={keyword}
           onChange={handleChange}
           onKeyPress={handleKeyPress}
-          onClick={handleClick}
+          onClick={clickType => handleClick(clickType)}
         ></Nav>
         <div
           style={{
@@ -73,14 +76,14 @@ const Main = props => {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    profile: state.auth.profile,
-    movieData: state.getScore.movieData,
-    InfoLoaded: state.getMovieInfo.InfoLoaded,
-    scoreLoaded: state.getScore.scoreLoaded
+    profile: state.auth.profile
+    // movieData: state.getScore.movieData,
+    // InfoLoaded: state.getMovieInfo.InfoLoaded,
+    // scoreLoaded: state.getScore.scoreLoaded
   };
 };
 
 export default connect(
   mapStateToProps,
-  { logout, movieInfo, clearMovieInfo, loadUserProfile }
+  { movieInfo, loadUserProfile }
 )(Main);

@@ -66,7 +66,6 @@ const Nav = props => {
             value={props.value}
             onChange={props.onChange}
             onKeyPress={props.onKeyPress}
-            // size="50%"
           ></StyledSearchInput>
           <div style={{ width: "40px", height: "30px", paddingRight: "5px" }}>
             <NavLink exact to="/search">
@@ -80,7 +79,7 @@ const Nav = props => {
                   height: "30px",
                   outline: "none"
                 }}
-                onClick={props.onClick}
+                onClick={() => props.onClick("search")}
               >
                 <Icon size={"30px"} icon={androidSearch} />
               </button>
@@ -99,7 +98,11 @@ const Nav = props => {
         >
           <StyledContentHover>
             <NavLink exact to="/myPage">
-              <StyledSubButton id="myPage" fontSize={"1em"}>
+              <StyledSubButton
+                id="myPage"
+                fontSize={"1em"}
+                onClick={() => props.onClick("myPage")}
+              >
                 마이페이지
               </StyledSubButton>
             </NavLink>

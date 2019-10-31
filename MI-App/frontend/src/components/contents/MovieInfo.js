@@ -1,10 +1,9 @@
-import React, { Component, useState, useEffect, memo } from "react";
+import React, { Component, useState, memo } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 
 import EmotionGraph from "./graph";
-import { loadUserProfile } from "../../actions/auth";
 
 import {
   StyledMovieInfo,
@@ -39,9 +38,9 @@ const getConfig = () => {
     }
   };
 
-  //   if (token) {
-  //     config.headers["Authorization"] = `Token ${token}`;
-  //   }
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
 
   return config;
 };
@@ -66,12 +65,11 @@ const hateMovie = async hate => {
 
   await axios.post("/api/profile/", body, config);
 };
-let i = 0;
+
 // 검색 페이지 영화 요약 정보
 export class MovieSearchInfo extends Component {
   render() {
-    const { info, user } = this.props;
-
+    const { info } = this.props;
     const { page } = this.props;
     const url = page + "/datails";
 
@@ -152,15 +150,6 @@ export class MovieDetailsInfo extends Component {
                   >
                     {info.movieNm}
                   </h1>
-                  {/* <h3
-                    style={{
-                      margin: "0px 10px",
-                      color: "#84817a",
-                      alignSelf: "flex-end"
-                    }}
-                  >
-                    {info.movieNmEn}
-                  </h3> */}
                 </div>
                 <p
                   style={{ color: "#57606f", margin: "0px", marginTop: "5px" }}
@@ -271,8 +260,9 @@ export class MovieDetailsInfo extends Component {
 
 let MovieStatusButtons = memo(props => {
   const profile = props.profile;
-  const { info, user } = props.data;
+  const { info } = props.data;
   const value = info.movieCd;
+
   let initialSeen;
 
   if (profile && profile !== []) {
@@ -322,6 +312,7 @@ let MovieStatusButtons = memo(props => {
         title={"좋아요"}
         onClick={() => {
           handleClick("isLike");
+          likeMovie(value);
         }}
       >
         <StyledMovieIcon
@@ -334,6 +325,7 @@ let MovieStatusButtons = memo(props => {
         title={"별로에요"}
         onClick={() => {
           handleClick("isHate");
+          hateMovie(value);
         }}
       >
         <StyledMovieIcon
@@ -353,7 +345,4 @@ const mapStateToProps = state => {
   };
 };
 
-MovieStatusButtons = connect(
-  mapStateToProps,
-  { loadUserProfile }
-)(MovieStatusButtons);
+MovieStatusButtons = connect(mapStateToProps)(MovieStatusButtons);

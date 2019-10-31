@@ -1,7 +1,7 @@
 import * as types from "./actionTypes";
 import axios from "axios";
 import { getErrors } from "./messages";
-import { movieInfo, clearMovieInfo } from "./movieInfo";
+// import { movieInfo, clearMovieInfo } from "./movieInfo";
 
 // django csrftoken
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";

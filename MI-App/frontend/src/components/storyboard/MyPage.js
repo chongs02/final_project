@@ -22,11 +22,9 @@ const MyPage = memo(props => {
     </StyledContent>
   );
 
-  console.log(props.profile);
-
   return (
     <div>
-      {props.profile && props.profile !== [] ? (
+      {props.profile.length > 0 ? (
         <UserMovie profile={props.profile}></UserMovie>
       ) : (
         noResult
@@ -38,9 +36,6 @@ const MyPage = memo(props => {
 const mapStateToProps = state => {
   return {
     profile: state.auth.profile
-    // profileLoading: state.auth.profileLoading,
-    // movieInfo: state.getMovieInfo.movieInfo,
-    // InfoLoaded: state.getMovieInfo.InfoLoaded
   };
 };
 

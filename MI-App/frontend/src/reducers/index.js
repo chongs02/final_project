@@ -1,8 +1,8 @@
+import { combineReducers } from "redux";
+import { LOGOUT_SUCCESSFUL } from "../actions/actionTypes";
 import auth from "./auth";
 import messages from "./messages";
 import errors from "./errors";
-import { combineReducers } from "redux";
-import { LOGOUT_SUCCESSFUL } from "../actions/actionTypes";
 import getScore from "./getScore";
 import getMovieInfo from "./movieInfo";
 
