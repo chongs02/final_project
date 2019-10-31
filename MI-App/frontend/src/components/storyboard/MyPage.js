@@ -27,8 +27,6 @@ const MyPage = memo(props => {
     </StyledContent>
   );
 
-  console.log(props.profile);
-
   return <UserMovie profile={props.profile}></UserMovie>;
 });
 

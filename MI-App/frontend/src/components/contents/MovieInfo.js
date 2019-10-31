@@ -27,24 +27,7 @@ import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-export const likeMovie = async likedMovie => {
-  const token = localStorage.getItem("token");
-  const config = {
-    haeders: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
-
-  const body = { likedMovie: likedMovie };
-
-  await axios.post("api/liked/", body, config);
-};
-
-export const seenMovie = async watchedMovie => {
+const getConfig = () => {
   const token = localStorage.getItem("token");
   const config = {
     headers: {
@@ -56,7 +39,26 @@ export const seenMovie = async watchedMovie => {
     config.headers["Authorization"] = `Token ${token}`;
   }
 
+  return config;
+};
+
+const seenMovie = async watchedMovie => {
+  const config = getConfig();
   const body = { watchedMovie: watchedMovie };
+
+  await axios.post("/api/profile/", body, config);
+};
+
+const likeMovie = async like => {
+  const config = getConfig();
+  const body = { like: like };
+
+  await axios.post("/api/profile/", body, config);
+};
+
+const hateMovie = async hate => {
+  const config = getConfig();
+  const body = { hate: hate };
 
   await axios.post("/api/profile/", body, config);
 };
@@ -65,6 +67,7 @@ export const seenMovie = async watchedMovie => {
 export class MovieSearchInfo extends Component {
   render() {
     const { info, user } = this.props;
+
     const { page } = this.props;
     const url = page + "/datails";
 
@@ -300,6 +303,7 @@ export class MovieStatusButtons extends Component {
           title={"좋아요"}
           onClick={() => {
             this.handleClick("isLike");
+            likeMovie(value);
           }}
         >
           <StyledMovieIcon
@@ -312,6 +316,7 @@ export class MovieStatusButtons extends Component {
           title={"별로에요"}
           onClick={() => {
             this.handleClick("isHate");
+            hateMovie(value);
           }}
         >
           <StyledMovieIcon

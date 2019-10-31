@@ -10,10 +10,18 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        print(validated_data['watchedMovie'])
-        profile_instance = Profile.objects.create(
-            user=self.context['request'].user, watchedMovie=validated_data['watchedMovie'])
-        return profile_instance
+        # print(validated_data[0])
+        if 'watchedMovie' in validated_data:
+            return Profile.objects.create(
+                user=self.context['request'].user, watchedMovie=validated_data['watchedMovie'])
+        elif 'like' in validated_data:
+            return Profile.objects.create(
+                user=self.context['request'].user,like=validated_data['like'])
+        else:
+            return Profile.objects.create(
+                user=self.context['request'].user,hate=validated_data['hate'])
+    
+   
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
