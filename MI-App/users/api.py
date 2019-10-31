@@ -7,6 +7,7 @@ from knox.models import AuthToken
 from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer #, LikedSerializer
 from .models import Profile
 
+
 class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
@@ -16,10 +17,6 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Profile.objects.filter(user=self.request.user)
-    
-    
-
-
 
 
 class RegistrationAPI(generics.GenericAPIView):

@@ -16,10 +16,10 @@ class ProfileSerializer(serializers.ModelSerializer):
                 user=self.context['request'].user, watchedMovie=validated_data['watchedMovie'])
         elif 'like' in validated_data:
             return Profile.objects.create(
-                user=self.context['request'].user,like=validated_data['like'])
+                user=self.context['request'].user, like=validated_data['like'])
         else:
             return Profile.objects.create(
-                user=self.context['request'].user,hate=validated_data['hate'])
+                user=self.context['request'].user, hate=validated_data['hate'])
     
    
 
