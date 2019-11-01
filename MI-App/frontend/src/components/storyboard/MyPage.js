@@ -2,10 +2,11 @@ import React, { memo } from "react";
 import { connect } from "react-redux";
 
 import UserMovie from "../contents/userMovie";
-
+import Collaborative from "../contents/collaborative";
 import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
 
 const MyPage = memo(props => {
+  console.log(props);
   const noResult = (
     <StyledContent>
       <StyledContentTitle>내가 본 영화</StyledContentTitle>
@@ -25,7 +26,10 @@ const MyPage = memo(props => {
   return (
     <div>
       {props.profile.length > 0 ? (
-        <UserMovie profile={props.profile}></UserMovie>
+        <React.Fragment>
+          <UserMovie profile={props.profile}></UserMovie>
+          <Collaborative></Collaborative>
+        </React.Fragment>
       ) : (
         noResult
       )}

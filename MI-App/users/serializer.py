@@ -3,6 +3,11 @@ from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import Profile
 
+class CollaborativeSerializer(serializers.Serializer):
+    score = serializers.FloatField()
+    movie_code = serializers.CharField(max_length=16)
+
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

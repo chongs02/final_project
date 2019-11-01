@@ -4,8 +4,50 @@ from rest_framework.decorators import action
 
 from django.contrib.auth import logout
 from knox.models import AuthToken
-from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer #, LikedSerializer
+from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer,CollaborativeSerializer
+
 from .models import Profile
+from .collaborative_filtering import main
+
+
+class CollaborativeLike(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = CollaborativeSerializer
+
+    def get_queryset(self):
+        li = main(self.request, 'like')
+        print(li)
+        result = CollaborativeSerializer(li, many=True).data
+        print(result)
+        return li
+
+class CollaborativeHate(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = CollaborativeSerializer
+
+    def get_queryset(self):
+        li = main(self.request, 'hate')
+        print(li)
+        result = CollaborativeSerializer(li, many=True).data
+        print(result)
+        return li
+
+class CollaborativeWatched(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = CollaborativeSerializer
+
+    def get_queryset(self):
+        li = main(self.request, 'watchedMovie')
+        print(li)
+        result = CollaborativeSerializer(li, many=True).data
+        print(result)
+        return li
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

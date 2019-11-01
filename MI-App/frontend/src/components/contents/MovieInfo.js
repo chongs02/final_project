@@ -30,7 +30,7 @@ import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-const getConfig = () => {
+export const getConfig = () => {
   const token = localStorage.getItem("token");
   const config = {
     headers: {
