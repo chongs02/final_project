@@ -264,6 +264,8 @@ export const StyledH5 = styled.h5`
 `;
 
 export const StyledBottomNav = styled.nav`
+  position: fixed;
+  width: 100%;
   height: 8%;
   padding-bottom: 0px;
   padding-left: 20px;

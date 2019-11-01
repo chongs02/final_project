@@ -11,6 +11,9 @@ import MyPage from "./myPage";
 import Logout from "./logout";
 import DailyBoxOffice from "../contents/dailyBoxOffice";
 
+import logo2 from "../../statics/logos/logo03.png";
+import { StyledBottomNav } from "../contents/styleComponent";
+
 const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
@@ -43,30 +46,46 @@ const Main = props => {
   return (
     <Fragment>
       <BrowserRouter>
-        <Nav
-          value={keyword}
-          onChange={handleChange}
-          onKeyPress={handleKeyPress}
-          onClick={clickType => handleClick(clickType)}
-        ></Nav>
-        <div
-          style={{
-            height: "100%",
-            marginLeft: "2%",
-            marginRight: "2%",
-            color: "#1e272e"
-          }}
-        >
-          <div style={{ height: "8%" }} />
-          <Switch>
-            <Route
-              path="/search"
-              render={() => <SearchResult keyword={renderKeyword} />}
-            />
-            <Route path="/mypage" component={MyPage} />
-            <Route exact path="/logout" component={Logout} />
-          </Switch>
-          <DailyBoxOffice />
+        <div style={{ height: "92%" }}>
+          <Nav
+            value={keyword}
+            onChange={handleChange}
+            onKeyPress={handleKeyPress}
+            onClick={clickType => handleClick(clickType)}
+          ></Nav>
+          <div
+            style={{
+              height: "100%",
+              marginLeft: "2%",
+              marginRight: "2%",
+              color: "#1e272e"
+            }}
+          >
+            <div style={{ height: "8%" }} />
+            <Switch>
+              <Route
+                path="/search"
+                render={() => <SearchResult keyword={renderKeyword} />}
+              />
+              <Route path="/mypage" component={MyPage} />
+              <Route exact path="/logout" component={Logout} />
+            </Switch>
+            <DailyBoxOffice />
+          </div>
+          <StyledBottomNav>
+            <div>
+              <img
+                src={logo2}
+                alt={"logo2"}
+                width={30}
+                style={{ verticalAlign: "middle", backgroundColor: "none" }}
+              />
+              <span style={{ marginLeft: "7px", marginRight: "20px" }}>
+                Movie Inside
+              </span>
+            </div>
+            <div>Copyright © 2019 HAND Inc.</div>
+          </StyledBottomNav>
         </div>
       </BrowserRouter>
     </Fragment>
