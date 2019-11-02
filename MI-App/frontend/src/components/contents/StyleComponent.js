@@ -32,6 +32,7 @@ export const StyledNav = styled.nav`
 `;
 
 export const StyledLoginRegister = styled.div`
+  width: 100%;
   position: relative;
   height: 42%;
   display: flex;
@@ -267,13 +268,10 @@ export const StyledBottomNav = styled.nav`
   position: fixed;
   width: 100%;
   height: 8%;
-  padding-bottom: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   text-align: center;
   background-color: #303952;
   font-size: 17px;

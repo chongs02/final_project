@@ -46,7 +46,7 @@ const Main = props => {
   return (
     <Fragment>
       <BrowserRouter>
-        <div style={{ height: "92%" }}>
+        <div style={{ display: "inline-block", height: "92%" }}>
           <Nav
             value={keyword}
             onChange={handleChange}
@@ -71,20 +71,28 @@ const Main = props => {
               <Route exact path="/logout" component={Logout} />
             </Switch>
             <DailyBoxOffice />
+            <div style={{ height: "10%" }} />
           </div>
+
           <StyledBottomNav>
             <div>
               <img
                 src={logo2}
                 alt={"logo2"}
                 width={30}
-                style={{ verticalAlign: "middle", backgroundColor: "none" }}
+                style={{
+                  verticalAlign: "middle",
+                  backgroundColor: "none",
+                  paddingLeft: "20px"
+                }}
               />
               <span style={{ marginLeft: "7px", marginRight: "20px" }}>
                 Movie Inside
               </span>
             </div>
-            <div>Copyright © 2019 HAND Inc.</div>
+            <div style={{ paddingRight: "30px" }}>
+              Copyright © 2019 HAND Inc.
+            </div>
           </StyledBottomNav>
         </div>
       </BrowserRouter>
