@@ -13,47 +13,35 @@ import {
 const data = [
   {
     subject: "Math",
-    A: 120,
-    B: 110,
-    fullMark: 150
+    A: 120
   },
   {
     subject: "Chinese",
-    A: 98,
-    B: 130,
-    fullMark: 150
+    A: 98
   },
   {
     subject: "English",
-    A: 86,
-    B: 130,
-    fullMark: 150
+    A: 86
   },
   {
     subject: "Geography",
-    A: 99,
-    B: 100,
-    fullMark: 150
+    A: 99
   },
   {
     subject: "Physics",
-    A: 85,
-    B: 90,
-    fullMark: 150
+    A: 85
   },
   {
     subject: "History",
-    A: 65,
-    B: 85,
-    fullMark: 150
+    A: 65
   }
 ];
 
 const EmotionGraph = props => {
-  // console.log(props);
+  console.log(props);
   useEffect(() => {
     props.getScore();
-  });
+  }, []);
   return (
     <RadarChart
       cx={"50%"}

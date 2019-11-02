@@ -13,7 +13,6 @@ import DailyBoxOffice from "../contents/dailyBoxOffice";
 
 import logo2 from "../../statics/logos/logo03.png";
 import { StyledBottomNav } from "../contents/styleComponent";
-
 const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
@@ -57,7 +56,6 @@ const Main = props => {
             style={{
               height: "100%",
               marginLeft: "2%",
-              marginRight: "2%",
               color: "#1e272e"
             }}
           >

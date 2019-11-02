@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getConfig } from "./movieInfo";
 import axios from "axios";
 
