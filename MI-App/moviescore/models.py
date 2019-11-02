@@ -18,4 +18,4 @@ class MovieScore(models.Model):
     #                           on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.movieCd
+        return self.movieNm
