@@ -264,18 +264,26 @@ let MovieStatusButtons = memo(props => {
   const value = info.movieCd;
 
   let initialSeen;
+  let initialLike;
+  let initialHate;
 
   if (profile && profile !== []) {
     for (let i = 0; i < profile.length; i++) {
       if (value === profile[i].watchedMovie) {
         initialSeen = true;
       }
+      if (value === profile[i].like) {
+        initialLike = true;
+      }
+      if (value === profile[i].hate) {
+        initialHate = true;
+      }
     }
   }
 
   const [isSeen, setIsSeen] = useState(initialSeen);
-  const [isLike, setIsLike] = useState(false);
-  const [isHate, setIsHate] = useState(false);
+  const [isLike, setIsLike] = useState(initialLike);
+  const [isHate, setIsHate] = useState(initialHate);
 
   const handleClick = typeOfButton => {
     if (typeOfButton === "isSeen") {

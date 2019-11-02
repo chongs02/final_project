@@ -11,7 +11,6 @@ import MyStatics from "../contents/mystatics";
 import Collaborative from "../contents/collaborative";
 
 const MyPage = memo(props => {
-  console.log(props);
   const noResult = (
     <StyledContent>
       <StyledContentTitle>내가 본 영화</StyledContentTitle>
