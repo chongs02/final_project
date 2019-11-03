@@ -4,7 +4,8 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import MyPageMatcher from "../contents/myPageMatcher";
 import MyDefaultPage from "../contents/myDefaultPage";
 
-const MyPage = memo(() => {
+const MyPage = memo(props => {
+  console.log(props);
   return (
     <React.Fragment>
       <BrowserRouter>
@@ -12,6 +13,7 @@ const MyPage = memo(() => {
           <Switch>
             <Route exact path="/myPage" component={MyDefaultPage}></Route>
             <Route
+              exact
               path="/myPage/:name"
               render={props => <MyPageMatcher {...props}></MyPageMatcher>}
             ></Route>

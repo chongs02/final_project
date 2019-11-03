@@ -48,6 +48,39 @@ const EmotionGraph = props => {
         // B: 85,
       }
     ];
+  } else {
+    data = [
+      {
+        subject: "감동",
+        A: 0
+        // B: 110,
+      },
+      {
+        subject: "공포",
+        A: 0
+        // B: 130,
+      },
+      {
+        subject: "분노",
+        A: 0
+        // B: 130,
+      },
+      {
+        subject: "지루함",
+        A: 0
+        // B: 100,
+      },
+      {
+        subject: "슬픔",
+        A: 0
+        // B: 90,
+      },
+      {
+        subject: "유쾌",
+        A: 0
+        // B: 85,
+      }
+    ];
   }
 
   useEffect(() => {
@@ -79,7 +112,7 @@ const EmotionGraph = props => {
           <PolarAngleAxis dataKey="subject" />
           <PolarRadiusAxis type="number" />
           <Radar
-            name={score.movieNm}
+            name={score ? score.movieNm : "정보가 없습니다"}
             dataKey="A"
             stroke="#FC427B"
             fill="#FC427B"
