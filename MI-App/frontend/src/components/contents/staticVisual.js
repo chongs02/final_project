@@ -32,6 +32,8 @@ import {
   Pie
 } from "recharts";
 
+const WIDTH = window.innerWidth;
+
 const StaticVisual = props => {
   const { likeInfo, watchInfo } = props;
 
@@ -321,7 +323,7 @@ const StaticVisual = props => {
           cy={150}
           labelLine={true}
           label={renderCustomizedLabel}
-          outerRadius={80}
+          outerRadius={120}
           fill="#8884d8"
           dataKey="value"
         >
@@ -372,7 +374,6 @@ const StaticVisual = props => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        marginTop: "30px",
         marginBottom: "30px"
       }}
     >
@@ -381,7 +382,8 @@ const StaticVisual = props => {
         <div
           style={{
             marginTop: "30px",
-            marginBottom: "30px"
+            marginBottom: "30px",
+            marginRight: "30px"
           }}
         >
           {table()}
@@ -409,7 +411,6 @@ const StaticVisual = props => {
         style={{
           display: "flex",
           flexDirection: "row",
-          marginTop: "30px",
           marginBottom: "30px",
           borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
         }}
@@ -443,7 +444,6 @@ const StaticVisual = props => {
           display: "flex",
           flexDirection: "row",
           borderBottom: "1px solid rgba(37, 40, 47, 0.1)",
-          marginTop: "30px",
           marginBottom: "30px"
         }}
       >

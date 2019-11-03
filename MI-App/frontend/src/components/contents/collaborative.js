@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { getConfig } from "./movieInfo";
 import axios from "axios";
 import update from "react-addons-update";
+import { connect } from "react-redux";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
 import {
@@ -12,6 +13,7 @@ import {
 } from "./styleComponent";
 
 const Collaborative = props => {
+  console.log(props);
   let data = [];
   const [title, setTitle] = useState("");
   const [collaborativeMovie, setCollaborativeMovie] = useState([]);
@@ -176,4 +178,10 @@ const Collaborative = props => {
   );
 };
 
-export default Collaborative;
+const mapStateToProps = state => {
+  return {
+    profile: state.auth.profile
+  };
+};
+
+export default connect(mapStateToProps)(Collaborative);

@@ -20,7 +20,7 @@ const MyPage = memo(props => {
     <React.Fragment>
       <BrowserRouter>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <div style={{ width: "80%" }}>
+          <div style={{ width: "80%", height: "100%" }}>
             <Switch>
               <Route exact path="/myPage" component={MyDefaultPage}></Route>
               <Route
