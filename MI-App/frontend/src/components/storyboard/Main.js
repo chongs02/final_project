@@ -17,23 +17,26 @@ import { StyledBottomNav } from "../contents/styleComponent";
 const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
-  const [renderMyPage, setRenderMyPage] = useState(false);
+  const [isMyPage, setIsMyPage] = useState(false);
 
   useEffect(() => {
     props.loadUserProfile();
-  }, [renderMyPage]);
+  }, [isMyPage]);
 
   const handleChange = e => {
     setKeyword(e.target.value);
   };
 
   const handleClick = clickType => {
-    if (clickType === "search") {
+    if (clickType === "myPage") {
+      setIsMyPage(true);
+    } else if (clickType === "search") {
       const filteredKeyword = keyword.replace(/ +/g, " ").trim();
-      setRenderKeyword(filteredKeyword);
       props.movieInfo(keyword);
+      setRenderKeyword(filteredKeyword);
+      setIsMyPage(false);
     } else {
-      setRenderMyPage(!renderMyPage);
+      setIsMyPage(false);
     }
   };
 
@@ -70,7 +73,7 @@ const Main = props => {
               <Route path="/mypage" component={MyPage} />
               <Route exact path="/logout" component={Logout} />
             </Switch>
-            <DailyBoxOffice />
+            <DailyBoxOffice isUnMount={isMyPage} />
             <div style={{ height: "10%" }} />
           </div>
           <StyledBottomNav>

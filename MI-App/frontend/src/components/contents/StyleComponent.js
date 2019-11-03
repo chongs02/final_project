@@ -218,11 +218,10 @@ export const StyledMovieSearch = styled.div`
 `;
 
 export const StyledMovieInfo = styled.div`
-  width: 60%;
+  width: ${props => (props.width ? props.width : "70%")}
   height: 50%;
   padding: 10px;
-  margin: 5px;
-  margin-bottom: 20px;
+  margin: 30px;
   background-color: white;
   display: flex;
   justify-content: flex;

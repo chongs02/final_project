@@ -23,7 +23,7 @@ const MyPage = memo(props => {
   );
 
   return (
-    <div>
+    <div style={{}}>
       {props.profile.length > 0 ? (
         <React.Fragment>
           <UserMovie profile={props.profile}></UserMovie>

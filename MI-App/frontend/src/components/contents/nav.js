@@ -35,6 +35,7 @@ const Nav = props => {
                 alignItems: "center",
                 marginRight: "20px"
               }}
+              onClick={() => props.onClick("home")}
             >
               <img
                 src={logo}
@@ -109,7 +110,11 @@ const Nav = props => {
           </StyledContentHover>
           <StyledContentHover>
             <NavLink exact to="/logout">
-              <StyledSubButton id="logout" fontSize={"1em"}>
+              <StyledSubButton
+                id="logout"
+                fontSize={"1em"}
+                onClick={() => props.onClick("logout")}
+              >
                 로그아웃
               </StyledSubButton>
             </NavLink>

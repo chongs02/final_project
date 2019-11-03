@@ -8,6 +8,7 @@ const KEY = "a3639b253586ed914a06659d53a62177";
 
 const DailyBoxOffice = props => {
   //어제날짜
+
   const dateInfo = () => {
     let nowDate = new Date();
     let yesterDate = nowDate.getTime() - 2 * 24 * 60 * 60 * 1000;
@@ -61,7 +62,7 @@ const DailyBoxOffice = props => {
     boxOfficeDetail();
   }, []);
 
-  return <DailyMovie />;
+  return <DailyMovie isUnMount={props.isUnMount} />;
 };
 
 const mapStateToProps = state => {
