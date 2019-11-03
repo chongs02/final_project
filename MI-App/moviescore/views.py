@@ -10,10 +10,3 @@ class MovieScoreView(ListCreateAPIView):
     filter_backends = (SearchFilter,)
     queryset = MovieScore.objects.all()
     serializer_class = MovieScoreSerializer
-
-    # def get_queryset(self):
-    #     return self.request.user.moviescore.all()
-
-    # def perform_create(self, serializer):
-    #     serializer.save(owner=self.request.user)
-
