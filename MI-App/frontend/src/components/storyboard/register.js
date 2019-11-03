@@ -144,13 +144,17 @@ class Register extends Component {
               src={logo2}
               alt={"logo2"}
               width={30}
-              style={{ verticalAlign: "middle", backgroundColor: "none" }}
+              style={{
+                verticalAlign: "middle",
+                backgroundColor: "none",
+                paddingLeft: "20px"
+              }}
             />
             <span style={{ marginLeft: "7px", marginRight: "20px" }}>
               Movie Inside
             </span>
           </div>
-          <div>Copyright © 2019 HAND Inc.</div>
+          <div style={{ paddingRight: "30px" }}>Copyright © 2019 HAND Inc.</div>
         </StyledBottomNav>
       </div>
     );

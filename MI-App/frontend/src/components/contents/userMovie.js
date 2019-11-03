@@ -64,6 +64,7 @@ const UserMovie = memo(props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
+              width={"80%"}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
@@ -130,15 +131,23 @@ const UserMovie = memo(props => {
   };
 
   return (
-    <div style={{ flex: 1 }}>
-      <div>
-        {isDetails ? (
-          <Route exact path="/myPage/:title" component={details} />
-        ) : (
-          <div></div>
-        )}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between"
+      }}
+    >
+      <div style={{ width: "100%" }}>
+        <div>
+          {isDetails ? (
+            <Route path="/myPage/:title" component={details} />
+          ) : (
+            <div></div>
+          )}
+        </div>
+        <div>{userMoviecomponent()}</div>
       </div>
-      <div>{userMoviecomponent()}</div>
+      <div style={{ width: "15%", marginTop: "20px" }}>테스트 페이지</div>
     </div>
   );
 });

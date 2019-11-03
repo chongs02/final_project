@@ -7,6 +7,16 @@ import MyDefaultPage from "../contents/myDefaultPage";
 const MyPage = memo(props => {
   console.log(props);
   return (
+    // <div style={{}}>
+    //   {props.profile.length > 0 ? (
+    //     <React.Fragment>
+    //       <UserMovie profile={props.profile}></UserMovie>
+    //       <Collaborative></Collaborative>
+    //     </React.Fragment>
+    //   ) : (
+    //     noResult
+    //   )}
+    // </div>
     <React.Fragment>
       <BrowserRouter>
         <div style={{ display: "flex", flexDirection: "row" }}>

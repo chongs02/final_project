@@ -25,7 +25,6 @@ export default function getMovieInfo(state = initialState, action) {
         // recentMovieInfo: [...state.recentMovieInfo, action.payload],
         recentInfoLoaded: true
       };
-
     case types.CLEAR_MOVIE_INFO:
       return {
         ...state,

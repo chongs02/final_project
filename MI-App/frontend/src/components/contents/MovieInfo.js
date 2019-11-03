@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import EmotionGraph from "./graph";
+import Example from "./preferenceChart";
+import EmotionGraph from "./emotionChart";
 
 import {
   StyledMovieInfo,
@@ -118,13 +119,16 @@ export class MovieDetailsInfo extends Component {
     return (
       <div>
         <StyledContentTitle>영화 상세 정보</StyledContentTitle>
-        <StyledMovieInfo>
-          <div style={{ width: "100%", margin: "5%" }}>
+        <StyledMovieInfo width={this.props.width}>
+          <div style={{ width: "100%", margin: "50px" }}>
             <div
               style={{
                 display: "flex",
                 height: "50%",
-                paddingBottom: "20px",
+                // justifyContent: "center",
+                // alignItems: "center",
+                // alignSelf: "center",
+                paddingBottom: "30px",
                 borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
               }}
             >
@@ -199,16 +203,17 @@ export class MovieDetailsInfo extends Component {
               <div
                 style={{
                   display: "flex",
-                  paddingBottom: "20px",
-                  borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
+                  paddingBottom: "30px",
+                  borderBottom: "1px solid rgba(37, 40, 47, 0.1)",
+                  width: "100%"
                 }}
               >
-                <div style={{ width: "50%" }}>
+                <div style={{ width: "33.3%" }}>
                   <h3
                     style={{
                       fontFamily: "nanumB",
                       margin: "0px",
-                      marginTop: "20px",
+                      marginTop: "30px",
                       marginBottom: "10px"
                     }}
                   >
@@ -236,21 +241,28 @@ export class MovieDetailsInfo extends Component {
                     <StyledH5>{this.state.plot}</StyledH5>
                   </div>
                 </div>
+                {/* 좋아요/싫어요 댓글 리뷰 파이 차트 */}
                 <div
                   style={{
                     marginTop: "20px",
-                    width: "50%"
+                    width: "33.3%"
                   }}
                 >
-                  <EmotionGraph></EmotionGraph>
+                  <Example movieCd={info.movieCd} />
+                </div>
+                <div
+                  style={{
+                    width: "33.3%"
+                  }}
+                >
+                  <EmotionGraph movieCd={info.movieCd}></EmotionGraph>
                 </div>
               </div>
-              <div>
+              <div style={{ marginTop: "30px" }}>
                 <h3
                   style={{
                     fontFamily: "nanumB",
                     margin: "0px",
-                    marginTop: "20px",
                     marginBottom: "10px"
                   }}
                 >

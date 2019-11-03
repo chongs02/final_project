@@ -14,14 +14,3 @@ class Profile(models.Model):
     def __str__(self):
         # print(self.user.username)
         return str(self.user)
-
-# class Liked(models.Model):
-#     user = models.ForeignKey(
-#         User, on_delete=models.CASCADE, related_name='user', null=True)
-
-#     id = models.AutoField(primary_key=True)
-#     likedMovie = models.CharField(max_length=8, blank=True, null=True)
-
-#     def __str__(self):
-#         # print(self.user.username)
-#         return str(self.user)

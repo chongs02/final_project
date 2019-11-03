@@ -25,7 +25,7 @@ const DailyMovie = props => {
     return () => {
       setIsDetails(false);
     };
-  }, []);
+  }, [props.isUnMount]);
 
   const details = () => {
     return (
@@ -81,14 +81,18 @@ const DailyMovie = props => {
 
   return (
     <div>
-      <div>
-        {isDetails ? (
-          <Route exact path="/main/:title" component={details} />
-        ) : (
-          <div></div>
-        )}
-      </div>
-      <div>{recentInfoLoaded ? moviePostercomponent() : noResult}</div>
+      {props.isUnMount ? (
+        <div />
+      ) : (
+        <div>
+          {isDetails ? (
+            <Route exact path="/main/:title" component={details} />
+          ) : (
+            <div></div>
+          )}
+          <div>{recentInfoLoaded ? moviePostercomponent() : noResult}</div>
+        </div>
+      )}
     </div>
   );
 };

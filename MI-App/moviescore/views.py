@@ -5,7 +5,6 @@ from .models import MovieScore
 from rest_framework.filters import SearchFilter
 from rest_framework.generics import ListCreateAPIView
 
-
 class MovieScoreView(ListCreateAPIView):
     search_fields = ['movieCd']
     filter_backends = (SearchFilter,)

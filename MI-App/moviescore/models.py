@@ -13,6 +13,8 @@ class MovieScore(models.Model):
     sadness = models.PositiveSmallIntegerField()           # 슬픔
     fun = models.PositiveSmallIntegerField()               # 유쾌
     boredom = models.PositiveSmallIntegerField()           # 지루함
+    positive = models.PositiveSmallIntegerField()          # 긍정
+    negative = models.PositiveSmallIntegerField()          # 부정
 
     # owner = models.ForeignKey(User, related_name="moviescore",
     #                           on_delete=models.CASCADE, null=True)
