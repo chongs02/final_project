@@ -1,6 +1,6 @@
 import React from "react";
 import Profile from "../contents/profile";
-import MyStatics from "./myStatics";
+import MyStatics from "./mystatics";
 import Collaborative from "../contents/collaborative";
 import MyDefaultPage from "../contents/myDefaultPage";
 
