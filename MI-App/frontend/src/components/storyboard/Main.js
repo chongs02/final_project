@@ -46,7 +46,7 @@ const Main = props => {
   return (
     <Fragment>
       <BrowserRouter>
-        <div style={{ display: "inline-block", height: "92%" }}>
+        <div style={{ display: "inline-block", height: "92%", width: "100%" }}>
           <Nav
             value={keyword}
             onChange={handleChange}

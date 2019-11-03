@@ -5,17 +5,20 @@ import axios from "axios";
 const watchedMovie = async () => {
   const config = getConfig();
 
-  await axios.get("/api/watched/", config).then(res => console.log(res));
+  await axios.get("/api/watched/", config);
+  // .then(res => console.log(res));
 };
 const likeMovie = async () => {
   const config = getConfig();
 
-  await axios.get("/api/like/", config).then(res => console.log(res));
+  await axios.get("/api/like/", config);
+  // .then(res => console.log(res));
 };
 const hateMovie = async () => {
   const config = getConfig();
 
-  await axios.get("/api/hate/", config).then(res => console.log(res));
+  await axios.get("/api/hate/", config);
+  // .then(res => console.log(res));
 };
 
 const Collaborative = () => {

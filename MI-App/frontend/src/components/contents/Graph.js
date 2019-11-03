@@ -7,74 +7,90 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis
+  PolarRadiusAxis,
+  Legend
 } from "recharts";
 
-const data = [
-  {
-    subject: "Math",
-    A: 120,
-    B: 110,
-    fullMark: 150
-  },
-  {
-    subject: "Chinese",
-    A: 98,
-    B: 130,
-    fullMark: 150
-  },
-  {
-    subject: "English",
-    A: 86,
-    B: 130,
-    fullMark: 150
-  },
-  {
-    subject: "Geography",
-    A: 99,
-    B: 100,
-    fullMark: 150
-  },
-  {
-    subject: "Physics",
-    A: 85,
-    B: 90,
-    fullMark: 150
-  },
-  {
-    subject: "History",
-    A: 65,
-    B: 85,
-    fullMark: 150
-  }
-];
-
 const EmotionGraph = props => {
-  // console.log(props);
+  const score = props.movieData[0];
+  let data;
+
+  if (score) {
+    data = [
+      {
+        subject: "감동",
+        A: score.impression
+        // B: 110,
+      },
+      {
+        subject: "공포",
+        A: score.fear
+        // B: 130,
+      },
+      {
+        subject: "분노",
+        A: score.anger
+        // B: 130,
+      },
+      {
+        subject: "지루함",
+        A: score.boredom
+        // B: 100,
+      },
+      {
+        subject: "슬픔",
+        A: score.sadness
+        // B: 90,
+      },
+      {
+        subject: "유쾌",
+        A: score.fun
+        // B: 85,
+      }
+    ];
+  }
+
   useEffect(() => {
     props.getScore();
-  });
+  }, []);
+
   return (
-    <RadarChart
-      cx={"50%"}
-      cy={"50%"}
-      outerRadius={75}
-      width={200}
-      height={200}
-      data={data}
-      margin={{ top: 5, right: 5, bottom: 5, left: 5 }}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        color: "#551a8b",
+        fontFamily: "nanumB"
+      }}
     >
-      <PolarGrid />
-      <PolarAngleAxis dataKey="subject" />
-      <PolarRadiusAxis />
-      <Radar
-        name="Mike"
-        dataKey="A"
-        stroke="#8884d8"
-        fill="#8884d8"
-        fillOpacity={0.6}
-      />
-    </RadarChart>
+      {props.scoreLoaded ? (
+        <RadarChart
+          cx={"50%"}
+          cy={"50%"}
+          outerRadius={100}
+          width={300}
+          height={300}
+          data={data}
+          margin={{ top: 5, right: 5, bottom: 5, left: 5 }}
+        >
+          <PolarGrid />
+          <PolarAngleAxis dataKey="subject" />
+          <PolarRadiusAxis type="number" />
+          <Radar
+            name={score.movieNm}
+            dataKey="A"
+            stroke="#FC427B"
+            fill="#FC427B"
+            fillOpacity={0.6}
+          />
+          <Legend verticalAlign="top" iconType="star" font-family="nanumB" />
+        </RadarChart>
+      ) : (
+        <div />
+      )}
+    </div>
   );
 };
 
