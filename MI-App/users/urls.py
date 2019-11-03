@@ -2,7 +2,6 @@ from django.urls import path, include
 from .api import RegistrationAPI, LoginAPI, UserAPI, ProfileViewSet, CollaborativeWatched,CollaborativeHate,CollaborativeLike
 from django.contrib.auth import views as auth_views
 from rest_framework import routers
-from .views import test
 
 router = routers.DefaultRouter()
 router.register('profile', ProfileViewSet, 'profile')
@@ -17,5 +16,4 @@ urlpatterns = [
     path('user/', UserAPI.as_view()),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', include(router.urls)),
-    path('test/', test, name = 'test')
 ]

@@ -27,7 +27,7 @@ const SearchResult = props => {
     };
   }, [keyword]);
 
-  const details = () => {
+  const details = props => {
     return (
       <StyledContent>
         {selected.map(info => {
