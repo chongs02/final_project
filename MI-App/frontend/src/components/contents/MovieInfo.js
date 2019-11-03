@@ -111,7 +111,7 @@ export class MovieDetailsInfo extends Component {
               style={{
                 display: "flex",
                 height: "50%",
-                paddingBottom: "5%",
+                paddingBottom: "20px",
                 borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
               }}
             >
@@ -183,24 +183,24 @@ export class MovieDetailsInfo extends Component {
               </div>
             </div>
             <div>
-              <h3
-                style={{
-                  fontFamily: "nanumB",
-                  margin: "0px",
-                  marginTop: "20px",
-                  marginBottom: "10px"
-                }}
-              >
-                기본 정보
-              </h3>
               <div
                 style={{
                   display: "flex",
-                  paddingBottom: "5%",
+                  paddingBottom: "20px",
                   borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
                 }}
               >
-                <div style={{ display: "flex", width: "50%" }}>
+                <div style={{ width: "50%" }}>
+                  <h3
+                    style={{
+                      fontFamily: "nanumB",
+                      margin: "0px",
+                      marginTop: "20px",
+                      marginBottom: "10px"
+                    }}
+                  >
+                    기본 정보
+                  </h3>
                   <div style={{}}>
                     <div style={{ margin: "0px", marginBottom: "10px" }}>
                       <h4
@@ -227,10 +227,8 @@ export class MovieDetailsInfo extends Component {
                 </div>
                 <div
                   style={{
-                    display: "flex",
-                    width: "50%",
-                    justifyContent: "center",
-                    alignItems: "center"
+                    marginTop: "20px",
+                    width: "50%"
                   }}
                 >
                   <EmotionGraph></EmotionGraph>
