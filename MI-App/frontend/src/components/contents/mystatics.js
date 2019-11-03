@@ -1,7 +1,118 @@
-import React from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import update from "react-addons-update";
 
-const MyStatics = () => {
-  return <div>MyStatics</div>;
+import UserMovie from "../contents/userMovie";
+import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
+
+const MyStatics = memo(props => {
+  const profile = usePrevious(props.profile);
+  const [likeMovieInfo, setLikeMovieInfo] = useState([]);
+  const [watchedMovieInfo, setWatchedMovieInfo] = useState([]);
+  const [isDetails, setIsDetails] = useState(false);
+  const [likeLoaded, setLikeLoaded] = useState(false);
+  const [watchLoaded, setWatchLoaded] = useState(false);
+
+  useEffect(() => {
+    if (profile !== props.profile && props.profile) {
+      let watchMovie = sortingWatchedMovie();
+      let likeMovie = sortingLikeMovie();
+      watchMovie.forEach(async element => {
+        await userMovie(element)
+          .then(res =>
+            setWatchedMovieInfo(prevState => {
+              return [...prevState, res[0][0]];
+            })
+          )
+          .then(res => setWatchLoaded(true));
+      });
+      likeMovie.forEach(async element => {
+        await userMovie(element)
+          .then(res =>
+            setLikeMovieInfo(prevState => {
+              return [...prevState, res[0][0]];
+            })
+          )
+          .then(res => setLikeLoaded(true));
+      });
+    }
+    return () => {
+      setLikeMovieInfo([]);
+      setWatchedMovieInfo([]);
+      setIsDetails(false);
+    };
+  }, [props.profile]);
+
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    }, [value]);
+
+    return ref.current;
+  }
+  const userMovie = async searchInfo => {
+    let url = "/movieInfo/";
+    url = url + "?search=" + searchInfo;
+    let data = [];
+    await axios
+      .get(url)
+      .then(response => {
+        data.push(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    return data;
+  };
+
+  const sortingWatchedMovie = () => {
+    let watch = Array.from(
+      new Set(props.profile.map(data => data.watchedMovie))
+    ).map(watchedMovie => {
+      return {
+        watchedMovie: watchedMovie
+      };
+    });
+    let watchedMovie = [];
+    for (let i in watch) {
+      if (
+        watch[i].watchedMovie === null ||
+        watch[i].watchedMovie == undefined
+      ) {
+      } else {
+        watchedMovie.push(watch[i].watchedMovie);
+      }
+    }
+    return watchedMovie;
+  };
+
+  const sortingLikeMovie = () => {
+    let like = Array.from(new Set(props.profile.map(data => data.like))).map(
+      like => {
+        return {
+          like: like
+        };
+      }
+    );
+    let likeMovie = [];
+    for (let i in like) {
+      if (like[i].like === null || like[i].like == undefined) {
+      } else {
+        likeMovie.push(like[i].like);
+      }
+    }
+    return likeMovie;
+  };
+
+  return <div>{likeLoaded ? console.log(likeMovieInfo) : <div></div>}</div>;
+});
+
+const mapStateToProps = state => {
+  return {
+    profile: state.auth.profile
+  };
 };
 
-export default MyStatics;
+export default connect(mapStateToProps)(MyStatics);

@@ -4,7 +4,7 @@ import { getErrors } from "./messages";
 
 export const getScore = () => async dispatch => {
   await axios
-    .get("/movie-api/movieScore/")
+    .get("/movie-api/")
     .then(response => {
       dispatch({
         type: types.GET_SCORE,

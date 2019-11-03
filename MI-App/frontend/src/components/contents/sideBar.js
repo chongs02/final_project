@@ -29,7 +29,7 @@ export default class SideBar extends Component {
         <div>
           <NavLink
             exact
-            to="myPage/collaborative/seen"
+            to="/collaborative-seen"
             style={{ textDecoration: "none" }}
           >
             <div>봤어요 추천</div>
@@ -38,7 +38,7 @@ export default class SideBar extends Component {
         <div>
           <NavLink
             exact
-            to="myPage/collaborative/like"
+            to="/collaborative-like"
             style={{ textDecoration: "none" }}
           >
             <div>좋아요 추천</div>
@@ -47,7 +47,7 @@ export default class SideBar extends Component {
         <div>
           <NavLink
             exact
-            to="myPage/collaborative/hate"
+            to="/collaborative-hate"
             style={{ textDecoration: "none" }}
           >
             <div>걸러야할 영화</div>

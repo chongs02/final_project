@@ -3,8 +3,3 @@ from .collaborative_filtering import main
 
 # Create your views here.
 
-def test(request):
-    main(request)
-
-
-    return render(request, 'test.html', {})
