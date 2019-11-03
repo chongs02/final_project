@@ -5,6 +5,7 @@ import Collaborative from "../contents/collaborative";
 import MyDefaultPage from "../contents/myDefaultPage";
 
 const MyPageMatcher = props => {
+  console.log(props.match.params);
   if (props.match.params.name === "myPage") {
     return <MyDefaultPage />;
   } else if (props.match.params.name === "profile") {

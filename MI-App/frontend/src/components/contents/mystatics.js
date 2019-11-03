@@ -1,18 +1,15 @@
 import React, { memo, useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import update from "react-addons-update";
-
-import UserMovie from "../contents/userMovie";
-import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
+import StaticVisual from "./staticVisual";
 
 const MyStatics = memo(props => {
   const profile = usePrevious(props.profile);
-  const [likeMovieInfo, setLikeMovieInfo] = useState([]);
-  const [watchedMovieInfo, setWatchedMovieInfo] = useState([]);
   const [isDetails, setIsDetails] = useState(false);
   const [likeLoaded, setLikeLoaded] = useState(false);
   const [watchLoaded, setWatchLoaded] = useState(false);
+  const [likeMovieInfo, setLikeMovieInfo] = useState([]);
+  const [watchedMovieInfo, setWatchedMovieInfo] = useState([]);
 
   useEffect(() => {
     if (profile !== props.profile && props.profile) {
@@ -79,7 +76,7 @@ const MyStatics = memo(props => {
     for (let i in watch) {
       if (
         watch[i].watchedMovie === null ||
-        watch[i].watchedMovie == undefined
+        watch[i].watchedMovie === undefined
       ) {
       } else {
         watchedMovie.push(watch[i].watchedMovie);
@@ -98,7 +95,7 @@ const MyStatics = memo(props => {
     );
     let likeMovie = [];
     for (let i in like) {
-      if (like[i].like === null || like[i].like == undefined) {
+      if (like[i].like === null || like[i].like === undefined) {
       } else {
         likeMovie.push(like[i].like);
       }
@@ -106,7 +103,18 @@ const MyStatics = memo(props => {
     return likeMovie;
   };
 
-  return <div>{likeLoaded ? console.log(likeMovieInfo) : <div></div>}</div>;
+  return (
+    <div>
+      {likeLoaded ? (
+        <StaticVisual
+          likeInfo={likeMovieInfo}
+          watchInfo={watchedMovieInfo}
+        ></StaticVisual>
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );
 });
 
 const mapStateToProps = state => {

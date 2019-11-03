@@ -10,7 +10,6 @@ const MyPage = memo(() => {
         <div style={{ display: "flex", flexDirection: "row" }}>
           <Switch>
             <Route
-              exact
               path="/:name"
               render={props => <MyPageMatcher {...props}></MyPageMatcher>}
             ></Route>
