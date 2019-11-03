@@ -65,7 +65,7 @@ const Main = props => {
                 path="/search"
                 render={() => <SearchResult keyword={renderKeyword} />}
               />
-              <Route path="/mypage" component={MyPage} />
+              <Route path="/myPage" component={MyPage} />
               <Route exact path="/logout" component={Logout} />
             </Switch>
             <DailyBoxOffice />
