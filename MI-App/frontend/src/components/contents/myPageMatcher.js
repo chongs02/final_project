@@ -2,13 +2,9 @@ import React from "react";
 import Profile from "../contents/profile";
 import MyStatics from "./mystatics";
 import Collaborative from "../contents/collaborative";
-import MyDefaultPage from "../contents/myDefaultPage";
 
 const MyPageMatcher = props => {
-  console.log(props.match.params);
-  if (props.match.params.name === "myPage") {
-    return <MyDefaultPage />;
-  } else if (props.match.params.name === "profile") {
+  if (props.match.params.name === "profile") {
     return <Profile />;
   } else if (props.match.params.name === "mystatics") {
     return <MyStatics />;
