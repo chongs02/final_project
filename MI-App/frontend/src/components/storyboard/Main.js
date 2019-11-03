@@ -73,7 +73,6 @@ const Main = props => {
             <DailyBoxOffice />
             <div style={{ height: "10%" }} />
           </div>
-
           <StyledBottomNav>
             <div>
               <img

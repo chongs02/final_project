@@ -2,9 +2,12 @@ import * as types from "./actionTypes";
 import axios from "axios";
 import { getErrors } from "./messages";
 
-export const getScore = () => async dispatch => {
+export const getScore = movieCd => async dispatch => {
+  let url = "/movie-api/";
+  url = url + "?search=" + movieCd;
   await axios
-    .get("/movie-api/movieScore/")
+    .get(url)
+    // .get("/movie-api/movieScore/")
     .then(response => {
       dispatch({
         type: types.GET_SCORE,

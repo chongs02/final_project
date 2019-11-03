@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 
 from django.contrib.auth import logout
 from knox.models import AuthToken
-from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer,CollaborativeSerializer
+from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer, CollaborativeSerializer
 
 from .models import Profile
 from .collaborative_filtering import main

@@ -231,7 +231,7 @@ export class MovieDetailsInfo extends Component {
                     width: "50%"
                   }}
                 >
-                  <EmotionGraph></EmotionGraph>
+                  <EmotionGraph movieCd={info.movieCd}></EmotionGraph>
                 </div>
               </div>
               <div>

@@ -13,9 +13,11 @@ import {
 
 const EmotionGraph = props => {
   const score = props.movieData[0];
+
   let data;
 
   if (score) {
+    // B는 내가 선호하는 감정스테이트 정보로 넣을 예정임
     data = [
       {
         subject: "감동",
@@ -48,10 +50,43 @@ const EmotionGraph = props => {
         // B: 85,
       }
     ];
+  } else {
+    data = [
+      {
+        subject: "감동",
+        A: 0
+        // B: 110,
+      },
+      {
+        subject: "공포",
+        A: 0
+        // B: 130,
+      },
+      {
+        subject: "분노",
+        A: 0
+        // B: 130,
+      },
+      {
+        subject: "지루함",
+        A: 0
+        // B: 100,
+      },
+      {
+        subject: "슬픔",
+        A: 0
+        // B: 90,
+      },
+      {
+        subject: "유쾌",
+        A: 0
+        // B: 85,
+      }
+    ];
   }
 
   useEffect(() => {
-    props.getScore();
+    props.getScore(props.movieCd);
   }, []);
 
   return (
@@ -77,15 +112,24 @@ const EmotionGraph = props => {
         >
           <PolarGrid />
           <PolarAngleAxis dataKey="subject" />
-          <PolarRadiusAxis type="number" />
+          <PolarRadiusAxis
+            type="number"
+            angle={60}
+            axisLine={false}
+            tick={true}
+          />
           <Radar
-            name={score.movieNm}
+            name={score ? score.movieNm : "정보가 없습니다"}
             dataKey="A"
             stroke="#FC427B"
             fill="#FC427B"
             fillOpacity={0.6}
           />
-          <Legend verticalAlign="top" iconType="star" font-family="nanumB" />
+          <Legend
+            verticalAlign="bottom"
+            iconType="square"
+            font-family="nanumB"
+          />
         </RadarChart>
       ) : (
         <div />
