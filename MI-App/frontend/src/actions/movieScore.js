@@ -8,7 +8,6 @@ export const getScore = movieCd => async dispatch => {
   await axios
     .get(url)
     .then(response => {
-      console.log(response.data);
       dispatch({
         type: types.GET_SCORE,
         payload: response.data

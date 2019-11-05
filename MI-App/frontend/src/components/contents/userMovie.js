@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useRef } from "react";
+import React, { useEffect, useState, memo, useRef, useMemo } from "react";
 import { Route } from "react-router-dom";
 import axios from "axios";
 import update from "react-addons-update";
@@ -38,6 +38,7 @@ const UserMovie = memo(props => {
     url = url + "?search=" + searchInfo;
     try {
       const fetchedData = await axios.get(url);
+
       setUserMovieInfo(prevState => {
         return update(prevState, { $push: fetchedData.data });
       });

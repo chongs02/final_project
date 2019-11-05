@@ -4,11 +4,24 @@ from rest_framework.decorators import action
 
 from django.contrib.auth import logout
 from knox.models import AuthToken
-from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer, CollaborativeSerializer,UserMovieEmotionSerializer
+from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer, CollaborativeSerializer,UserMovieEmotionSerializer,CollaborativeByEmotion
 
 from .models import Profile
-from .collaborative_filtering import main
+from .collaborative_filtering import user_based_filtering,item_based_filtering
 from .user_movie_score import get_user_movie_emotion
+
+class CollaborativeEmotion(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = CollaborativeByEmotion
+
+    def get_queryset(self):
+        movieCd = self.request.query_params.get('movieCd')
+        recomended_movie = item_based_filtering(self.request, movieCd)
+        result = CollaborativeByEmotion(recomended_movie, many=True).data
+        return result
+
 
 
 class UserMovieEmotion(viewsets.ModelViewSet):
@@ -30,7 +43,7 @@ class CollaborativeLike(viewsets.ModelViewSet):
     serializer_class = CollaborativeSerializer
 
     def get_queryset(self):
-        li = main(self.request, 'like')
+        li = user_based_filtering(self.request, 'like')
         result = CollaborativeSerializer(li, many=True).data
         return result
 
