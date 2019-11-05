@@ -1,11 +1,5 @@
 import styled from "styled-components";
 
-// @media (min-width: 1023px)
-// <style>
-// .SearchContainer {
-//     width: 640px;
-// }
-
 export const StyledHeader = styled.header`
   position: fixed;
   top: 0px;
