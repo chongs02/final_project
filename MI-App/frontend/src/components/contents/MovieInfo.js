@@ -96,6 +96,19 @@ export class MovieSearchInfo extends Component {
 // 상세 정보 페이지 영화 상세 정보
 
 export class MovieDetailsInfo extends Component {
+  state = {
+    plot: ""
+  };
+  requestPlot = async movieTitle => {
+    const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=N&title=${movieTitle}&ServiceKey=G1Z1T6XK90K3GOQJ4Y48`;
+    axios.get(url).then(res => {
+      this.setState({ plot: res.data.Data[0].Result[0].plot });
+    });
+  };
+
+  componentDidMount() {
+    this.requestPlot(this.props.info.movieNm);
+  }
   render() {
     const { info } = this.props;
     const openDt = info.openDt.toString().substring(0, 4);
@@ -225,9 +238,7 @@ export class MovieDetailsInfo extends Component {
                       </StyledH5>
                       <StyledH5>{info.watchGradeNm.split(",")[0]}</StyledH5>
                     </div>
-                    <StyledH5>
-                      1999년 이 영화는 어쩌구 저쩌구 이러쿵 저러쿵 샤바리샤바
-                    </StyledH5>
+                    <StyledH5>{this.state.plot}</StyledH5>
                   </div>
                 </div>
                 {/* 좋아요/싫어요 댓글 리뷰 파이 차트 */}

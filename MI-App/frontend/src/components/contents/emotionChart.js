@@ -15,7 +15,7 @@ const EmotionGraph = props => {
   const score = props.movieData[0];
 
   let data;
-
+  console.log(props.scoreLoaded);
   if (score) {
     // B는 내가 선호하는 감정스테이트 정보로 넣을 예정임
     data = [

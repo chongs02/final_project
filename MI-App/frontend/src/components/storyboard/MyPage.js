@@ -20,14 +20,16 @@ const MyPage = memo(props => {
     <React.Fragment>
       <BrowserRouter>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <Switch>
-            <Route exact path="/myPage" component={MyDefaultPage}></Route>
-            <Route
-              exact
-              path="/myPage/:name"
-              render={props => <MyPageMatcher {...props}></MyPageMatcher>}
-            ></Route>
-          </Switch>
+          <div style={{ width: "80%" }}>
+            <Switch>
+              <Route exact path="/myPage" component={MyDefaultPage}></Route>
+              <Route
+                exact
+                path="/myPage/:name"
+                render={props => <MyPageMatcher {...props}></MyPageMatcher>}
+              ></Route>
+            </Switch>
+          </div>
           <div style={{ width: "20%" }}>
             <SideBar></SideBar>
           </div>
