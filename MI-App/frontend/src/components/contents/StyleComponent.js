@@ -146,9 +146,24 @@ export const StyledMainButton = styled.button`
   outline: none;
 `;
 
+// eb3b5a
+// fc427b
+
+export const StyledSideBarButton = styled.div`
+  cursor: pointer;
+  color: ${props => (props.color ? props.color : "#ced6e0")};
+  font-size: 18px;
+  font-family: nanum;
+  margin: 0px;
+  padding: 0.25em 1em;
+  border: none;
+  background: rgba(255, 255, 255, 0);
+  vertical-align: middle;
+`;
+
 export const StyledSubButton = styled.button`
   cursor: pointer;
-  color: #eb3b5a;
+  color: ${props => (props.color ? props.color : "#eb3b5a")};
   font-size: ${props => props.fontSize};
   font-family: nanum;
   margin: 0px;
@@ -218,7 +233,7 @@ export const StyledMovieSearch = styled.div`
 `;
 
 export const StyledMovieInfo = styled.div`
-  width: ${props => (props.width ? props.width : "70%")}
+  width: ${props => (props.width ? props.width : "60%")}
   height: 50%;
   padding: 10px;
   margin: 30px;

@@ -473,4 +473,5 @@ const StaticVisual = props => {
     </div>
   );
 };
+
 export default StaticVisual;

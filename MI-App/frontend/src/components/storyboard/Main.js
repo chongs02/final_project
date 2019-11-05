@@ -17,6 +17,7 @@ const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
   const [isMyPage, setIsMyPage] = useState(false);
+  const [pageChange, setPageChange] = useState(false);
 
   useEffect(() => {
     props.loadUserProfile();
@@ -27,6 +28,8 @@ const Main = props => {
   };
 
   const handleClick = clickType => {
+    setPageChange(!pageChange);
+
     if (clickType === "myPage") {
       setIsMyPage(true);
     } else if (clickType === "search") {
@@ -68,7 +71,11 @@ const Main = props => {
                 path="/search"
                 render={() => <SearchResult keyword={renderKeyword} />}
               />
-              <Route path="/myPage" component={MyPage} />
+              <Route
+                exact
+                path="/myPage"
+                render={() => <MyPage pageChange={pageChange} />}
+              />
               <Route exact path="/logout" component={Logout} />
             </Switch>
             <DailyBoxOffice isUnMount={isMyPage} />

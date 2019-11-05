@@ -18,6 +18,10 @@ const UserMovie = memo(props => {
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
+    setIsDetails(false);
+  }, [props.pageChange]);
+
+  useEffect(() => {
     if (profile !== props.profile && props.profile) {
       props.profile.forEach(async element => {
         await userMovie(element.watchedMovie);
@@ -64,7 +68,7 @@ const UserMovie = memo(props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
-              // width={"80%"}
+              width={"73%"}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
@@ -130,27 +134,39 @@ const UserMovie = memo(props => {
     );
   };
 
-  return (
-    // <div
-    //   style={{
-    //     display: "flex",
-    //     justifyContent: "space-between"
-    //   }}
-    // >
-    //   <div style={{ width: "100%" }}>
-    <React.Fragment>
-      <div>
-        {isDetails ? (
-          <Route path="/myPage/:title" component={details} />
-        ) : (
-          <div></div>
-        )}
+  const noResult = (
+    <StyledContent>
+      <StyledContentTitle>내가 본 영화</StyledContentTitle>
+      <div
+        style={{
+          display: "flex",
+          height: "188.6px",
+          margin: "30px 0px",
+          paddingLeft: "20px"
+        }}
+      >
+        본 영화가 없습니다
       </div>
-      <div>{userMoviecomponent()}</div>
-    </React.Fragment>
-    //   </div>
-    //   <div style={{ width: "15%", marginTop: "20px" }}>테스트 페이지</div>
-    // </div>
+    </StyledContent>
+  );
+
+  return (
+    <div>
+      {!props.isHome ? (
+        <div />
+      ) : (
+        <div>
+          {isDetails ? (
+            <Route exact path="/myPage/:title" component={details} />
+          ) : (
+            <div></div>
+          )}
+          <div>
+            {props.profile.length > 0 ? userMoviecomponent() : noResult}
+          </div>
+        </div>
+      )}
+    </div>
   );
 });
 

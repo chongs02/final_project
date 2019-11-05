@@ -1,37 +1,67 @@
-import React, { memo } from "react";
-import SideBar from "../contents/sideBar";
+import React, { useState, useEffect, memo } from "react";
+import { connect } from "react-redux";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import MyPageMatcher from "../contents/myPageMatcher";
-import MyDefaultPage from "../contents/myDefaultPage";
+
+import UserMovie from "../contents/userMovie";
+import Profile from "../contents/profile";
+import MyStatics from "../contents/mystatics";
+import Collaborative from "../contents/collaborative";
+import SideBar from "../contents/sideBar";
 
 const MyPage = memo(props => {
-  console.log(props);
+  const [isHome, setIsHome] = useState(true);
+  const [collaboPage, setCollaboPage] = useState("");
+
+  useEffect(() => {
+    setIsHome(true);
+  }, [props.pageChange]);
+
+  console.log(isHome);
+
+  const handleCilck = clickType => {
+    if (clickType === "home") {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+    }
+    if (clickType.includes("collaborative")) {
+      setCollaboPage(clickType);
+    }
+  };
+
   return (
-    // <div style={{}}>
-    //   {props.profile.length > 0 ? (
-    //     <React.Fragment>
-    //       <UserMovie profile={props.profile}></UserMovie>
-    //       <Collaborative></Collaborative>
-    //     </React.Fragment>
-    //   ) : (
-    //     noResult
-    //   )}
-    // </div>
     <React.Fragment>
       <BrowserRouter>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <div style={{ width: "80%", height: "100%" }}>
-            <Switch>
-              <Route exact path="/myPage" component={MyDefaultPage}></Route>
-              <Route
-                exact
-                path="/myPage/:name"
-                render={props => <MyPageMatcher {...props}></MyPageMatcher>}
-              ></Route>
-            </Switch>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            height: "100%"
+          }}
+        >
+          <div style={{ width: "82%" }}>
+            {isHome ? (
+              <UserMovie
+                profile={props.profile}
+                isHome={isHome}
+                pageChange={props.pageChange}
+              />
+            ) : (
+              <Switch>
+                <Route exact path="/myPage/profile" component={Profile} />
+                <Route exact path="/myPage/mystatics" component={MyStatics} />
+                <Route
+                  path={`/myPage/${collaboPage}`}
+                  render={() => <Collaborative name={`${collaboPage}`} />}
+                />
+              </Switch>
+            )}
           </div>
-          <div style={{ width: "20%" }}>
-            <SideBar></SideBar>
+          <div style={{ width: "16%" }}>
+            <div style={{ width: "100%", height: "100%", position: "fixed" }}>
+              <SideBar onClick={handleCilck} />
+            </div>
           </div>
         </div>
       </BrowserRouter>
@@ -39,4 +69,10 @@ const MyPage = memo(props => {
   );
 });
 
-export default MyPage;
+const mapStateToProps = state => {
+  return {
+    profile: state.auth.profile
+  };
+};
+
+export default connect(mapStateToProps)(MyPage);

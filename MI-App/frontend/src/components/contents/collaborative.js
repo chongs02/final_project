@@ -5,6 +5,7 @@ import axios from "axios";
 import update from "react-addons-update";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
+
 import {
   StyledMovieList,
   StyledContent,
@@ -116,7 +117,7 @@ const Collaborative = props => {
           {SortedMovie.map((info, i) => {
             return (
               <MovieSearchInfo
-                page={`/${props.name}`}
+                page={`/myPage/${props.name}`}
                 key={i}
                 info={info}
                 onClick={() => handleClick(i)}
@@ -143,6 +144,7 @@ const Collaborative = props => {
       </div>
     </StyledContent>
   );
+
   const details = props => {
     console.log("a");
     return (
@@ -150,6 +152,7 @@ const Collaborative = props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
+              width={"73%"}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
@@ -160,19 +163,25 @@ const Collaborative = props => {
     );
   };
 
+  console.log(props.name);
+
   return (
     <React.Fragment>
       <div>
         {isDetails ? (
-          <Route exact path={`/${props.name}/:title`} component={details} />
+          <Route
+            exact
+            path={`/myPage/${props.name}/:title`}
+            component={details}
+          />
         ) : (
-          <div></div>
+          <div />
         )}
       </div>
       <div>
         {collaborativeMovie && collaborativeMovie !== []
           ? moviePostercomponent()
-          : noResult()}
+          : noResult}
       </div>
     </React.Fragment>
   );

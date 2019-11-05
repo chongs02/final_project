@@ -7,10 +7,9 @@ import { Legend, ResponsiveContainer, Label } from "recharts";
 
 const COLORS = ["#ff7979", "#74b9ff"];
 
-const Example = props => {
+const PreferenceChart = props => {
   let renderLabel = entry => {
-    console.log(entry);
-    return entry.value;
+    return `${entry.value}%`;
   };
 
   //   onPieEnter = ele => {
@@ -74,4 +73,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { getScore }
-)(Example);
+)(PreferenceChart);
