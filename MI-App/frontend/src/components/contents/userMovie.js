@@ -68,7 +68,7 @@ const UserMovie = memo(props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
-              width={"80%"}
+              width={"73%"}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}

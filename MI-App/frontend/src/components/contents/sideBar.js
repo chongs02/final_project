@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
+import { StyledSideBarButton } from "../contents/styleComponent";
+
 export default class SideBar extends Component {
   render() {
     return (
@@ -8,69 +10,133 @@ export default class SideBar extends Component {
         style={{
           marginTop: "5px",
           marginRight: "0px",
-          paddingBottom: "-10px",
           height: "100%",
-          backgroundColor: "lightgray",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start"
+          backgroundColor: "rgba(55, 66, 250, 0.8)",
+          display: "block"
         }}
       >
-        <div>
-          <NavLink exact to="/myPage" style={{ textDecoration: "none" }}>
-            <div onClick={() => this.props.onClick("home")}>내가 본 영화</div>
-          </NavLink>
-        </div>
-        <div>
-          <NavLink
-            exact
-            to="/myPage/profile"
-            style={{ textDecoration: "none" }}
+        <div style={{ padding: "15px" }} />
+        <div
+          style={{
+            width: "100%",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+            paddingLeft: "30px"
+          }}
+        >
+          <span
+            style={{
+              display: "flex",
+              fontSize: "20px",
+              fontFamily: "nanumB",
+              color: "#ffffff"
+            }}
           >
-            <div onClick={() => this.props.onClick("profile")}>개인 정보</div>
-          </NavLink>
-        </div>
-        <div>
-          <NavLink
-            exact
-            to="/myPage/mystatics"
-            style={{ textDecoration: "none" }}
-          >
-            <div onClick={() => this.props.onClick("mystatics")}>나의 영화</div>
-          </NavLink>
-        </div>
-        <div>
-          <NavLink
-            exact
-            to="/myPage/collaborative-seen"
-            style={{ textDecoration: "none" }}
-          >
-            <div onClick={() => this.props.onClick("collaborative-seen")}>
-              봤어요 추천
+            기본 정보
+          </span>
+          <div style={{ paddingLeft: "10px" }}>
+            <div style={{ padding: "10px" }} />
+            <div>
+              <NavLink
+                exact
+                to="/myPage/profile"
+                style={{ textDecoration: "none" }}
+              >
+                <StyledSideBarButton
+                  onClick={() => this.props.onClick("profile")}
+                >
+                  개인 정보
+                </StyledSideBarButton>
+              </NavLink>
             </div>
-          </NavLink>
-        </div>
-        <div>
-          <NavLink
-            exact
-            to="/myPage/collaborative-like"
-            style={{ textDecoration: "none" }}
-          >
-            <div onClick={() => this.props.onClick("collaborative-like")}>
-              좋아요 추천
+            <div style={{ padding: "3px" }} />
+            <div>
+              <NavLink exact to="/myPage" style={{ textDecoration: "none" }}>
+                <StyledSideBarButton onClick={() => this.props.onClick("home")}>
+                  내가 본 영화
+                </StyledSideBarButton>
+              </NavLink>
             </div>
-          </NavLink>
+            <div style={{ padding: "15px" }} />
+          </div>
         </div>
-        <div>
-          <NavLink
-            exact
-            to="/myPage/collaborative-hate"
-            style={{ textDecoration: "none" }}
+        <div style={{ padding: "15px" }} />
+
+        <div
+          style={{
+            width: "100%",
+            borderBottom: "1px solid rgba(37, 40, 47, 0.07)",
+            paddingLeft: "30px"
+          }}
+        >
+          <span
+            style={{
+              display: "flex",
+              fontSize: "20px",
+              fontFamily: "nanumB",
+              color: "#ffffff"
+            }}
           >
-            <div onClick={() => this.props.onClick("collaborative-hate")}>
-              걸러야할 영화
+            추천 정보
+          </span>
+          <div style={{ paddingLeft: "10px" }}>
+            <div style={{ padding: "10px" }} />
+            <div>
+              <NavLink
+                exact
+                to="/myPage/mystatics"
+                style={{ textDecoration: "none" }}
+              >
+                <StyledSideBarButton
+                  onClick={() => this.props.onClick("mystatics")}
+                >
+                  나의 영화 선호 정보
+                </StyledSideBarButton>
+              </NavLink>
             </div>
-          </NavLink>
+            <div style={{ padding: "3px" }} />
+            <div>
+              <NavLink
+                exact
+                to="/myPage/collaborative-seen"
+                style={{ textDecoration: "none" }}
+              >
+                <StyledSideBarButton
+                  onClick={() => this.props.onClick("collaborative-seen")}
+                >
+                  볼 만한 영화
+                </StyledSideBarButton>
+              </NavLink>
+            </div>
+            <div style={{ padding: "3px" }} />
+            <div>
+              <NavLink
+                exact
+                to="/myPage/collaborative-like"
+                style={{ textDecoration: "none" }}
+              >
+                <StyledSideBarButton
+                  onClick={() => this.props.onClick("collaborative-like")}
+                >
+                  좋아할 만한 영화
+                </StyledSideBarButton>
+              </NavLink>
+            </div>
+            <div style={{ padding: "3px" }} />
+            <div>
+              <NavLink
+                exact
+                to="/myPage/collaborative-hate"
+                style={{ textDecoration: "none" }}
+              >
+                <StyledSideBarButton
+                  onClick={() => this.props.onClick("collaborative-hate")}
+                >
+                  싫어할 만한 영화
+                </StyledSideBarButton>
+              </NavLink>
+            </div>
+            <div style={{ padding: "10px" }} />
+          </div>
         </div>
       </div>
     );

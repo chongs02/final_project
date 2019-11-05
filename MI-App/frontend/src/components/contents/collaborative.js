@@ -107,7 +107,7 @@ const Collaborative = props => {
   };
 
   const moviePostercomponent = () => {
-    let SortedMovie = collaborativeMovie.slice(0, 5);
+    let SortedMovie = collaborativeMovie.slice(0, 10);
     return (
       <StyledContent>
         <StyledContentTitle>{title}</StyledContentTitle>
@@ -150,6 +150,7 @@ const Collaborative = props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
+              width={"73%"}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}

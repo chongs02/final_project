@@ -30,20 +30,17 @@ const MyPage = memo(props => {
   };
 
   return (
-    // <div style={{}}>
-    //   {props.profile.length > 0 ? (
-    //     <React.Fragment>
-    //       <UserMovie profile={props.profile}></UserMovie>
-    //       <Collaborative></Collaborative>
-    //     </React.Fragment>
-    //   ) : (
-    //     noResult
-    //   )}
-    // </div>
     <React.Fragment>
       <BrowserRouter>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            height: "100%"
+          }}
+        >
+          <div style={{ width: "82%" }}>
             {isHome ? (
               <UserMovie
                 profile={props.profile}
@@ -61,8 +58,10 @@ const MyPage = memo(props => {
               </Switch>
             )}
           </div>
-          <div style={{ width: "20%" }}>
-            <SideBar onClick={handleCilck} />
+          <div style={{ width: "16%" }}>
+            <div style={{ width: "100%", height: "100%", position: "fixed" }}>
+              <SideBar onClick={handleCilck} />
+            </div>
           </div>
         </div>
       </BrowserRouter>
