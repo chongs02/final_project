@@ -72,7 +72,7 @@ export class MovieSearchInfo extends Component {
   render() {
     const { info } = this.props;
     const { page } = this.props;
-    const url = page + "/datails";
+    const url = page + "/details";
 
     return (
       <StyledContentHover>

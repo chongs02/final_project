@@ -3,7 +3,6 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import update from "react-addons-update";
 
-import MyPageMatcher from "../contents/myPageMatcher";
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
 
 import {
@@ -17,8 +16,6 @@ const UserMovie = memo(props => {
   const [userMovieInfo, setUserMovieInfo] = useState([]);
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
-
-  console.log(props);
 
   useEffect(() => {
     if (profile !== props.profile && props.profile) {
@@ -133,7 +130,33 @@ const UserMovie = memo(props => {
     );
   };
 
+  const noResult = (
+    <StyledContent>
+      <StyledContentTitle>내가 본 영화</StyledContentTitle>
+      <div
+        style={{
+          display: "flex",
+          height: "188.6px",
+          margin: "30px 0px",
+          paddingLeft: "20px"
+        }}
+      >
+        본 영화가 없습니다
+      </div>
+    </StyledContent>
+  );
+
+  console.log(isDetails, "user");
+
   return (
+    <div style={{ flex: 1 }}>
+      {isDetails ? (
+        <Route exact path="/mypage/:title" component={details} />
+      ) : (
+        <div />
+      )}
+      {props.profile.length > 0 ? <div>{userMoviecomponent()}</div> : noResult}
+    </div>
     // <div
     //   style={{
     //     display: "flex",
@@ -141,31 +164,10 @@ const UserMovie = memo(props => {
     //   }}
     // >
     //   <div style={{ width: "100%" }}>
-    <React.Fragment>
-      <div>
-        {isDetails ? (
-          <div>
-            <div>{details()}</div>
-            <div>{userMoviecomponent()}</div>
-          </div>
-        ) : (
-          <div>{userMoviecomponent()}</div>
-        )}
-      </div>
-      <BrowserRouter>
-        <div style={{}}>
-          <div style={{ width: "80%" }}>
-            <Switch>
-              <Route
-                exact
-                path="/myPage/:title"
-                render={props => <MyPageMatcher {...props} />}
-              />
-            </Switch>
-          </div>
-        </div>
-      </BrowserRouter>
-    </React.Fragment>
+    // <React.Fragment>
+    //   <div>{isDetails ? details() : <div />}</div>
+    //   <div>{userMoviecomponent()}</div>
+    // </React.Fragment>
   );
 });
 

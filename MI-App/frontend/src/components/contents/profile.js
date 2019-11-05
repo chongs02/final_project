@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 class Profile extends Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);s
     return <div>Profile</div>;
   }
 }

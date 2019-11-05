@@ -17,54 +17,45 @@ export default class SideBar extends Component {
         }}
       >
         <div>
-          <NavLink
-            exact
-            to="/mypage/profile"
-            style={{ textDecoration: "none" }}
-          >
-            <div onClick={() => this.props.onClick("profile")}>개인 정보</div>
+          <NavLink exact to="/home" style={{ textDecoration: "none" }}>
+            <div>홈</div>
+          </NavLink>
+        </div>
+        <div>
+          <NavLink exact to="/profile" style={{ textDecoration: "none" }}>
+            <div>개인 정보</div>
+          </NavLink>
+        </div>
+        <div>
+          <NavLink exact to="/mystatics" style={{ textDecoration: "none" }}>
+            <div>나의 영화</div>
           </NavLink>
         </div>
         <div>
           <NavLink
             exact
-            to="/mypage/mystatics"
+            to="/collaborative-seen"
             style={{ textDecoration: "none" }}
           >
-            <div onClick={() => this.props.onClick("mystatics")}>나의 영화</div>
+            <div>봤어요 추천</div>
           </NavLink>
         </div>
         <div>
           <NavLink
             exact
-            to="/mypage/collaborative-seen"
+            to="/collaborative-like"
             style={{ textDecoration: "none" }}
           >
-            <div onClick={() => this.props.onClick("collaborative-seen")}>
-              봤어요 추천
-            </div>
+            <div>좋아요 추천</div>
           </NavLink>
         </div>
         <div>
           <NavLink
             exact
-            to="/mypage/collaborative-like"
+            to="/collaborative-hate"
             style={{ textDecoration: "none" }}
           >
-            <div onClick={() => this.props.onClick("collaborative-like")}>
-              좋아요 추천
-            </div>
-          </NavLink>
-        </div>
-        <div>
-          <NavLink
-            exact
-            to="/mypage/collaborative-hate"
-            style={{ textDecoration: "none" }}
-          >
-            <div onClick={() => this.props.onClick("collaborative-hate")}>
-              걸러야할 영화
-            </div>
+            <div>걸러야할 영화</div>
           </NavLink>
         </div>
       </div>

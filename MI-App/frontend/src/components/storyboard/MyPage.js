@@ -1,82 +1,43 @@
-import React, { useState, memo, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import SideBar from "../contents/sideBar";
+import MyPageMatcher from "../contents/myPageMatcher";
+// import MyDefaultPage from "../contents/myDefaultPage";
 import UserMovie from "../contents/userMovie";
 
-import SideBar from "../contents/sideBar";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
-import MyPageMatcher from "../contents/myPageMatcher";
-
-import { StyledContent, StyledContentTitle } from "../contents/styleComponent";
-
 const MyPage = memo(props => {
-  const [isDefaultPage, setIsDefaultPage] = useState(true);
-  const [changePage, setChangePage] = useState(false);
-
-  console.log(props, "mypage");
-
-  const handleClick = clickType => {
-    // if (clickType === "default") {
-    //   setIsDefaultPage(true);
-    // } else {
-    //   setIsDefaultPage(false);
-    // }
-    setChangePage(!changePage);
-  };
-
-  useEffect(() => {});
-
-  const noResult = (
-    <StyledContent>
-      <StyledContentTitle>내가 본 영화</StyledContentTitle>
-      <div
-        style={{
-          display: "flex",
-          height: "188.6px",
-          margin: "30px 0px",
-          paddingLeft: "20px"
-        }}
-      >
-        본 영화가 없습니다
-      </div>
-    </StyledContent>
-  );
-
   return (
+    // <div style={{}}>
+    //   {props.profile.length > 0 ? (
+    //     <React.Fragment>
+    //       <UserMovie profile={props.profile}></UserMovie>
+    //       <Collaborative></Collaborative>
+    //     </React.Fragment>
+    //   ) : (
+    //     noResult
+    //   )}
+    // </div>
     <React.Fragment>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        {/* {isDefaultPage ? ( */}
-        <div style={{ width: "80%" }}>
-          {props.profile.length > 0 ? (
-            <React.Fragment>
-              <UserMovie
-                profile={props.profile}
-                changePage={changePage}
-              ></UserMovie>
-            </React.Fragment>
-          ) : (
-            noResult
-          )}
+      <BrowserRouter>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <Switch>
+            <Route
+              exact
+              path="/mypage"
+              render={() => <UserMovie profile={props.profile} />}
+            />
+            <Route
+              path="/:name"
+              render={props => <MyPageMatcher {...props} />}
+            />
+          </Switch>
+          <div style={{ width: "20%" }}>
+            <SideBar />
+          </div>
         </div>
-        {/* ) : (
-          <BrowserRouter>
-            <div style={{}}>
-              <div style={{ width: "80%" }}>
-                <Switch>
-                  <Route
-                    exact
-                    path="/myPage/:title"
-                    render={props => <MyPageMatcher {...props} />}
-                  />
-                </Switch>
-              </div>
-            </div>
-          </BrowserRouter>
-        )} */}
-        <div style={{ width: "20%" }}>
-          <SideBar onClick={(handleClick, props.onClick)} />
-        </div>
-      </div>
+      </BrowserRouter>
     </React.Fragment>
   );
 });

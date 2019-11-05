@@ -10,39 +10,38 @@ import SearchResult from "./searchResult";
 import MyPage from "./myPage";
 import Logout from "./logout";
 import DailyBoxOffice from "../contents/dailyBoxOffice";
+// import MyDefaultPage from "../contents/myDefaultPage";
 
 import logo2 from "../../statics/logos/logo03.png";
 import { StyledBottomNav } from "../contents/styleComponent";
+
 const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
   const [isMyPage, setIsMyPage] = useState(false);
-  const [isRender, setIsRender] = useState(false);
-
-  console.log(isRender);
+  const [isPageChanged, setIsPageChanged] = useState(false);
 
   useEffect(() => {
     props.loadUserProfile();
-  }, [isMyPage]);
+  }, [isPageChanged]);
 
   const handleChange = e => {
     setKeyword(e.target.value);
   };
 
   const handleClick = clickType => {
-    console.log(clickType);
-    if (clickType === "myPage") {
+    if (clickType === "mypage") {
       setIsMyPage(true);
     } else if (clickType === "search") {
       const filteredKeyword = keyword.replace(/ +/g, " ").trim();
       props.movieInfo(keyword);
       setRenderKeyword(filteredKeyword);
       setIsMyPage(false);
-    } else if (clickType === "render") {
-      setIsRender(!isRender);
     } else {
       setIsMyPage(false);
     }
+
+    setIsPageChanged(!isPageChanged);
   };
 
   const handleKeyPress = e => {
@@ -65,8 +64,7 @@ const Main = props => {
             style={{
               height: "100%",
               marginLeft: "2%",
-              color: "#1e272e",
-              width: "100%"
+              color: "#1e272e"
             }}
           >
             <div style={{ height: "8%" }} />
@@ -75,10 +73,7 @@ const Main = props => {
                 path="/search"
                 render={() => <SearchResult keyword={renderKeyword} />}
               />
-              <Route
-                path="/mypage"
-                render={() => <MyPage onClick={() => handleClick("render")} />}
-              />
+              <Route path="/mypage" component={MyPage} />
               <Route exact path="/logout" component={Logout} />
             </Switch>
             <DailyBoxOffice isUnMount={isMyPage} />

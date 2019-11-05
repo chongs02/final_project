@@ -26,7 +26,7 @@ const Nav = props => {
     <StyledHeader>
       <StyledNav>
         <div style={{ marginRight: "20px" }}>
-          <NavLink exact to="/" style={{ textDecoration: "none" }}>
+          <NavLink exact to="/main" style={{ textDecoration: "none" }}>
             <div
               id="home"
               style={{
@@ -102,7 +102,7 @@ const Nav = props => {
               <StyledSubButton
                 id="myPage"
                 fontSize={"1em"}
-                onClick={() => props.onClick("myPage")}
+                onClick={() => props.onClick("mypage")}
               >
                 마이페이지
               </StyledSubButton>
