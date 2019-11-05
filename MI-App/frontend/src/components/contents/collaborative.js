@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Route } from "react-router-dom";
 import { getConfig } from "./movieInfo";
 import axios from "axios";
 import update from "react-addons-update";
-import { connect } from "react-redux";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
 import {
@@ -14,6 +13,7 @@ import {
 
 const Collaborative = props => {
   console.log(props);
+
   let data = [];
   const [title, setTitle] = useState("");
   const [collaborativeMovie, setCollaborativeMovie] = useState([]);
@@ -37,7 +37,7 @@ const Collaborative = props => {
 
   const getCollaborative = () => {
     if (props.name === "collaborative-seen") {
-      setTitle("비슷한 영화를 본 사람들이 본 영화");
+      setTitle("내가 본 영화와 비슷한 영화");
       const watchedMovie = async () => {
         const config = getConfig();
 
@@ -55,7 +55,7 @@ const Collaborative = props => {
       watchedMovie();
       return title;
     } else if (props.name === "collaborative-like") {
-      setTitle("비슷한 영화를 좋아한 사람들이 본 사람들이 좋아한 영화");
+      setTitle("내가 좋아한 영화와 비슷한 영화");
       const likeMovie = async () => {
         const config = getConfig();
 
@@ -73,7 +73,7 @@ const Collaborative = props => {
       likeMovie();
       return title;
     } else if (props.name === "collaborative-hate") {
-      setTitle("비슷한 영화를 싫어한 사람들이 본 사람들이 싫어한 영화");
+      setTitle("내가 싫어한 영화와 비슷한 영화");
       const hateMovie = async () => {
         const config = getConfig();
 
@@ -108,7 +108,7 @@ const Collaborative = props => {
   };
 
   const moviePostercomponent = () => {
-    let SortedMovie = collaborativeMovie.slice(0, 5);
+    let SortedMovie = collaborativeMovie.slice(0, 10);
     return (
       <StyledContent>
         <StyledContentTitle>{title}</StyledContentTitle>
@@ -177,11 +177,4 @@ const Collaborative = props => {
     </React.Fragment>
   );
 };
-
-const mapStateToProps = state => {
-  return {
-    profile: state.auth.profile
-  };
-};
-
-export default connect(mapStateToProps)(Collaborative);
+export default Collaborative;

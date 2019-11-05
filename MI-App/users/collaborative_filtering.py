@@ -16,6 +16,12 @@ def main(request, instance):
     users = pd.merge(user_data, user_profile,left_on='id', right_on="user_id")
     users = users.drop(labels=['id','user_id'], axis=1)
 
+    profile_watched_movie = pd.DataFrame(list(Profile.objects.all().values('user_id','watchedMovie')))
+    profile_watched_movie = profile_watched_movie.drop_duplicates(subset=["user_id", 'watchedMovie'])
+    profile_watched_movie = profile_watched_movie.dropna()
+    matched_data = pd.merge(user_data, profile_watched_movie,left_on='id', right_on="user_id")
+    matched_data = matched_data.drop(labels=['id','user_id'], axis=1)
+
 
     #  users의 데이터프레임을 dictionary로
     data_dict = users.groupby('username').apply(lambda x: x.to_dict(orient='list')).to_dict()
@@ -36,8 +42,18 @@ def main(request, instance):
 
     li = getRecommendation(user_movie_data,request.user.get_username(),sim_jaccard)
     
+    new_li = []
+    matched_data = matched_data.pivot_table(values='watchedMovie', index=matched_data.index, columns='username', aggfunc='first')
+    user_matched_table = matched_data[request.user.get_username()]
+    user_matched_table = user_matched_table.dropna()
+    user_matched_table = user_matched_table.tolist()
     
-    return li
+    for i in li:
+        if i['movie_code'] not in user_matched_table:
+            new_li.append(i)
+        else:
+            pass
+    return new_li
 
 def sim_jaccard(data, name1, name2):
     overlap=0 

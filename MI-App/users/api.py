@@ -4,10 +4,23 @@ from rest_framework.decorators import action
 
 from django.contrib.auth import logout
 from knox.models import AuthToken
-from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer, CollaborativeSerializer
+from .serializer import CreateUserSerializer, UserSerializer, LoginUserSerializer, ProfileSerializer, CollaborativeSerializer,UserMovieEmotionSerializer
 
 from .models import Profile
 from .collaborative_filtering import main
+from .user_movie_score import get_user_movie_emotion
+
+
+class UserMovieEmotion(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = UserMovieEmotionSerializer
+
+    def get_queryset(self):
+        emotion = get_user_movie_emotion(self.request)
+        result = UserMovieEmotionSerializer(emotion, many=True).data
+        return result
 
 
 class CollaborativeLike(viewsets.ModelViewSet):
@@ -18,10 +31,8 @@ class CollaborativeLike(viewsets.ModelViewSet):
 
     def get_queryset(self):
         li = main(self.request, 'like')
-        print(li)
         result = CollaborativeSerializer(li, many=True).data
-        print(result)
-        return li
+        return result
 
 class CollaborativeHate(viewsets.ModelViewSet):
     permission_classes = [
@@ -31,10 +42,8 @@ class CollaborativeHate(viewsets.ModelViewSet):
 
     def get_queryset(self):
         li = main(self.request, 'hate')
-        print(li)
         result = CollaborativeSerializer(li, many=True).data
-        print(result)
-        return li
+        return result
 
 class CollaborativeWatched(viewsets.ModelViewSet):
     permission_classes = [
@@ -44,10 +53,8 @@ class CollaborativeWatched(viewsets.ModelViewSet):
 
     def get_queryset(self):
         li = main(self.request, 'watchedMovie')
-        print(li)
         result = CollaborativeSerializer(li, many=True).data
-        print(result)
-        return li
+        return result
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

@@ -3,6 +3,19 @@ from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import Profile
 
+
+class UserMovieEmotionSerializer(serializers.Serializer):
+    impression = serializers.IntegerField(max_value=None, min_value=None)        # 감동
+    fear = serializers.IntegerField(max_value=None, min_value=None)             # 공포
+    anger = serializers.IntegerField(max_value=None, min_value=None)             # 분노
+    sadness = serializers.IntegerField(max_value=None, min_value=None)           # 슬픔
+    fun = serializers.IntegerField(max_value=None, min_value=None)               # 유쾌
+    boredom = serializers.IntegerField(max_value=None, min_value=None)           # 지루함
+    positive = serializers.IntegerField(max_value=None, min_value=None)          # 긍정
+    negative = serializers.IntegerField(max_value=None, min_value=None)          # 부정
+
+
+
 class CollaborativeSerializer(serializers.Serializer):
     score = serializers.FloatField()
     movie_code = serializers.CharField(max_length=16)
