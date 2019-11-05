@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import Example from "./preferenceChart";
+import PreferenceChart from "./preferenceChart";
 import EmotionGraph from "./emotionChart";
 
 import {
@@ -94,7 +94,6 @@ export class MovieSearchInfo extends Component {
 }
 
 // 상세 정보 페이지 영화 상세 정보
-
 export class MovieDetailsInfo extends Component {
   state = {
     plot: ""
@@ -125,9 +124,6 @@ export class MovieDetailsInfo extends Component {
               style={{
                 display: "flex",
                 height: "50%",
-                // justifyContent: "center",
-                // alignItems: "center",
-                // alignSelf: "center",
                 paddingBottom: "30px",
                 borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
               }}
@@ -241,14 +237,13 @@ export class MovieDetailsInfo extends Component {
                     <StyledH5>{this.state.plot}</StyledH5>
                   </div>
                 </div>
-                {/* 좋아요/싫어요 댓글 리뷰 파이 차트 */}
                 <div
                   style={{
                     marginTop: "20px",
                     width: "33.3%"
                   }}
                 >
-                  <Example movieCd={info.movieCd} />
+                  <PreferenceChart movieCd={info.movieCd} />
                 </div>
                 <div
                   style={{

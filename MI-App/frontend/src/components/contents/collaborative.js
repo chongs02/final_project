@@ -5,6 +5,7 @@ import axios from "axios";
 import update from "react-addons-update";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
+
 import {
   StyledMovieList,
   StyledContent,
@@ -159,6 +160,8 @@ const Collaborative = props => {
     );
   };
 
+  console.log(props.name);
+
   return (
     <React.Fragment>
       <div>
@@ -169,13 +172,13 @@ const Collaborative = props => {
             component={details}
           />
         ) : (
-          <div></div>
+          <div />
         )}
       </div>
       <div>
         {collaborativeMovie && collaborativeMovie !== []
           ? moviePostercomponent()
-          : noResult()}
+          : noResult}
       </div>
     </React.Fragment>
   );

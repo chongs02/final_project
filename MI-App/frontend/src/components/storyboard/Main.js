@@ -10,27 +10,27 @@ import SearchResult from "./searchResult";
 import MyPage from "./myPage";
 import Logout from "./logout";
 import DailyBoxOffice from "../contents/dailyBoxOffice";
-// import MyDefaultPage from "../contents/myDefaultPage";
 
 import logo2 from "../../statics/logos/logo03.png";
 import { StyledBottomNav } from "../contents/styleComponent";
-
 const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
   const [isMyPage, setIsMyPage] = useState(false);
-  const [isPageChanged, setIsPageChanged] = useState(false);
+  const [pageChange, setPageChange] = useState(false);
 
   useEffect(() => {
     props.loadUserProfile();
-  }, [isPageChanged]);
+  }, [isMyPage]);
 
   const handleChange = e => {
     setKeyword(e.target.value);
   };
 
   const handleClick = clickType => {
-    if (clickType === "mypage") {
+    setPageChange(!pageChange);
+
+    if (clickType === "myPage") {
       setIsMyPage(true);
     } else if (clickType === "search") {
       const filteredKeyword = keyword.replace(/ +/g, " ").trim();
@@ -40,8 +40,6 @@ const Main = props => {
     } else {
       setIsMyPage(false);
     }
-
-    setIsPageChanged(!isPageChanged);
   };
 
   const handleKeyPress = e => {
@@ -73,7 +71,11 @@ const Main = props => {
                 path="/search"
                 render={() => <SearchResult keyword={renderKeyword} />}
               />
-              <Route path="/mypage" component={MyPage} />
+              <Route
+                exact
+                path="/myPage"
+                render={() => <MyPage pageChange={pageChange} />}
+              />
               <Route exact path="/logout" component={Logout} />
             </Switch>
             <DailyBoxOffice isUnMount={isMyPage} />

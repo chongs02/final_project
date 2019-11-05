@@ -1,5 +1,5 @@
 import React, { useEffect, useState, memo, useRef } from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import axios from "axios";
 import update from "react-addons-update";
 
@@ -16,6 +16,10 @@ const UserMovie = memo(props => {
   const [userMovieInfo, setUserMovieInfo] = useState([]);
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    setIsDetails(false);
+  }, [props.pageChange]);
 
   useEffect(() => {
     if (profile !== props.profile && props.profile) {
@@ -64,7 +68,7 @@ const UserMovie = memo(props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
-              // width={"80%"}
+              width={"80%"}
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
@@ -118,7 +122,7 @@ const UserMovie = memo(props => {
           {uniqueInfo.map((info, i) => {
             return (
               <MovieSearchInfo
-                page={"/mypage"}
+                page={"/myPage"}
                 key={i}
                 info={info}
                 onClick={() => handleClick(i)}
@@ -146,28 +150,23 @@ const UserMovie = memo(props => {
     </StyledContent>
   );
 
-  console.log(isDetails, "user");
-
   return (
-    <div style={{ flex: 1 }}>
-      {isDetails ? (
-        <Route exact path="/mypage/:title" component={details} />
-      ) : (
+    <div>
+      {!props.isHome ? (
         <div />
+      ) : (
+        <div>
+          {isDetails ? (
+            <Route exact path="/myPage/:title" component={details} />
+          ) : (
+            <div></div>
+          )}
+          <div>
+            {props.profile.length > 0 ? userMoviecomponent() : noResult}
+          </div>
+        </div>
       )}
-      {props.profile.length > 0 ? <div>{userMoviecomponent()}</div> : noResult}
     </div>
-    // <div
-    //   style={{
-    //     display: "flex",
-    //     justifyContent: "space-between"
-    //   }}
-    // >
-    //   <div style={{ width: "100%" }}>
-    // <React.Fragment>
-    //   <div>{isDetails ? details() : <div />}</div>
-    //   <div>{userMoviecomponent()}</div>
-    // </React.Fragment>
   );
 });
 

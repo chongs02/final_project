@@ -98,11 +98,11 @@ const Nav = props => {
           }}
         >
           <StyledContentHover>
-            <NavLink exact to="/mypage">
+            <NavLink exact to="/myPage">
               <StyledSubButton
                 id="myPage"
                 fontSize={"1em"}
-                onClick={() => props.onClick("mypage")}
+                onClick={() => props.onClick("myPage")}
               >
                 마이페이지
               </StyledSubButton>

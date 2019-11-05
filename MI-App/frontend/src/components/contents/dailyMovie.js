@@ -22,9 +22,7 @@ const DailyMovie = props => {
   };
 
   useEffect(() => {
-    return () => {
-      setIsDetails(false);
-    };
+    setIsDetails(false);
   }, [props.isUnMount]);
 
   const details = () => {

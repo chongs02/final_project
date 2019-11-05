@@ -36,7 +36,7 @@ class Register extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      return <Redirect to="/" />;
+      return <Redirect to="/main" />;
     }
     return (
       <div style={{ position: "relative", height: "100%", width: "100%" }}>

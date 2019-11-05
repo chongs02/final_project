@@ -7,7 +7,6 @@ export const getScore = movieCd => async dispatch => {
   url = url + "?search=" + movieCd;
   await axios
     .get(url)
-    // .get("/movie-api/movieScore/")
     .then(response => {
       dispatch({
         type: types.GET_SCORE,

@@ -1,13 +1,34 @@
 import React, { useState, useEffect, memo } from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 
-import SideBar from "../contents/sideBar";
-import MyPageMatcher from "../contents/myPageMatcher";
-// import MyDefaultPage from "../contents/myDefaultPage";
 import UserMovie from "../contents/userMovie";
+import Profile from "../contents/profile";
+import MyStatics from "../contents/mystatics";
+import Collaborative from "../contents/collaborative";
+import SideBar from "../contents/sideBar";
 
 const MyPage = memo(props => {
+  const [isHome, setIsHome] = useState(true);
+  const [collaboPage, setCollaboPage] = useState("");
+
+  useEffect(() => {
+    setIsHome(true);
+  }, [props.pageChange]);
+
+  console.log(isHome);
+
+  const handleCilck = clickType => {
+    if (clickType === "home") {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+    }
+    if (clickType.includes("collaborative")) {
+      setCollaboPage(clickType);
+    }
+  };
+
   return (
     // <div style={{}}>
     //   {props.profile.length > 0 ? (
@@ -22,19 +43,26 @@ const MyPage = memo(props => {
     <React.Fragment>
       <BrowserRouter>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <Switch>
-            <Route
-              exact
-              path="/mypage"
-              render={() => <UserMovie profile={props.profile} />}
-            />
-            <Route
-              path="/:name"
-              render={props => <MyPageMatcher {...props} />}
-            />
-          </Switch>
+          <div>
+            {isHome ? (
+              <UserMovie
+                profile={props.profile}
+                isHome={isHome}
+                pageChange={props.pageChange}
+              />
+            ) : (
+              <Switch>
+                <Route exact path="/myPage/profile" component={Profile} />
+                <Route exact path="/myPage/mystatics" component={MyStatics} />
+                <Route
+                  path={`/myPage/${collaboPage}`}
+                  render={() => <Collaborative name={`${collaboPage}`} />}
+                />
+              </Switch>
+            )}
+          </div>
           <div style={{ width: "20%" }}>
-            <SideBar />
+            <SideBar onClick={handleCilck} />
           </div>
         </div>
       </BrowserRouter>
