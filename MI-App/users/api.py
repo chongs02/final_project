@@ -54,7 +54,7 @@ class CollaborativeHate(viewsets.ModelViewSet):
     serializer_class = CollaborativeSerializer
 
     def get_queryset(self):
-        li = main(self.request, 'hate')
+        li = user_based_filtering(self.request, 'hate')
         result = CollaborativeSerializer(li, many=True).data
         return result
 
@@ -65,7 +65,7 @@ class CollaborativeWatched(viewsets.ModelViewSet):
     serializer_class = CollaborativeSerializer
 
     def get_queryset(self):
-        li = main(self.request, 'watchedMovie')
+        li = user_based_filtering(self.request, 'watchedMovie')
         result = CollaborativeSerializer(li, many=True).data
         return result
 

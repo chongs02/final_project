@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import { StyledSideBarButton } from "../contents/styleComponent";
+import { StyledSideBarButton } from "./styleComponent";
 
 export default class SideBar extends Component {
   render() {
