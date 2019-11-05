@@ -1,7 +1,10 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from .models import Profile
+from .models import Profile, Person
+
+
+
 
 class CollaborativeByEmotion(serializers.Serializer):
     impression = serializers.IntegerField(max_value=None, min_value=None)        # 감동
@@ -67,6 +70,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username')
+
 
 
 class LoginUserSerializer(serializers.Serializer):
