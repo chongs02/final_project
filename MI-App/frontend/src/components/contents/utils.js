@@ -17,7 +17,7 @@ export const stringToList = str => {
   );
   arr = arr.flat();
   arr = arr.map(data => data.trim());
-  console.log(arr);
+  // console.log(arr);
   return arr;
 };
 

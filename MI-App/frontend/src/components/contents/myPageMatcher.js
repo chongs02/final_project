@@ -4,15 +4,15 @@ import MyStatics from "./mystatics";
 import Collaborative from "../contents/collaborative";
 
 const MyPageMatcher = props => {
-  if (props.match.params.name === "profile") {
+  if (props.match.params.title === "profile") {
     return <Profile />;
-  } else if (props.match.params.name === "mystatics") {
+  } else if (props.match.params.title === "mystatics") {
     return <MyStatics />;
-  } else if (props.match.params.name === "collaborative-seen") {
+  } else if (props.match.params.title === "collaborative-seen") {
     return <Collaborative name={"collaborative-seen"} />;
-  } else if (props.match.params.name === "collaborative-like") {
+  } else if (props.match.params.title === "collaborative-like") {
     return <Collaborative name={"collaborative-like"} />;
-  } else if (props.match.params.name === "collaborative-hate") {
+  } else if (props.match.params.title === "collaborative-hate") {
     return <Collaborative name={"collaborative-hate"} />;
   }
 

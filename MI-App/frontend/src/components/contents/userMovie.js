@@ -1,8 +1,9 @@
 import React, { useEffect, useState, memo, useRef } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import update from "react-addons-update";
 
+import MyPageMatcher from "../contents/myPageMatcher";
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
 
 import {
@@ -16,6 +17,8 @@ const UserMovie = memo(props => {
   const [userMovieInfo, setUserMovieInfo] = useState([]);
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
+
+  console.log(props);
 
   useEffect(() => {
     if (profile !== props.profile && props.profile) {
@@ -118,7 +121,7 @@ const UserMovie = memo(props => {
           {uniqueInfo.map((info, i) => {
             return (
               <MovieSearchInfo
-                page={"/myPage"}
+                page={"/mypage"}
                 key={i}
                 info={info}
                 onClick={() => handleClick(i)}
@@ -141,16 +144,28 @@ const UserMovie = memo(props => {
     <React.Fragment>
       <div>
         {isDetails ? (
-          <Route path="/myPage/:title" component={details} />
+          <div>
+            <div>{details()}</div>
+            <div>{userMoviecomponent()}</div>
+          </div>
         ) : (
-          <div></div>
+          <div>{userMoviecomponent()}</div>
         )}
       </div>
-      <div>{userMoviecomponent()}</div>
+      <BrowserRouter>
+        <div style={{}}>
+          <div style={{ width: "80%" }}>
+            <Switch>
+              <Route
+                exact
+                path="/myPage/:title"
+                render={props => <MyPageMatcher {...props} />}
+              />
+            </Switch>
+          </div>
+        </div>
+      </BrowserRouter>
     </React.Fragment>
-    //   </div>
-    //   <div style={{ width: "15%", marginTop: "20px" }}>테스트 페이지</div>
-    // </div>
   );
 });
 

@@ -9,7 +9,7 @@ const COLORS = ["#ff7979", "#74b9ff"];
 
 const Example = props => {
   let renderLabel = entry => {
-    console.log(entry);
+    // console.log(entry);
     return entry.value;
   };
 

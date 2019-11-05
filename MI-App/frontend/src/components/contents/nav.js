@@ -26,7 +26,7 @@ const Nav = props => {
     <StyledHeader>
       <StyledNav>
         <div style={{ marginRight: "20px" }}>
-          <NavLink exact to="/main" style={{ textDecoration: "none" }}>
+          <NavLink exact to="/" style={{ textDecoration: "none" }}>
             <div
               id="home"
               style={{
@@ -98,7 +98,7 @@ const Nav = props => {
           }}
         >
           <StyledContentHover>
-            <NavLink exact to="/myPage">
+            <NavLink exact to="/mypage">
               <StyledSubButton
                 id="myPage"
                 fontSize={"1em"}

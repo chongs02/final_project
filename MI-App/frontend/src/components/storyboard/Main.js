@@ -17,6 +17,9 @@ const Main = props => {
   const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
   const [isMyPage, setIsMyPage] = useState(false);
+  const [isRender, setIsRender] = useState(false);
+
+  console.log(isRender);
 
   useEffect(() => {
     props.loadUserProfile();
@@ -27,6 +30,7 @@ const Main = props => {
   };
 
   const handleClick = clickType => {
+    console.log(clickType);
     if (clickType === "myPage") {
       setIsMyPage(true);
     } else if (clickType === "search") {
@@ -34,6 +38,8 @@ const Main = props => {
       props.movieInfo(keyword);
       setRenderKeyword(filteredKeyword);
       setIsMyPage(false);
+    } else if (clickType === "render") {
+      setIsRender(!isRender);
     } else {
       setIsMyPage(false);
     }
@@ -59,7 +65,8 @@ const Main = props => {
             style={{
               height: "100%",
               marginLeft: "2%",
-              color: "#1e272e"
+              color: "#1e272e",
+              width: "100%"
             }}
           >
             <div style={{ height: "8%" }} />
@@ -68,7 +75,10 @@ const Main = props => {
                 path="/search"
                 render={() => <SearchResult keyword={renderKeyword} />}
               />
-              <Route path="/myPage" component={MyPage} />
+              <Route
+                path="/mypage"
+                render={() => <MyPage onClick={() => handleClick("render")} />}
+              />
               <Route exact path="/logout" component={Logout} />
             </Switch>
             <DailyBoxOffice isUnMount={isMyPage} />

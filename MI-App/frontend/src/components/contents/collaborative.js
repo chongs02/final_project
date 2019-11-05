@@ -114,7 +114,7 @@ const Collaborative = props => {
           {SortedMovie.map((info, i) => {
             return (
               <MovieSearchInfo
-                page={`/${props.name}`}
+                page={`/myPage/${props.name}`}
                 key={i}
                 info={info}
                 onClick={() => handleClick(i)}
@@ -141,6 +141,7 @@ const Collaborative = props => {
       </div>
     </StyledContent>
   );
+
   const details = props => {
     console.log("a");
     return (
@@ -162,7 +163,11 @@ const Collaborative = props => {
     <React.Fragment>
       <div>
         {isDetails ? (
-          <Route exact path={`/${props.name}/:title`} component={details} />
+          <Route
+            exact
+            path={`/myPage/${props.name}/:title`}
+            component={details}
+          />
         ) : (
           <div></div>
         )}
