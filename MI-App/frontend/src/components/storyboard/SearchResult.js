@@ -29,6 +29,7 @@ const SearchResult = props => {
   }, [keyword]);
 
   const details = props => {
+    console.log(props);
     return (
       <StyledContent>
         {selected.map(info => {
