@@ -147,16 +147,15 @@ const EmotionGraph = props => {
             dataKey="A"
             stroke="#FC427B"
             fill="#FC427B"
-            fillOpacity={0.6}
+            fillOpacity={0.4}
           />
           <Radar
             name={user.username ? user.username : "정보가 없습니다"}
             dataKey="B"
             stroke="#82ca9d"
             fill="#82ca9d"
-            fillOpacity={0.6}
+            fillOpacity={0.4}
           />
-
           <Legend
             verticalAlign="bottom"
             iconType="square"

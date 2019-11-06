@@ -6,7 +6,6 @@ import update from "react-addons-update";
 
 import PreferenceChart from "./preferenceChart";
 import EmotionGraph from "./emotionChart";
-
 import {
   StyledMovieInfo,
   StyledContentHover,
@@ -19,13 +18,11 @@ import {
   StyledContentTitle,
   StyledH5
 } from "./styleComponent";
-// import { tokenConfig } from "../../actions/auth";
 
 import { Icon } from "react-icons-kit";
 import { check } from "react-icons-kit/fa/check";
 import { heart } from "react-icons-kit/fa/heart";
 import { heartO } from "react-icons-kit/fa/heartO";
-// import { u1F611 } from "react-icons-kit/noto_emoji_regular/u1F611";
 import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 
 // django csrftoken
