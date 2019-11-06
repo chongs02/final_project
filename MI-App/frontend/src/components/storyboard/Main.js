@@ -78,7 +78,7 @@ const Main = props => {
               />
               <Route exact path="/logout" component={Logout} />
             </Switch>
-            <DailyBoxOffice isUnMount={isMyPage} />
+            {/* <DailyBoxOffice isUnMount={isMyPage} /> */}
             <div style={{ height: "10%" }} />
           </div>
           <StyledBottomNav>

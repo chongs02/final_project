@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { StyledMovieDetailPoster, StyledMovieTitle } from "./styleComponent";
-import ScrollArea from "react-scrollbar";
 import EmotionGraph from "./emotionChart";
 
 const ItemBasedView = props => {
@@ -34,7 +33,7 @@ const ItemBasedView = props => {
   return (
     <div>
       <StyledMovieTitle>ItemBased</StyledMovieTitle>
-      <ScrollArea>
+      <div style={{ overflowY: "scroll", height: "100%" }}>
         {data[current] ? (
           data.map(item => {
             return (
@@ -67,7 +66,7 @@ const ItemBasedView = props => {
         ) : (
           <div></div>
         )}
-      </ScrollArea>
+      </div>
     </div>
   );
 };
