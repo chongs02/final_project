@@ -37,6 +37,7 @@ const SearchResult = props => {
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              from={props.location.pathname}
             />
           );
         })}

@@ -100,8 +100,6 @@ export const MovieDetailsInfo = props => {
   const [plot, setPlot] = useState("");
   const [collaMovie, setCollaMovie] = useState([]);
   const [collaEmotion, setCollaEmotion] = useState([]);
-  const movieInfoState = useSelector(state => state.getMovieInfo.movieInfo);
-  console.log(movieInfoState);
 
   const requestPlot = async movieTitle => {
     const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=N&title=${movieTitle}&ServiceKey=G1Z1T6XK90K3GOQJ4Y48`;
