@@ -153,21 +153,33 @@ export const StyledMainButton = styled.button`
 export const StyledSideBarButton = styled.div`
   cursor: pointer;
   color: ${props => (props.color ? props.color : "#e1e6ec")};
-  font-size: 18px;
+  font-size: ${props => (props.fontSize ? props.fontSize : "18px")};
   font-family: nanum;
   margin: 0px;
-  padding: 10px 40px;
+  padding: ${props => (props.padding ? props.padding : "10px 40px")}
   border: none;
   background: ${props =>
     props.bgColor ? props.bgColor : "rgba(255, 255, 255, 0)"} 
   vertical-align: middle;
+  text-decoration: none;
+  
 
   transition: all 0.3s ease-in-out;
 
   :hover {
-    background: #ffffff;
-    color: rgba(55, 66, 250, 0.8);
+    background: #748ffc;
   }
+  
+  :visited {
+    color: #e1e6ec;
+  }
+
+  :active,
+  .active {
+    background: #ffffff;
+    color: rgba(55, 66, 250, 0.75);
+  }
+  
 `;
 
 export const StyledSubButton = styled.button`
