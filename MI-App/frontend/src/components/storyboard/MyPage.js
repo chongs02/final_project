@@ -35,8 +35,7 @@ const MyPage = memo(props => {
           style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
-            height: "100%"
+            justifyContent: "space-between"
           }}
         >
           <div style={{ width: "82%" }}>

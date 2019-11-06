@@ -95,10 +95,10 @@ const StaticVisual = props => {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="right">평균 평점</StyledTableCell>
-              <StyledTableCell align="right">최소 평점</StyledTableCell>
-              <StyledTableCell align="right">평균 제작년도</StyledTableCell>
-              <StyledTableCell align="right">최소 제작년도</StyledTableCell>
+              <StyledTableCell align="center">평균 평점</StyledTableCell>
+              <StyledTableCell align="center">최소 평점</StyledTableCell>
+              <StyledTableCell align="center">평균 제작년도</StyledTableCell>
+              <StyledTableCell align="center">최소 제작년도</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -107,10 +107,16 @@ const StaticVisual = props => {
                 {/* <StyledTableCell component="th" scope="row">
                   {row.name}
                 </StyledTableCell> */}
-                <StyledTableCell align="right">{row.avgRating}</StyledTableCell>
-                <StyledTableCell align="right">{row.minRating}</StyledTableCell>
-                <StyledTableCell align="right">{row.openDtAvg}</StyledTableCell>
-                <StyledTableCell align="right">{row.minDt}</StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.avgRating}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.minRating}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.openDtAvg}
+                </StyledTableCell>
+                <StyledTableCell align="center">{row.minDt}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -374,16 +380,15 @@ const StaticVisual = props => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        marginBottom: "30px"
+        marginBottom: "30px",
+        marginRight: "30px"
       }}
     >
       <div style={{ borderBottom: "1px solid rgba(37, 40, 47, 0.1)" }}>
         <StyledContentTitle>평점 및 제작년도</StyledContentTitle>
         <div
           style={{
-            marginTop: "30px",
-            marginBottom: "30px",
-            marginRight: "30px"
+            marginBottom: "30px"
           }}
         >
           {table()}
@@ -392,8 +397,6 @@ const StaticVisual = props => {
 
       <div
         style={{
-          marginTop: "30px",
-          marginBottom: "30px",
           borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
         }}
       >
@@ -411,7 +414,6 @@ const StaticVisual = props => {
         style={{
           display: "flex",
           flexDirection: "row",
-          marginBottom: "30px",
           borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
         }}
       >
@@ -451,8 +453,7 @@ const StaticVisual = props => {
           <StyledContentTitle>좋아하는 장르</StyledContentTitle>
           <div
             style={{
-              marginTop: "30px",
-              marginBottom: "30px"
+              marginTop: "30px"
             }}
           >
             {genreChart()}
@@ -462,8 +463,7 @@ const StaticVisual = props => {
           <StyledContentTitle>국가별 통계</StyledContentTitle>
           <div
             style={{
-              marginTop: "30px",
-              marginBottom: "30px"
+              marginTop: "30px"
             }}
           >
             {repNationChart()}
