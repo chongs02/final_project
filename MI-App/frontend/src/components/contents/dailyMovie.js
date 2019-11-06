@@ -19,6 +19,7 @@ const DailyMovie = props => {
   const handleClick = i => {
     setIsDetails(true);
     setSelected([recentMovieInfo[i]]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {

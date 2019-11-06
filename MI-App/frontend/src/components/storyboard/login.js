@@ -19,7 +19,8 @@ import {
   StyledForm,
   StyledLoginRegister,
   StyledInput,
-  StyledBottomNav
+  StyledBottomNav,
+  StyledContentHover
 } from "../contents/styleComponent";
 
 class Login extends Component {
