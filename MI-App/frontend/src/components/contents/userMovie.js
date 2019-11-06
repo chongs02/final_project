@@ -62,7 +62,7 @@ const UserMovie = memo(props => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const details = () => {
+  const details = props => {
     return (
       <StyledContent>
         {selected.map(info => {

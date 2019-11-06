@@ -453,8 +453,7 @@ const StaticVisual = props => {
           <StyledContentTitle>좋아하는 장르</StyledContentTitle>
           <div
             style={{
-              marginTop: "30px",
-              marginBottom: "30px"
+              marginTop: "30px"
             }}
           >
             {genreChart()}
@@ -464,8 +463,7 @@ const StaticVisual = props => {
           <StyledContentTitle>국가별 통계</StyledContentTitle>
           <div
             style={{
-              marginTop: "30px",
-              marginBottom: "30px"
+              marginTop: "30px"
             }}
           >
             {repNationChart()}
