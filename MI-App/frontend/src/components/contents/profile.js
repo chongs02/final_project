@@ -6,7 +6,7 @@ import {
   StyledSearchForm,
   StyledSubButton,
   StyledMainButton
-} from "../contents/styleComponent";
+} from "./styleComponent";
 
 class Profile extends Component {
   render() {

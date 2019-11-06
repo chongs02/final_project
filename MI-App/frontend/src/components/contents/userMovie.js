@@ -86,11 +86,46 @@ const UserMovie = memo(props => {
   };
 
   const userMoviecomponent = () => {
+    let uniqueInfo = Array.from(new Set(userMovieInfo.map(s => s.movieCd))).map(
+      movieCd => {
+        return {
+          actors: userMovieInfo.find(s => s.movieCd === movieCd).actors,
+          actors_en: userMovieInfo.find(s => s.movieCd === movieCd).actors_en,
+          cast: userMovieInfo.find(s => s.movieCd === movieCd).cast,
+          cast_en: userMovieInfo.find(s => s.movieCd === movieCd).cast_en,
+          companyCd: userMovieInfo.find(s => s.movieCd === movieCd).companyCd,
+          companyNm: userMovieInfo.find(s => s.movieCd === movieCd).companyNm,
+          companyNmEn: userMovieInfo.find(s => s.movieCd === movieCd)
+            .companyNmEn,
+          companyPartNm: userMovieInfo.find(s => s.movieCd === movieCd)
+            .companyPartNm,
+          directors: userMovieInfo.find(s => s.movieCd === movieCd).directors,
+          genre: userMovieInfo.find(s => s.movieCd === movieCd).genre,
+          id: userMovieInfo.find(s => s.movieCd === movieCd).id,
+          movieCd: movieCd,
+          movieNm: userMovieInfo.find(s => s.movieCd === movieCd).movieNm,
+          movieNmEn: userMovieInfo.find(s => s.movieCd === movieCd).movieNmEn,
+          nations: userMovieInfo.find(s => s.movieCd === movieCd).nations,
+          openDt: userMovieInfo.find(s => s.movieCd === movieCd).openDt,
+          poster: userMovieInfo.find(s => s.movieCd === movieCd).poster,
+          prdtStatNm: userMovieInfo.find(s => s.movieCd === movieCd).prdtStatNm,
+          prdtYear: userMovieInfo.find(s => s.movieCd === movieCd).prdtYear,
+          repGenre: userMovieInfo.find(s => s.movieCd === movieCd).repGenre,
+          repNation: userMovieInfo.find(s => s.movieCd === movieCd).repNation,
+          showTm: userMovieInfo.find(s => s.movieCd === movieCd).showTm,
+          typeNm: userMovieInfo.find(s => s.movieCd === movieCd).typeNm,
+          userRating: userMovieInfo.find(s => s.movieCd === movieCd).userRating,
+          watchGradeNm: userMovieInfo.find(s => s.movieCd === movieCd)
+            .watchGradeNm
+        };
+      }
+    );
+
     return (
       <StyledContent>
         <StyledContentTitle>내가 본 영화</StyledContentTitle>
         <StyledMovieList>
-          {userMovieInfo.map((info, i) => {
+          {uniqueInfo.map((info, i) => {
             return (
               <MovieSearchInfo
                 page={"/myPage"}
