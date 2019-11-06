@@ -136,7 +136,7 @@ export const StyledMainButton = styled.button`
   width: 97%;
   height: 100%;
   color: white;
-  font-size: ${props => props.fontSize};
+  font-size: ${props => (props.fontSize ? props.fontSize : "1em")};
   font-family: nanum;
   margin: 0px;
   border-radius: 10px;
@@ -144,6 +144,13 @@ export const StyledMainButton = styled.button`
   border: none;
   vertical-align: middle;
   outline: none;
+
+  transition: all 0.3s ease-in-out;
+
+  :hover {
+    background: #f1f2f6;
+    color: #fd7272;
+  }
 `;
 
 // eb3b5a
@@ -151,20 +158,28 @@ export const StyledMainButton = styled.button`
 
 export const StyledSideBarButton = styled.div`
   cursor: pointer;
-  color: ${props => (props.color ? props.color : "#ced6e0")};
+  color: ${props => (props.color ? props.color : "#e1e6ec")};
   font-size: 18px;
   font-family: nanum;
   margin: 0px;
-  padding: 0.25em 1em;
+  padding: 10px 40px;
   border: none;
-  background: rgba(255, 255, 255, 0);
+  background: ${props =>
+    props.bgColor ? props.bgColor : "rgba(255, 255, 255, 0)"} 
   vertical-align: middle;
+
+  transition: all 0.3s ease-in-out;
+
+  :hover {
+    background: #ffffff;
+    color: rgba(55, 66, 250, 0.8);
+  }
 `;
 
 export const StyledSubButton = styled.button`
   cursor: pointer;
   color: ${props => (props.color ? props.color : "#eb3b5a")};
-  font-size: ${props => props.fontSize};
+  font-size: ${props => (props.fontSize ? props.fontSize : "1em")};
   font-family: nanum;
   margin: 0px;
   padding: 0.25em 1em;

@@ -36,7 +36,7 @@ const Collaborative = props => {
 
   const getCollaborative = () => {
     if (props.name === "collaborative-seen") {
-      setTitle("비슷한 영화를 본 사람들이 본 영화");
+      setTitle("볼 만한 영화");
       const watchedMovie = async () => {
         const config = getConfig();
 
@@ -54,7 +54,7 @@ const Collaborative = props => {
       watchedMovie();
       return title;
     } else if (props.name === "collaborative-like") {
-      setTitle("비슷한 영화를 좋아한 사람들이 본 사람들이 좋아한 영화");
+      setTitle("좋아할 만한 영화");
       const likeMovie = async () => {
         const config = getConfig();
 
@@ -72,7 +72,7 @@ const Collaborative = props => {
       likeMovie();
       return title;
     } else if (props.name === "collaborative-hate") {
-      setTitle("비슷한 영화를 싫어한 사람들이 본 사람들이 싫어한 영화");
+      setTitle("싫어할 만한 영화");
       const hateMovie = async () => {
         const config = getConfig();
 

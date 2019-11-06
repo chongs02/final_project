@@ -19,6 +19,8 @@ const SearchResult = props => {
   const handleClick = i => {
     setIsDetails(true);
     setSelected([movieInfo[i]]);
+    window.scrollTo({ top: 0 });
+    // behavior: "smooth"
   };
 
   useEffect(() => {

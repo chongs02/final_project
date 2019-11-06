@@ -60,6 +60,8 @@ const UserMovie = memo(props => {
   const handleClick = i => {
     setIsDetails(true);
     setSelected([userMovieInfo[i]]);
+    window.scrollTo({ top: 0 });
+    // behavior: "smooth"
   };
 
   const details = () => {

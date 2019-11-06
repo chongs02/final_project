@@ -12,9 +12,9 @@ import {
   StyledSubButton
 } from "./styleComponent";
 
-import logo from "../../statics/logos/logo04.png";
 import { Icon } from "react-icons-kit";
 import { androidSearch } from "react-icons-kit/ionicons/androidSearch";
+import logo from "../../statics/logos/logo04.png";
 
 const Nav = props => {
   useEffect(() => {
