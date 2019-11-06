@@ -32,6 +32,8 @@ import {
   Pie
 } from "recharts";
 
+const WIDTH = window.innerWidth;
+
 const StaticVisual = props => {
   const { likeInfo, watchInfo } = props;
 
@@ -327,7 +329,7 @@ const StaticVisual = props => {
           cy={150}
           labelLine={true}
           label={renderCustomizedLabel}
-          outerRadius={80}
+          outerRadius={120}
           fill="#8884d8"
           dataKey="value"
         >

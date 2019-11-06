@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useRef } from "react";
+import React, { useEffect, useState, memo, useRef, useMemo } from "react";
 import { Route } from "react-router-dom";
 import axios from "axios";
 import update from "react-addons-update";
@@ -36,16 +36,15 @@ const UserMovie = memo(props => {
   const userMovie = async searchInfo => {
     let url = "/movieInfo/";
     url = url + "?search=" + searchInfo;
-    await axios
-      .get(url)
-      .then(response => {
-        setUserMovieInfo(prevState => {
-          return update(prevState, { $push: response.data });
-        });
-      })
-      .catch(err => {
-        console.log(err);
+    try {
+      const fetchedData = await axios.get(url);
+
+      setUserMovieInfo(prevState => {
+        return update(prevState, { $push: fetchedData.data });
       });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   function usePrevious(value) {

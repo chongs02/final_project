@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 
 import UserMovie from "../contents/userMovie";
@@ -11,12 +11,11 @@ import SideBar from "../contents/sideBar";
 const MyPage = memo(props => {
   const [isHome, setIsHome] = useState(true);
   const [collaboPage, setCollaboPage] = useState("");
+  const profile = useSelector(state => state.auth.profile);
 
   useEffect(() => {
     setIsHome(true);
   }, [props.pageChange]);
-
-  console.log(isHome);
 
   const handleCilck = clickType => {
     if (clickType === "home") {
@@ -42,7 +41,7 @@ const MyPage = memo(props => {
           <div style={{ width: "82%" }}>
             {isHome ? (
               <UserMovie
-                profile={props.profile}
+                profile={profile}
                 isHome={isHome}
                 pageChange={props.pageChange}
               />
@@ -68,10 +67,4 @@ const MyPage = memo(props => {
   );
 });
 
-const mapStateToProps = state => {
-  return {
-    profile: state.auth.profile
-  };
-};
-
-export default connect(mapStateToProps)(MyPage);
+export default MyPage;

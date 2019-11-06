@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .api import RegistrationAPI, LoginAPI, UserAPI, ProfileViewSet, CollaborativeWatched,CollaborativeHate,CollaborativeLike
+from .api import RegistrationAPI, LoginAPI, UserAPI, ProfileViewSet, CollaborativeWatched,CollaborativeHate,CollaborativeLike,UserMovieEmotion,CollaborativeEmotion
 from django.contrib.auth import views as auth_views
 from rest_framework import routers
 
@@ -8,6 +8,9 @@ router.register('profile', ProfileViewSet, 'profile')
 router.register('watched', CollaborativeWatched, 'watched')
 router.register('hate', CollaborativeHate, 'hate')
 router.register('like', CollaborativeLike, 'like')
+router.register('userMovieEmotion', UserMovieEmotion, 'userMovieEmotion')
+router.register('CollaborativeEmotion', CollaborativeEmotion, 'CollaborativeEmotion')
+
 
 
 urlpatterns = [

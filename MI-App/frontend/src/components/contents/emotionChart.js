@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 import { getScore } from "../../actions/movieScore";
 
 import {
@@ -12,7 +13,12 @@ import {
 } from "recharts";
 
 const EmotionGraph = props => {
-  const score = props.movieData[0];
+  const [userEmotion, setUserEmotion] = useState({});
+  const [err, setErr] = useState(null);
+  const movieData = useSelector(state => state.getScore.movieData);
+  const scoreLoaded = useSelector(state => state.getScore.scoreLoaded);
+  const user = useSelector(state => state.auth.user);
+  const score = movieData[0];
 
   let data;
   if (score) {
@@ -20,72 +26,92 @@ const EmotionGraph = props => {
     data = [
       {
         subject: "감동",
-        A: score.impression
-        // B: 110,
+        A: score.impression,
+        B: userEmotion.impression
       },
       {
         subject: "공포",
-        A: score.fear
-        // B: 130,
+        A: score.fear,
+        B: userEmotion.fear
       },
       {
         subject: "분노",
-        A: score.anger
-        // B: 130,
+        A: score.anger,
+        B: userEmotion.anger
       },
       {
         subject: "지루함",
-        A: score.boredom
-        // B: 100,
+        A: score.boredom,
+        B: userEmotion.boredom
       },
       {
         subject: "슬픔",
-        A: score.sadness
-        // B: 90,
+        A: score.sadness,
+        B: userEmotion.sadness
       },
       {
         subject: "유쾌",
-        A: score.fun
-        // B: 85,
+        A: score.fun,
+        B: userEmotion.fun
       }
     ];
   } else {
     data = [
       {
         subject: "감동",
-        A: 0
-        // B: 110,
+        A: 0,
+        B: userEmotion.impression
       },
       {
         subject: "공포",
-        A: 0
-        // B: 130,
+        A: 0,
+        B: userEmotion.fear
       },
       {
         subject: "분노",
-        A: 0
-        // B: 130,
+        A: 0,
+        B: userEmotion.anger
       },
       {
         subject: "지루함",
-        A: 0
-        // B: 100,
+        A: 0,
+        B: userEmotion.boredom
       },
       {
         subject: "슬픔",
-        A: 0
-        // B: 90,
+        A: 0,
+        B: userEmotion.sadness
       },
       {
         subject: "유쾌",
-        A: 0
-        // B: 85,
+        A: 0,
+        B: userEmotion.fun
       }
     ];
   }
 
   useEffect(() => {
-    props.getScore(props.movieCd);
+    getScore(props.movieCd);
+    const userMovieEmotion = async () => {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+
+      if (token) {
+        config.headers["Authorization"] = `Token ${token}`;
+      }
+      let url = "/api/userMovieEmotion/";
+      try {
+        const response = await axios.get(url, config);
+        setUserEmotion(response.data[0]);
+      } catch (e) {
+        setErr(e);
+      }
+    };
+    userMovieEmotion();
   }, []);
 
   return (
@@ -98,7 +124,7 @@ const EmotionGraph = props => {
         fontFamily: "nanumB"
       }}
     >
-      {props.scoreLoaded ? (
+      {scoreLoaded && userEmotion ? (
         <RadarChart
           cx={"50%"}
           cy={"50%"}
@@ -123,6 +149,14 @@ const EmotionGraph = props => {
             fill="#FC427B"
             fillOpacity={0.6}
           />
+          <Radar
+            name={user.username ? user.username : "정보가 없습니다"}
+            dataKey="B"
+            stroke="#82ca9d"
+            fill="#82ca9d"
+            fillOpacity={0.6}
+          />
+
           <Legend
             verticalAlign="bottom"
             iconType="square"
@@ -136,14 +170,4 @@ const EmotionGraph = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    movieData: state.getScore.movieData,
-    scoreLoaded: state.getScore.scoreLoaded
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { getScore }
-)(EmotionGraph);
+export default EmotionGraph;

@@ -4,10 +4,35 @@ import pandas as pd
 
 from .models import Profile
 from django.contrib.auth.models import User
+from moviescore.models import MovieScore
+
+def item_based_filtering(request, movie_code):
+    movie_score = pd.DataFrame(list(MovieScore.objects.all().values('movieCd','impression','fear','anger','sadness','fun','boredom')))
+    
+    pre_dict = {}
+    for i in movie_score.to_dict('records'):
+        pre_dict[i['movieCd']] = {
+            'impression': i['impression'], 
+            'fear': i['fear'], 
+            'anger': i['anger'], 
+            'sadness':i['sadness'], 
+            'fun': i['fun'],
+            'boredom': i['fun']
+            }
+    try:
+        data = get_code_by_emotion(pre_dict,movie_code,sim_pearson, index=5)
+    except:
+        data = []
+        return data
+
+    result_list = []
+    for i in data:
+        pre_dict[i[1]]['movieCd'] = i[1]
+        result_list.append(pre_dict[i[1]])
+    return result_list
 
 
-
-def main(request, instance):
+def user_based_filtering(request, instance):
 
     user_data =pd.DataFrame(list(User.objects.all().values('id','username')))
     user_profile = pd.DataFrame(list(Profile.objects.all().values("user_id",instance)))
@@ -15,6 +40,12 @@ def main(request, instance):
     user_profile = user_profile.dropna()
     users = pd.merge(user_data, user_profile,left_on='id', right_on="user_id")
     users = users.drop(labels=['id','user_id'], axis=1)
+
+    profile_watched_movie = pd.DataFrame(list(Profile.objects.all().values('user_id','watchedMovie')))
+    profile_watched_movie = profile_watched_movie.drop_duplicates(subset=["user_id", 'watchedMovie'])
+    profile_watched_movie = profile_watched_movie.dropna()
+    matched_data = pd.merge(user_data, profile_watched_movie,left_on='id', right_on="user_id")
+    matched_data = matched_data.drop(labels=['id','user_id'], axis=1)
 
 
     #  users의 데이터프레임을 dictionary로
@@ -36,8 +67,18 @@ def main(request, instance):
 
     li = getRecommendation(user_movie_data,request.user.get_username(),sim_jaccard)
     
+    new_li = []
+    matched_data = matched_data.pivot_table(values='watchedMovie', index=matched_data.index, columns='username', aggfunc='first')
+    user_matched_table = matched_data[request.user.get_username()]
+    user_matched_table = user_matched_table.dropna()
+    user_matched_table = user_matched_table.tolist()
     
-    return li
+    for i in li:
+        if i['movie_code'] not in user_matched_table:
+            new_li.append(i)
+        else:
+            pass
+    return new_li
 
 def sim_jaccard(data, name1, name2):
     overlap=0 
@@ -46,6 +87,28 @@ def sim_jaccard(data, name1, name2):
             overlap+=1
     return overlap / (len(data[name1]) + len(data[name2]) - overlap)
 
+# 피어슨 상관계수 구하기
+def sim_pearson(data, name1, name2):
+    sumX=0 
+    sumY=0 
+    sumPowX=0 
+    sumPowY=0 
+    sumXY=0 
+    count=0 
+    
+    for i in data[name1]: 
+        if i in data[name2]: 
+            sumX+=data[name1][i]
+            
+            sumY+=data[name2][i]
+            sumPowX+=pow(data[name1][i],2)
+            sumPowY+=pow(data[name2][i],2)
+            sumXY+=data[name1][i]*data[name2][i]
+            count+=1
+    pearson = ( sumXY- ((sumX*sumY)/count) )/ sqrt( (sumPowX - (pow(sumX,2) / count)) * (sumPowY - (pow(sumY,2)/count)))
+    return pearson
+
+
 def top_match(data, name, index=2, sim_function=sim_jaccard):
     li=[]
     for i in data:
@@ -53,6 +116,13 @@ def top_match(data, name, index=2, sim_function=sim_jaccard):
             li.append((sim_function(data,name,i),i))
     li = sorted(li, key=lambda x : x[0], reverse=True)
     return li[:index]
+
+def get_code_by_emotion(data, movie_code, sim_function, index=2):
+    result = top_match(data, movie_code, index, sim_function)
+
+
+
+    return result
 
 def getRecommendation (data,person,sim_function, index=2 ):
     result = top_match(data, person ,index , sim_function)

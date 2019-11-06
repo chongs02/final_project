@@ -37,7 +37,6 @@ const MyStatics = memo(props => {
     return () => {
       setLikeMovieInfo([]);
       setWatchedMovieInfo([]);
-      setIsDetails(false);
     };
   }, [props.profile]);
 

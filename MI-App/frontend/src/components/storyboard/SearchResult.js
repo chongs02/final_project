@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "../contents/movieInfo";
 
@@ -13,8 +13,9 @@ import {
 const SearchResult = props => {
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
+  const movieInfo = useSelector(state => state.getMovieInfo.movieInfo);
 
-  const { keyword, movieInfo } = props;
+  const { keyword } = props;
 
   const handleClick = i => {
     setIsDetails(true);
@@ -97,10 +98,4 @@ const SearchResult = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    movieInfo: state.getMovieInfo.movieInfo
-  };
-};
-
-export default connect(mapStateToProps)(SearchResult);
+export default SearchResult;

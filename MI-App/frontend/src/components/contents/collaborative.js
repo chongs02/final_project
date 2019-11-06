@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Route } from "react-router-dom";
 import { getConfig } from "./movieInfo";
 import axios from "axios";
@@ -13,6 +13,8 @@ import {
 } from "./styleComponent";
 
 const Collaborative = props => {
+  console.log(props);
+
   let data = [];
   const [title, setTitle] = useState("");
   const [collaborativeMovie, setCollaborativeMovie] = useState([]);
@@ -184,5 +186,4 @@ const Collaborative = props => {
     </React.Fragment>
   );
 };
-
 export default Collaborative;

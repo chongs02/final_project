@@ -13,6 +13,11 @@ export default function getScore(state = initialState, action) {
         movieData: action.payload,
         scoreLoaded: true
       };
+
+    case types.GET_USER_EMOTION_SCORE:
+      return {
+        ...state
+      };
     default:
       return state;
   }
