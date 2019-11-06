@@ -13,7 +13,11 @@ class CollaborativeByEmotion(serializers.Serializer):
     sadness = serializers.IntegerField(max_value=None, min_value=None)           # 슬픔
     fun = serializers.IntegerField(max_value=None, min_value=None)               # 유쾌
     boredom = serializers.IntegerField(max_value=None, min_value=None)           # 지루함
+    movieNm = serializers.CharField(max_length=256)
+    poster = serializers.CharField(max_length=None, min_length=None)
     movieCd = serializers.CharField(max_length=16)
+    index = serializers.IntegerField(max_value=None, min_value=None)   
+
 
 class UserMovieEmotionSerializer(serializers.Serializer):
     impression = serializers.IntegerField(max_value=None, min_value=None)        # 감동

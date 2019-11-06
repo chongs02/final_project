@@ -25,7 +25,8 @@ const DailyMovie = props => {
     setIsDetails(false);
   }, [props.isUnMount]);
 
-  const details = () => {
+  const details = props => {
+    console.log(props);
     return (
       <StyledContent>
         {selected.map(info => {
@@ -34,6 +35,7 @@ const DailyMovie = props => {
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              from={props.location.pathname}
             />
           );
         })}

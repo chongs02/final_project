@@ -61,7 +61,8 @@ const UserMovie = memo(props => {
     setSelected([userMovieInfo[i]]);
   };
 
-  const details = () => {
+  const details = props => {
+    console.log(props);
     return (
       <StyledContent>
         {selected.map(info => {
@@ -71,6 +72,7 @@ const UserMovie = memo(props => {
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              from={props.location.pathname}
             />
           );
         })}

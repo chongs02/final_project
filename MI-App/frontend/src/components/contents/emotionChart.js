@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { getScore } from "../../actions/movieScore";
@@ -13,14 +13,17 @@ import {
 } from "recharts";
 
 const EmotionGraph = props => {
+  console.log(props);
   const [userEmotion, setUserEmotion] = useState({});
   const [err, setErr] = useState(null);
-  const movieData = useSelector(state => state.getScore.movieData);
+  const [movieData, setMovieData] = useState([]);
   const scoreLoaded = useSelector(state => state.getScore.scoreLoaded);
   const user = useSelector(state => state.auth.user);
-  const score = movieData[0];
+  let score = movieData;
+  console.log(score);
 
   let data;
+
   if (score) {
     // B는 내가 선호하는 감정스테이트 정보로 넣을 예정임
     data = [
@@ -91,7 +94,19 @@ const EmotionGraph = props => {
   }
 
   useEffect(() => {
+    const getScore = async movieCd => {
+      let url = "/movie-api/";
+      url = url + "?search=" + movieCd;
+      try {
+        const response = await axios.get(url);
+        console.log(response.data);
+        setMovieData(response.data[0]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getScore(props.movieCd);
+
     const userMovieEmotion = async () => {
       const token = localStorage.getItem("token");
       const config = {
@@ -126,9 +141,9 @@ const EmotionGraph = props => {
     >
       {scoreLoaded && userEmotion ? (
         <RadarChart
-          cx={"50%"}
-          cy={"50%"}
-          outerRadius={90}
+          cx={props.cx ? props.cx : "50%"}
+          cy={props.cy ? props.cy : "50%"}
+          outerRadius={props.Radius ? props.Radius : 90}
           width={300}
           height={300}
           data={data}
@@ -156,12 +171,15 @@ const EmotionGraph = props => {
             fill="#82ca9d"
             fillOpacity={0.6}
           />
-
-          <Legend
-            verticalAlign="bottom"
-            iconType="square"
-            font-family="nanumB"
-          />
+          {props.Legend ? (
+            <></>
+          ) : (
+            <Legend
+              verticalAlign="bottom"
+              iconType="square"
+              font-family="nanumB"
+            />
+          )}
         </RadarChart>
       ) : (
         <div />

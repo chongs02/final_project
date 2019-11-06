@@ -5,10 +5,11 @@ import pandas as pd
 from .models import Profile
 from django.contrib.auth.models import User
 from moviescore.models import MovieScore
+from movieInfo.models import MovieInfo
 
 def item_based_filtering(request, movie_code):
     movie_score = pd.DataFrame(list(MovieScore.objects.all().values('movieCd','impression','fear','anger','sadness','fun','boredom')))
-    
+    movie_data = pd.DataFrame(list(MovieInfo.objects.all().values('movieCd','movieNm','poster')))
     pre_dict = {}
     for i in movie_score.to_dict('records'):
         pre_dict[i['movieCd']] = {
@@ -25,10 +26,26 @@ def item_based_filtering(request, movie_code):
         data = []
         return data
 
+    movie_dict = {}
+    for i in movie_data.to_dict('records'):
+        movie_dict[i['movieCd']]={
+            'movieNm':i['movieNm'],
+            'poster':i['poster']
+        }
+    # print(movie_dict)
+    # print(pre_dict)
+
+
+    for k in pre_dict:
+        pre_dict[k].update(movie_dict.get(k, {}))
+
+
     result_list = []
-    for i in data:
+    for idx, i in enumerate(data):
         pre_dict[i[1]]['movieCd'] = i[1]
+        pre_dict[i[1]]['index'] = idx
         result_list.append(pre_dict[i[1]])
+    print(result_list)
     return result_list
 
 

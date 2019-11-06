@@ -4,6 +4,7 @@ from .models import MovieInfo
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter
 from rest_framework.generics import ListCreateAPIView
+from .bestMovies import bestMovies
 
 
 # from .naverMovie import get_posterUrl
@@ -25,3 +26,14 @@ class MovieInfoView(ListCreateAPIView):
     filter_backends = (SearchFilter,)
     queryset = MovieInfo.objects.all()
     serializer_class = MovieInfoSerializer
+
+
+
+class MovieListByScore(ListCreateAPIView):
+    serializer_class = MovieInfoSerializer
+
+    def get_queryset(self):
+        data = bestMovies(self.request)
+        result = MovieInfoSerializer(data, many=True).data
+        print(result)
+        return result
