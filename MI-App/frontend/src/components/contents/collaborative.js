@@ -106,6 +106,7 @@ const Collaborative = props => {
   const handleClick = i => {
     setIsDetails(true);
     setSelected([collaborativeMovie[i]]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const moviePostercomponent = () => {
