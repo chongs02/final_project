@@ -48,7 +48,6 @@ const ItemBasedView = props => {
       setCurrent(recommendList.data[0].index);
     }
   };
-  console.log(data);
 
   return (
     <div>
@@ -66,7 +65,6 @@ const ItemBasedView = props => {
         style={{
           padding: "5px 5px",
           border: "1px solid rgba(37, 40, 47, 0.1)",
-          // padding: "20px 20px",
           // boxShadow:
           //   "0 13px 27px -5px rgba(50,50,93,0.25), 0 8px 16px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025)",
           // boxShadow:
@@ -138,8 +136,6 @@ const ItemBasedView = props => {
                           </div>
                           <div
                             style={{
-                              // boxShadow:
-                              //   "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025)",
                               margin: "10px 15px",
                               borderRadius: "5px"
                             }}

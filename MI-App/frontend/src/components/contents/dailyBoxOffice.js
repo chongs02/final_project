@@ -36,7 +36,6 @@ const DailyBoxOffice = props => {
     await axios
       .get(url)
       .then(response => {
-        // console.log(response.data.boxOfficeResult.dailyBoxOfficeList);
         array.push(response.data.boxOfficeResult.dailyBoxOfficeList);
       })
       .catch(err => {
