@@ -16,8 +16,5 @@ class MovieScore(models.Model):
     positive = models.PositiveSmallIntegerField(default=0)          # 긍정
     negative = models.PositiveSmallIntegerField(default=0)          # 부정
 
-    # owner = models.ForeignKey(User, related_name="moviescore",
-    #                           on_delete=models.CASCADE, null=True)
-
     def __str__(self):
         return self.movieNm

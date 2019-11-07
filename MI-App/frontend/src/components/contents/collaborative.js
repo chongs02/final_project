@@ -13,8 +13,6 @@ import {
 } from "./styleComponent";
 
 const Collaborative = props => {
-  console.log(props);
-
   let data = [];
   const [title, setTitle] = useState("");
   const [collaborativeMovie, setCollaborativeMovie] = useState([]);
@@ -38,7 +36,7 @@ const Collaborative = props => {
 
   const getCollaborative = () => {
     if (props.name === "collaborative-seen") {
-      setTitle("내가 본 영화와 비슷한 영화");
+      setTitle("볼 만한 영화");
       const watchedMovie = async () => {
         const config = getConfig();
 
@@ -56,7 +54,7 @@ const Collaborative = props => {
       watchedMovie();
       return title;
     } else if (props.name === "collaborative-like") {
-      setTitle("내가 좋아한 영화와 비슷한 영화");
+      setTitle("좋아할 만한 영화");
       const likeMovie = async () => {
         const config = getConfig();
 
@@ -74,7 +72,7 @@ const Collaborative = props => {
       likeMovie();
       return title;
     } else if (props.name === "collaborative-hate") {
-      setTitle("내가 싫어한 영화와 비슷한 영화");
+      setTitle("싫어할 만한 영화");
       const hateMovie = async () => {
         const config = getConfig();
 
@@ -106,6 +104,7 @@ const Collaborative = props => {
   const handleClick = i => {
     setIsDetails(true);
     setSelected([collaborativeMovie[i]]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const moviePostercomponent = () => {
@@ -146,24 +145,22 @@ const Collaborative = props => {
   );
 
   const details = props => {
-    console.log("a");
     return (
       <StyledContent>
         {selected.map(info => {
           return (
             <MovieDetailsInfo
-              width={"73%"}
+              width="85%"
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              from={props.location.pathname}
             />
           );
         })}
       </StyledContent>
     );
   };
-
-  console.log(props.name);
 
   return (
     <React.Fragment>

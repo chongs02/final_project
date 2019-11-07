@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../../actions/auth";
 
+import { logout } from "../../actions/auth";
 import {
   StyledHeader,
   StyledContentHover,
@@ -12,11 +12,17 @@ import {
   StyledSubButton
 } from "./styleComponent";
 
-import logo from "../../statics/logos/logo04.png";
 import { Icon } from "react-icons-kit";
 import { androidSearch } from "react-icons-kit/ionicons/androidSearch";
+import logo from "../../statics/logos/logo04.png";
 
 const Nav = props => {
+  const [keyword, setKeyword] = useState("");
+
+  const handleChange = e => {
+    setKeyword(e.target.value);
+  };
+
   useEffect(() => {
     document.getElementsByClassName("searchBar")[0].focus();
     return () => {};
@@ -64,8 +70,8 @@ const Nav = props => {
             className="searchBar"
             type="text"
             placeholder="영화 검색"
-            value={props.value}
-            onChange={props.onChange}
+            value={keyword}
+            onChange={handleChange}
             onKeyPress={props.onKeyPress}
           ></StyledSearchInput>
           <div style={{ width: "40px", height: "30px", paddingRight: "5px" }}>
@@ -80,7 +86,9 @@ const Nav = props => {
                   height: "30px",
                   outline: "none"
                 }}
-                onClick={() => props.onClick("search")}
+                onClick={() =>
+                  props.onClick(JSON.stringify({ keyword: keyword }))
+                }
               >
                 <Icon size={"30px"} icon={androidSearch} />
               </button>

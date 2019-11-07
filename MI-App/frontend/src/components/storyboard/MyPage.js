@@ -10,21 +10,24 @@ import SideBar from "../contents/sideBar";
 
 const MyPage = memo(props => {
   const [isHome, setIsHome] = useState(true);
+  const [name, setName] = useState("");
   const [collaboPage, setCollaboPage] = useState("");
   const profile = useSelector(state => state.auth.profile);
 
   useEffect(() => {
     setIsHome(true);
+    setName("home");
   }, [props.pageChange]);
 
   const handleCilck = clickType => {
-    if (clickType === "home") {
-      setIsHome(true);
-    } else {
-      setIsHome(false);
-    }
     if (clickType.includes("collaborative")) {
       setCollaboPage(clickType);
+      setIsHome(false);
+    } else if (clickType === "mystatics" || clickType === "profile") {
+      setIsHome(false);
+    } else {
+      setIsHome(true);
+      setName(clickType);
     }
   };
 
@@ -35,15 +38,14 @@ const MyPage = memo(props => {
           style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
-            height: "100%"
+            justifyContent: "space-between"
           }}
         >
-          <div style={{ width: "82%" }}>
+          <div style={{ width: "80%" }}>
             {isHome ? (
               <UserMovie
+                name={name}
                 profile={profile}
-                isHome={isHome}
                 pageChange={props.pageChange}
               />
             ) : (
@@ -57,9 +59,9 @@ const MyPage = memo(props => {
               </Switch>
             )}
           </div>
-          <div style={{ width: "16%" }}>
+          <div style={{ width: "17%" }}>
             <div style={{ width: "100%", height: "100%", position: "fixed" }}>
-              <SideBar onClick={handleCilck} />
+              <SideBar onClick={handleCilck} pageChange={props.pageChange} />
             </div>
           </div>
         </div>

@@ -32,8 +32,6 @@ import {
   Pie
 } from "recharts";
 
-const WIDTH = window.innerWidth;
-
 const StaticVisual = props => {
   const { likeInfo, watchInfo } = props;
 
@@ -71,8 +69,10 @@ const StaticVisual = props => {
     // 좋아하는 영화들의 평균 평점, 최소 평점
     let userRating = arrayStringToNumber(pickInfo(likeInfo, "userRating"));
     let avgRating = calAverage(userRating).avg;
+    avgRating = Math.round(avgRating * 100) / 100;
 
     let minRating = getMinNumber(userRating);
+    minRating = Math.round(minRating * 100) / 100;
 
     //좋아하는 영화의 평균 제작년도, 최소 제작년도
 
@@ -83,6 +83,7 @@ const StaticVisual = props => {
     let openDtAvg = calAverage(openDt).avg;
 
     let minDt = getMinNumber(openDt);
+    minDt = Math.floor(minDt);
 
     function createData(avgRating, minRating, openDtAvg, minDt) {
       return { avgRating, minRating, openDtAvg, minDt };
@@ -95,10 +96,10 @@ const StaticVisual = props => {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="right">평균 평점</StyledTableCell>
-              <StyledTableCell align="right">최소 평점</StyledTableCell>
-              <StyledTableCell align="right">평균 제작년도</StyledTableCell>
-              <StyledTableCell align="right">최소 제작년도</StyledTableCell>
+              <StyledTableCell align="center">평균 평점</StyledTableCell>
+              <StyledTableCell align="center">최소 평점</StyledTableCell>
+              <StyledTableCell align="center">평균 제작년도</StyledTableCell>
+              <StyledTableCell align="center">최소 제작년도</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -107,10 +108,16 @@ const StaticVisual = props => {
                 {/* <StyledTableCell component="th" scope="row">
                   {row.name}
                 </StyledTableCell> */}
-                <StyledTableCell align="right">{row.avgRating}</StyledTableCell>
-                <StyledTableCell align="right">{row.minRating}</StyledTableCell>
-                <StyledTableCell align="right">{row.openDtAvg}</StyledTableCell>
-                <StyledTableCell align="right">{row.minDt}</StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.avgRating}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.minRating}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {row.openDtAvg}
+                </StyledTableCell>
+                <StyledTableCell align="center">{row.minDt}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -341,11 +348,13 @@ const StaticVisual = props => {
     let repNation = sorted("descend", pickInfo(likeInfo, "repNation"));
     let repNationObj = Object.entries(repNation);
     let temp = {};
-    repNationObj.forEach(function(x) {
-      temp[x[0]] = x[1];
-    });
     let data = [];
-    data.push(temp);
+    repNationObj.forEach(function(x) {
+      temp["name"] = x[0];
+      temp["value"] = x[1];
+      data.push(temp);
+      temp = {};
+    });
 
     const colors = ["#8884d8", "#82ca9d", "#ffc658"];
 
@@ -357,13 +366,14 @@ const StaticVisual = props => {
         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis />
+        <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Legend />
-        {Object.keys(data[0]).map((item, index) => {
-          return <Bar dataKey={item} stackId="a" fill={colors[index]} />;
-        })}
+        <Bar dataKey="value" barSize={50}>
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index]} />
+          ))}
+        </Bar>
       </BarChart>
     );
   }, [likeInfo]);
@@ -374,16 +384,15 @@ const StaticVisual = props => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        marginBottom: "30px"
+        marginBottom: "30px",
+        marginRight: "30px"
       }}
     >
       <div style={{ borderBottom: "1px solid rgba(37, 40, 47, 0.1)" }}>
         <StyledContentTitle>평점 및 제작년도</StyledContentTitle>
         <div
           style={{
-            marginTop: "30px",
-            marginBottom: "30px",
-            marginRight: "30px"
+            marginBottom: "30px"
           }}
         >
           {table()}
@@ -392,8 +401,6 @@ const StaticVisual = props => {
 
       <div
         style={{
-          marginTop: "30px",
-          marginBottom: "30px",
           borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
         }}
       >
@@ -411,7 +418,6 @@ const StaticVisual = props => {
         style={{
           display: "flex",
           flexDirection: "row",
-          marginBottom: "30px",
           borderBottom: "1px solid rgba(37, 40, 47, 0.1)"
         }}
       >
@@ -451,8 +457,7 @@ const StaticVisual = props => {
           <StyledContentTitle>좋아하는 장르</StyledContentTitle>
           <div
             style={{
-              marginTop: "30px",
-              marginBottom: "30px"
+              marginTop: "30px"
             }}
           >
             {genreChart()}
@@ -462,8 +467,7 @@ const StaticVisual = props => {
           <StyledContentTitle>국가별 통계</StyledContentTitle>
           <div
             style={{
-              marginTop: "30px",
-              marginBottom: "30px"
+              marginTop: "30px"
             }}
           >
             {repNationChart()}

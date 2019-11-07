@@ -5,7 +5,6 @@ import { getErrors } from "./messages";
 export const movieInfo = searchInfo => async dispatch => {
   let url = "/movieInfo/";
   url = url + "?search=" + searchInfo;
-  console.log(url);
   await axios
     .get(url)
     .then(response => {
@@ -40,5 +39,12 @@ export const recentMovieInfo = searchInfo => async dispatch => {
 export const clearMovieInfo = () => dispatch => {
   return {
     type: types.CLEAR_MOVIE_INFO
+  };
+};
+
+export const collaboToDetail = data => {
+  return {
+    type: types.COLLABO_TO_DETAIL,
+    payload: data
   };
 };

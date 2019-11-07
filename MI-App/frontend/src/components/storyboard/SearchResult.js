@@ -14,19 +14,28 @@ const SearchResult = props => {
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
   const movieInfo = useSelector(state => state.getMovieInfo.movieInfo);
+  const collaboToDetail = useSelector(
+    state => state.getMovieInfo.collaboToDetail
+  );
 
   const { keyword } = props;
 
   const handleClick = i => {
     setIsDetails(true);
     setSelected([movieInfo[i]]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
+    if (collaboToDetail) {
+      setSelected(collaboToDetail);
+      setIsDetails(true);
+    }
     return () => {
       setIsDetails(false);
+      setSelected([]);
     };
-  }, [keyword]);
+  }, [keyword, collaboToDetail]);
 
   const details = props => {
     return (
@@ -37,6 +46,7 @@ const SearchResult = props => {
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              from={props.location.pathname}
             />
           );
         })}
