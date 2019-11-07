@@ -48,7 +48,7 @@ const DailyMovie = props => {
   const moviePostercomponent = () => {
     return (
       <StyledContent>
-        <StyledContentTitle>최신 개봉 영화</StyledContentTitle>
+        <StyledContentTitle>오늘의 인기 영화</StyledContentTitle>
         <StyledMovieList>
           {recentMovieInfo.map((info, i) => {
             return (
@@ -67,7 +67,7 @@ const DailyMovie = props => {
 
   const noResult = (
     <StyledContent>
-      <StyledContentTitle>최신 개봉 영화</StyledContentTitle>
+      <StyledContentTitle>오늘의 인기 영화</StyledContentTitle>
       <div
         style={{
           display: "flex",

@@ -86,7 +86,7 @@ class Profile extends Component {
               style={{
                 marginTop: "30px",
                 display: "flex",
-                width: "90%",
+                width: "95%",
                 justifyContent: "center",
                 alignItems: "center"
               }}
