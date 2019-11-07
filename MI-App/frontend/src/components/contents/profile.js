@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import {
   StyledContentTitle,
-  StyledInput,
   StyledSearchInput,
   StyledSearchForm,
-  StyledSubButton,
   StyledMainButton
 } from "./styleComponent";
 
 class Profile extends Component {
   render() {
-    // console.log(this.props);s
     return (
       <div>
         <div>
@@ -89,7 +86,7 @@ class Profile extends Component {
               style={{
                 marginTop: "30px",
                 display: "flex",
-                width: "90%",
+                width: "95%",
                 justifyContent: "center",
                 alignItems: "center"
               }}
@@ -108,4 +105,5 @@ class Profile extends Component {
     );
   }
 }
+
 export default Profile;

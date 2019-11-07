@@ -4,7 +4,7 @@ import { recentMovieInfo } from "../../actions/movieInfo";
 import DailyMovie from "./dailyMovie";
 import axios from "axios";
 
-const KEY = "a3639b253586ed914a06659d53a62177";
+const KEY = "430156241533f1d058c603178cc3ca0e";
 
 const DailyBoxOffice = props => {
   //어제날짜
@@ -36,7 +36,6 @@ const DailyBoxOffice = props => {
     await axios
       .get(url)
       .then(response => {
-        // console.log(response.data.boxOfficeResult.dailyBoxOfficeList);
         array.push(response.data.boxOfficeResult.dailyBoxOfficeList);
       })
       .catch(err => {
@@ -48,7 +47,7 @@ const DailyBoxOffice = props => {
 
   const boxOfficeDetail = async () => {
     const dailyMovie = await getDailyMovie();
-    if (dailyMovie !== null) {
+    if (dailyMovie.length > 0) {
       dailyMovie.forEach(element => {
         function a() {
           props.recentMovieInfo(element.movieCd);

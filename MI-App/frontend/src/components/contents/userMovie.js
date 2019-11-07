@@ -12,26 +12,41 @@ import {
 } from "./styleComponent";
 
 const UserMovie = memo(props => {
-  const profile = usePrevious(props.profile);
   const [userMovieInfo, setUserMovieInfo] = useState([]);
   const [isDetails, setIsDetails] = useState(false);
   const [selected, setSelected] = useState([]);
 
-  useEffect(() => {
-    setIsDetails(false);
-  }, [props.pageChange]);
+  let title = "내가 본 영화";
+  if (props.name === "home") {
+    title = "내가 본 영화";
+  } else if (props.name === "like") {
+    title = "내가 좋아한 영화";
+  } else if (props.name === "hate") {
+    title = "내가 싫어한 영화";
+  }
 
   useEffect(() => {
-    if (profile !== props.profile && props.profile) {
-      props.profile.forEach(async element => {
+    loadProfile();
+    setIsDetails(false);
+    setUserMovieInfo([]);
+  }, [props.pageChange, props.name]);
+
+  const loadProfile = () => {
+    props.profile.forEach(async element => {
+      if (props.name === "like") {
+        await userMovie(element.like);
+      } else if (props.name === "hate") {
+        await userMovie(element.hate);
+      } else {
         await userMovie(element.watchedMovie);
-      });
-    }
+      }
+    });
+    // }
     return () => {
       setUserMovieInfo([]);
       setIsDetails(false);
     };
-  }, [props.profile]);
+  };
 
   let query = [];
   const userMovie = async searchInfo => {
@@ -53,15 +68,6 @@ const UserMovie = memo(props => {
     }
   };
 
-  function usePrevious(value) {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = value;
-    }, [value]);
-
-    return ref.current;
-  }
-
   const handleClick = i => {
     setIsDetails(true);
     setSelected([userMovieInfo[i]]);
@@ -74,10 +80,11 @@ const UserMovie = memo(props => {
         {selected.map(info => {
           return (
             <MovieDetailsInfo
-              width={"73%"}
+              width="85%"
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              from={props.location.pathname}
             />
           );
         })}
@@ -123,12 +130,12 @@ const UserMovie = memo(props => {
 
     return (
       <StyledContent>
-        <StyledContentTitle>내가 본 영화</StyledContentTitle>
+        <StyledContentTitle>{title}</StyledContentTitle>
         <StyledMovieList>
           {uniqueInfo.map((info, i) => {
             return (
               <MovieSearchInfo
-                page={"/myPage"}
+                page={`/myPage`}
                 key={i}
                 info={info}
                 onClick={() => handleClick(i)}
@@ -142,7 +149,7 @@ const UserMovie = memo(props => {
 
   const noResult = (
     <StyledContent>
-      <StyledContentTitle>내가 본 영화</StyledContentTitle>
+      <StyledContentTitle>{title}</StyledContentTitle>
       <div
         style={{
           display: "flex",
@@ -158,20 +165,12 @@ const UserMovie = memo(props => {
 
   return (
     <div>
-      {!props.isHome ? (
-        <div />
+      {isDetails ? (
+        <Route exact path={`/myPage/:title`} component={details} />
       ) : (
-        <div>
-          {isDetails ? (
-            <Route exact path="/myPage/:title" component={details} />
-          ) : (
-            <div></div>
-          )}
-          <div>
-            {props.profile.length > 0 ? userMoviecomponent() : noResult}
-          </div>
-        </div>
+        <div></div>
       )}
+      <div>{props.profile.length > 0 ? userMoviecomponent() : noResult}</div>
     </div>
   );
 });

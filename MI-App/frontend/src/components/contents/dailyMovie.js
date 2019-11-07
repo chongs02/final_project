@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
+import Spinner from "react-spinner-material";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
 
@@ -26,7 +27,8 @@ const DailyMovie = props => {
     setIsDetails(false);
   }, [props.isUnMount]);
 
-  const details = () => {
+  const details = props => {
+    console.log(props);
     return (
       <StyledContent>
         {selected.map(info => {
@@ -35,6 +37,7 @@ const DailyMovie = props => {
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              from={props.location.pathname}
             />
           );
         })}
@@ -45,7 +48,7 @@ const DailyMovie = props => {
   const moviePostercomponent = () => {
     return (
       <StyledContent>
-        <StyledContentTitle>최신 개봉 영화</StyledContentTitle>
+        <StyledContentTitle>오늘의 인기 영화</StyledContentTitle>
         <StyledMovieList>
           {recentMovieInfo.map((info, i) => {
             return (
@@ -64,16 +67,23 @@ const DailyMovie = props => {
 
   const noResult = (
     <StyledContent>
-      <StyledContentTitle>최신 개봉 영화</StyledContentTitle>
+      <StyledContentTitle>오늘의 인기 영화</StyledContentTitle>
       <div
         style={{
           display: "flex",
           height: "188.6px",
           margin: "30px 0px",
-          paddingLeft: "20px"
+          paddingLeft: "20px",
+          justifyContent: "center",
+          alignItems: "center"
         }}
       >
-        Loading...
+        <Spinner
+          size={40}
+          spinnerColor={"#7758f5"}
+          spinnerWidth={2}
+          visible={true}
+        />
       </div>
     </StyledContent>
   );
