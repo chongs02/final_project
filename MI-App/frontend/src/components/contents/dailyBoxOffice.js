@@ -48,7 +48,7 @@ const DailyBoxOffice = props => {
 
   const boxOfficeDetail = async () => {
     const dailyMovie = await getDailyMovie();
-    if (dailyMovie !== null) {
+    if (dailyMovie.length > 0) {
       dailyMovie.forEach(element => {
         function a() {
           props.recentMovieInfo(element.movieCd);
