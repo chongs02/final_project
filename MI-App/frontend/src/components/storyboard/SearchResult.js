@@ -18,8 +18,6 @@ const SearchResult = props => {
     state => state.getMovieInfo.collaboToDetail
   );
 
-  console.log(collaboToDetail);
-
   const { keyword } = props;
 
   const handleClick = i => {
@@ -40,8 +38,6 @@ const SearchResult = props => {
   }, [keyword, collaboToDetail]);
 
   const details = props => {
-    console.log(props);
-    console.log(selected);
     return (
       <StyledContent>
         {selected.map(info => {
