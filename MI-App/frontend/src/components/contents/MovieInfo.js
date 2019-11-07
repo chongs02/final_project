@@ -217,7 +217,7 @@ export const MovieDetailsInfo = props => {
                     width: "100%"
                   }}
                 >
-                  <div style={{ width: "33.3%" }}>
+                  <div style={{ width: "33.3%", height: "330px" }}>
                     <h3
                       style={{
                         fontFamily: "nanumB",
@@ -247,7 +247,19 @@ export const MovieDetailsInfo = props => {
                         </StyledH5>
                         <StyledH5>{info.watchGradeNm.split(",")[0]}</StyledH5>
                       </div>
-                      <StyledH5>{plot}</StyledH5>
+                      <h5
+                        style={{
+                          margin: "0px",
+                          color: "#778ca3",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 13,
+                          WebkitBoxOrient: "vertical"
+                        }}
+                      >
+                        {plot}
+                      </h5>
                     </div>
                   </div>
                   <div
@@ -266,7 +278,13 @@ export const MovieDetailsInfo = props => {
                     <EmotionGraph movieCd={info.movieCd}></EmotionGraph>
                   </div>
                 </div>
-                <div style={{ marginTop: "30px" }}>
+                <div
+                  style={{
+                    marginTop: "30px",
+                    paddingBottom: "30px",
+                    height: "60px"
+                  }}
+                >
                   <h3
                     style={{
                       fontFamily: "nanumB",

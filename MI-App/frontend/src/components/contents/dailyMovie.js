@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
+import Spinner from "react-spinner-material";
 
 import { MovieDetailsInfo, MovieSearchInfo } from "./movieInfo";
 
@@ -72,10 +73,17 @@ const DailyMovie = props => {
           display: "flex",
           height: "188.6px",
           margin: "30px 0px",
-          paddingLeft: "20px"
+          paddingLeft: "20px",
+          justifyContent: "center",
+          alignItems: "center"
         }}
       >
-        Loading...
+        <Spinner
+          size={40}
+          spinnerColor={"#7758f5"}
+          spinnerWidth={2}
+          visible={true}
+        />
       </div>
     </StyledContent>
   );

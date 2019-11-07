@@ -245,7 +245,7 @@ export const StyledMovieSearch = styled.div`
 
 export const StyledMovieInfo = styled.div`
   width: 90%;
-  height: 770px;
+  height: 800px;
   padding: 10px;
   margin: 30px;
   background-color: white;
@@ -287,6 +287,8 @@ export const StyledH5 = styled.h5`
   margin: 0px;
   color: #778ca3;
   word-break: keep-all;
+  text-overflow: ellipsis;
+  height: ${props => props.height};
 `;
 
 export const StyledBottomNav = styled.nav`
