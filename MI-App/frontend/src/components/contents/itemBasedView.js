@@ -186,7 +186,6 @@ export default ItemBasedView;
 const Card = props => {
   const { movieNm, poster, repGenre, repNation, openDt } = props.data;
   let openYear = openDt.slice(0, 4);
-  // repGenre, repNation, openDt
 
   return (
     <div>
