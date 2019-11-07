@@ -5,7 +5,8 @@ const initialState = {
   movieInfo: [],
   recentMovieInfo: [],
   recentInfoLoaded: false,
-  InfoLoaded: false
+  InfoLoaded: false,
+  collaboToDetail: []
 };
 
 export default function getMovieInfo(state = initialState, action) {
@@ -22,7 +23,6 @@ export default function getMovieInfo(state = initialState, action) {
         recentMovieInfo: update(state.recentMovieInfo, {
           $push: action.payload
         }),
-        // recentMovieInfo: [...state.recentMovieInfo, action.payload],
         recentInfoLoaded: true
       };
     case types.CLEAR_MOVIE_INFO:
@@ -30,6 +30,11 @@ export default function getMovieInfo(state = initialState, action) {
         ...state,
         movieInfo: [],
         InfoLoaded: false
+      };
+    case types.COLLABO_TO_DETAIL:
+      return {
+        ...state,
+        collaboToDetail: action.payload
       };
     default:
       return state;

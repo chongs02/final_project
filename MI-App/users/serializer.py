@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import Profile
 
-
+ 
 
 
 class CollaborativeByEmotion(serializers.Serializer):
@@ -14,6 +14,9 @@ class CollaborativeByEmotion(serializers.Serializer):
     fun = serializers.IntegerField(max_value=None, min_value=None)               # 유쾌
     boredom = serializers.IntegerField(max_value=None, min_value=None)           # 지루함
     movieNm = serializers.CharField(max_length=256)
+    repGenre = serializers.CharField(max_length=256)
+    repNation = serializers.CharField(max_length=128)
+    openDt = serializers.CharField(max_length=8)
     poster = serializers.CharField(max_length=None, min_length=None)
     movieCd = serializers.CharField(max_length=16)
     index = serializers.IntegerField(max_value=None, min_value=None)   

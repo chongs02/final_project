@@ -9,7 +9,7 @@ from movieInfo.models import MovieInfo
 
 def item_based_filtering(request, movie_code):
     movie_score = pd.DataFrame(list(MovieScore.objects.all().values('movieCd','impression','fear','anger','sadness','fun','boredom')))
-    movie_data = pd.DataFrame(list(MovieInfo.objects.all().values('movieCd','movieNm','poster')))
+    movie_data = pd.DataFrame(list(MovieInfo.objects.all().values('movieCd','movieNm','poster','repGenre','repNation','openDt')))
     pre_dict = {}
     for i in movie_score.to_dict('records'):
         pre_dict[i['movieCd']] = {
@@ -30,7 +30,10 @@ def item_based_filtering(request, movie_code):
     for i in movie_data.to_dict('records'):
         movie_dict[i['movieCd']]={
             'movieNm':i['movieNm'],
-            'poster':i['poster']
+            'poster':i['poster'],
+            'repGenre':i['repGenre'],
+            'repNation':i['repNation'],
+            'openDt':i['openDt']
         }
     # print(movie_dict)
     # print(pre_dict)
@@ -45,7 +48,7 @@ def item_based_filtering(request, movie_code):
         pre_dict[i[1]]['movieCd'] = i[1]
         pre_dict[i[1]]['index'] = idx
         result_list.append(pre_dict[i[1]])
-    print(result_list)
+    # print(result_list)
     return result_list
 
 
