@@ -10,7 +10,6 @@ import { barChartO } from "react-icons-kit/fa/barChartO";
 import { checkSquareO } from "react-icons-kit/fa/checkSquareO";
 import { heart } from "react-icons-kit/fa/heart";
 import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
-import { square } from "react-icons-kit/fa/square";
 
 export default class SideBar extends Component {
   state = {
