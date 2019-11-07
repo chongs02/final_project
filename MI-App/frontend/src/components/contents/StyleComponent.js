@@ -245,6 +245,7 @@ export const StyledMovieSearch = styled.div`
 
 export const StyledMovieInfo = styled.div`
   width: 90%;
+  height: 770px;
   padding: 10px;
   margin: 30px;
   background-color: white;
