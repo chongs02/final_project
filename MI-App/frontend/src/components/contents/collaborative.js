@@ -13,8 +13,6 @@ import {
 } from "./styleComponent";
 
 const Collaborative = props => {
-  console.log(props);
-
   let data = [];
   const [title, setTitle] = useState("");
   const [collaborativeMovie, setCollaborativeMovie] = useState([]);
@@ -147,24 +145,22 @@ const Collaborative = props => {
   );
 
   const details = props => {
-    console.log("a");
     return (
       <StyledContent>
         {selected.map(info => {
           return (
             <MovieDetailsInfo
-              width={"73%"}
+              width="85%"
               key={info.movieCd}
               movieCd={info.movieCd}
               info={info}
+              from={props.location.pathname}
             />
           );
         })}
       </StyledContent>
     );
   };
-
-  console.log(props.name);
 
   return (
     <React.Fragment>

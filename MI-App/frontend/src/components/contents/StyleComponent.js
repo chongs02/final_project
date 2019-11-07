@@ -153,20 +153,22 @@ export const StyledMainButton = styled.button`
 export const StyledSideBarButton = styled.div`
   cursor: pointer;
   color: ${props => (props.color ? props.color : "#e1e6ec")};
-  font-size: 18px;
+  font-size: ${props => (props.fontSize ? props.fontSize : "18px")};
   font-family: nanum;
   margin: 0px;
-  padding: 10px 40px;
+  padding: ${props => (props.padding ? props.padding : "10px 40px")}
   border: none;
   background: ${props =>
     props.bgColor ? props.bgColor : "rgba(255, 255, 255, 0)"} 
   vertical-align: middle;
+  text-decoration: none;
+  
 
   transition: all 0.3s ease-in-out;
 
   :hover {
-    background: #ffffff;
-    color: rgba(55, 66, 250, 0.8);
+    background: #748ffc;
+    color: #e1e6ec;
   }
 `;
 
@@ -242,8 +244,7 @@ export const StyledMovieSearch = styled.div`
 `;
 
 export const StyledMovieInfo = styled.div`
-  width: ${props => (props.width ? props.width : "60%")}
-  height: 50%;
+  width: 90%;
   padding: 10px;
   margin: 30px;
   background-color: white;
@@ -267,8 +268,8 @@ export const StyledMoviePoster = styled.img`
 
 export const StyledMovieDetailPoster = styled.img`
   display: block;
-  width: 150px;
-  height: 100%;
+  width: ${props => (props.width ? props.width : "150px")};
+  height: ${props => (props.height ? props.height : "100%")};
   border-radius: 5px;
   box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
     0 8px 16px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);

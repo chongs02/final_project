@@ -13,14 +13,12 @@ import {
 } from "recharts";
 
 const EmotionGraph = props => {
-  console.log(props);
   const [userEmotion, setUserEmotion] = useState({});
   const [err, setErr] = useState(null);
   const [movieData, setMovieData] = useState([]);
   const scoreLoaded = useSelector(state => state.getScore.scoreLoaded);
   const user = useSelector(state => state.auth.user);
   let score = movieData;
-  console.log(score);
 
   let data;
 
@@ -99,7 +97,6 @@ const EmotionGraph = props => {
       url = url + "?search=" + movieCd;
       try {
         const response = await axios.get(url);
-        console.log(response.data);
         setMovieData(response.data[0]);
       } catch (err) {
         console.log(err);
@@ -143,9 +140,9 @@ const EmotionGraph = props => {
         <RadarChart
           cx={props.cx ? props.cx : "50%"}
           cy={props.cy ? props.cy : "50%"}
-          outerRadius={props.Radius ? props.Radius : 90}
-          width={300}
-          height={300}
+          outerRadius={props.Radius ? props.Radius : 85}
+          width={props.width ? props.width : 300}
+          height={props.height ? props.height : 300}
           data={data}
           margin={{ top: 5, right: 5, bottom: 5, left: 5 }}
         >
@@ -162,15 +159,19 @@ const EmotionGraph = props => {
             dataKey="A"
             stroke="#FC427B"
             fill="#FC427B"
-            fillOpacity={0.6}
+            fillOpacity={0.4}
           />
-          <Radar
-            name={user.username ? user.username : "정보가 없습니다"}
-            dataKey="B"
-            stroke="#82ca9d"
-            fill="#82ca9d"
-            fillOpacity={0.6}
-          />
+          {props.isSideGraph ? (
+            <></>
+          ) : (
+            <Radar
+              name={user.username ? user.username : "정보가 없습니다"}
+              dataKey="B"
+              stroke="#82ca9d"
+              fill="#82ca9d"
+              fillOpacity={0.4}
+            />
+          )}
           {props.Legend ? (
             <></>
           ) : (

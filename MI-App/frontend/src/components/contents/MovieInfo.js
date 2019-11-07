@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
+
 import ItemBasedView from "./itemBasedView";
 import PreferenceChart from "./preferenceChart";
 import EmotionGraph from "./emotionChart";
@@ -18,13 +19,11 @@ import {
   StyledContentTitle,
   StyledH5
 } from "./styleComponent";
-// import { tokenConfig } from "../../actions/auth";
 
 import { Icon } from "react-icons-kit";
 import { check } from "react-icons-kit/fa/check";
 import { heart } from "react-icons-kit/fa/heart";
 import { heartO } from "react-icons-kit/fa/heartO";
-// import { u1F611 } from "react-icons-kit/noto_emoji_regular/u1F611";
 import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
 
 // django csrftoken
@@ -98,11 +97,18 @@ export class MovieSearchInfo extends Component {
 export const MovieDetailsInfo = props => {
   const [plot, setPlot] = useState("");
 
+  let isMyPage = props.from.includes("myPage");
+
+  console.log(props);
+
   const requestPlot = async movieTitle => {
     const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=N&title=${movieTitle}&ServiceKey=G1Z1T6XK90K3GOQJ4Y48`;
-    await axios.get(url).then(res => {
-      setPlot(res.data.Data[0].Result[0].plot);
-    });
+    await axios
+      .get(url)
+      .then(res => {
+        setPlot(res.data.Data[0].Result[0].plot);
+      })
+      .catch(err => {});
   };
 
   useEffect(() => {
@@ -114,10 +120,10 @@ export const MovieDetailsInfo = props => {
   const actors = info.actors.replace(/['"]+/g, "").replace(/[\[\]']+/g, "", "");
   return (
     <div style={{ width: "100%" }}>
-      <div>
-        <div style={{ width: "60%", height: "100%", float: "left" }}>
+      <div style={{ display: "flex" }}>
+        <div style={{ width: `${props.width ? props.width : "68%"}` }}>
           <StyledContentTitle>영화 상세 정보</StyledContentTitle>
-          <StyledMovieInfo width={"100%"}>
+          <StyledMovieInfo>
             <div style={{ width: "100%", margin: "50px" }}>
               <div
                 style={{
@@ -276,9 +282,15 @@ export const MovieDetailsInfo = props => {
             </div>
           </StyledMovieInfo>
         </div>
-        <div style={{ width: "40%", height: "100%", float: "right" }}>
-          <ItemBasedView movieCd={props.movieCd}></ItemBasedView>
-        </div>
+        {isMyPage ? (
+          <></>
+        ) : (
+          <div style={{ width: "30%" }}>
+            <div>
+              <ItemBasedView movieCd={props.movieCd}></ItemBasedView>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

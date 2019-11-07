@@ -1,9 +1,10 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-
 import { connect } from "react-redux";
+
 import { movieInfo } from "../../actions/movieInfo";
 import { loadUserProfile } from "../../actions/auth";
+import { StyledBottomNav } from "../contents/styleComponent";
 
 import Nav from "../contents/nav";
 import SearchResult from "./searchResult";
@@ -12,9 +13,8 @@ import Logout from "./logout";
 import DailyBoxOffice from "../contents/dailyBoxOffice";
 
 import logo2 from "../../statics/logos/logo03.png";
-import { StyledBottomNav } from "../contents/styleComponent";
+
 const Main = props => {
-  const [keyword, setKeyword] = useState("");
   const [renderKeyword, setRenderKeyword] = useState("");
   const [isMyPage, setIsMyPage] = useState(false);
   const [pageChange, setPageChange] = useState(false);
@@ -23,23 +23,22 @@ const Main = props => {
     props.loadUserProfile();
   }, [isMyPage]);
 
-  const handleChange = e => {
-    setKeyword(e.target.value);
-  };
-
   const handleClick = clickType => {
-    setPageChange(!pageChange);
-
-    if (clickType === "myPage") {
-      setIsMyPage(true);
-    } else if (clickType === "search") {
+    try {
+      let value = JSON.parse(clickType);
+      const keyword = value.keyword;
       const filteredKeyword = keyword.replace(/ +/g, " ").trim();
       props.movieInfo(keyword);
       setRenderKeyword(filteredKeyword);
       setIsMyPage(false);
-    } else {
-      setIsMyPage(false);
+    } catch {
+      if (clickType === "myPage") {
+        setIsMyPage(true);
+      } else {
+        setIsMyPage(false);
+      }
     }
+    setPageChange(!pageChange);
   };
 
   const handleKeyPress = e => {
@@ -53,8 +52,6 @@ const Main = props => {
       <BrowserRouter>
         <div style={{ display: "inline-block", height: "92%", width: "100%" }}>
           <Nav
-            value={keyword}
-            onChange={handleChange}
             onKeyPress={handleKeyPress}
             onClick={clickType => handleClick(clickType)}
           ></Nav>

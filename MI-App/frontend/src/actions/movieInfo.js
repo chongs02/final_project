@@ -5,7 +5,6 @@ import { getErrors } from "./messages";
 export const movieInfo = searchInfo => async dispatch => {
   let url = "/movieInfo/";
   url = url + "?search=" + searchInfo;
-  console.log(url);
   await axios
     .get(url)
     .then(response => {

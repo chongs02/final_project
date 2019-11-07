@@ -4,7 +4,7 @@ import { recentMovieInfo } from "../../actions/movieInfo";
 import DailyMovie from "./dailyMovie";
 import axios from "axios";
 
-const KEY = "a3639b253586ed914a06659d53a62177";
+const KEY = "430156241533f1d058c603178cc3ca0e";
 
 const DailyBoxOffice = props => {
   //어제날짜
