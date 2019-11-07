@@ -101,8 +101,9 @@ export const MovieDetailsInfo = props => {
 
   console.log(props);
 
-  const requestPlot = async movieTitle => {
-    const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=N&title=${movieTitle}&ServiceKey=G1Z1T6XK90K3GOQJ4Y48`;
+  const requestPlot = async (movieTitle, openDt, director) => {
+    // const director = directors.slice(0, 2);
+    const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=N&title=${movieTitle}&releaseDts=${openDt}&director=${director}&ServiceKey=G1Z1T6XK90K3GOQJ4Y48`;
     await axios
       .get(url)
       .then(res => {
@@ -112,7 +113,7 @@ export const MovieDetailsInfo = props => {
   };
 
   useEffect(() => {
-    requestPlot(props.info.movieNm);
+    requestPlot(props.info.movieNm, props.info.openDt, props.info.directors);
   }, []);
 
   const { info } = props;

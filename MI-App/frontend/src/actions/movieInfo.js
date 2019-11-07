@@ -41,3 +41,10 @@ export const clearMovieInfo = () => dispatch => {
     type: types.CLEAR_MOVIE_INFO
   };
 };
+
+export const collaboToDetail = data => {
+  return {
+    type: types.COLLABO_TO_DETAIL,
+    payload: data
+  };
+};
