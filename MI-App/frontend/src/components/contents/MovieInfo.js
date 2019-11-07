@@ -99,10 +99,7 @@ export const MovieDetailsInfo = props => {
 
   let isMyPage = props.from.includes("myPage");
 
-  console.log(props);
-
   const requestPlot = async (movieTitle, openDt, director) => {
-    // const director = directors.slice(0, 2);
     const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=N&title=${movieTitle}&releaseDts=${openDt}&director=${director}&ServiceKey=G1Z1T6XK90K3GOQJ4Y48`;
     await axios
       .get(url)

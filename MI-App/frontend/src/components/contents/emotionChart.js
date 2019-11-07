@@ -20,6 +20,8 @@ const EmotionGraph = props => {
   const user = useSelector(state => state.auth.user);
   let score = movieData;
 
+  console.log(userEmotion);
+
   let data;
 
   if (score) {
