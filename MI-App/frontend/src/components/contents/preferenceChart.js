@@ -43,8 +43,8 @@ const PreferenceChart = props => {
           data={data}
           cx={"50%"}
           cy={"50%"}
-          innerRadius={75}
-          outerRadius={95}
+          innerRadius={65}
+          outerRadius={86}
           fill="#8884d8"
           paddingAngle={5}
           dataKey="value"

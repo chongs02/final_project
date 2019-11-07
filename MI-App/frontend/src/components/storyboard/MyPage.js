@@ -19,8 +19,6 @@ const MyPage = memo(props => {
     setName("home");
   }, [props.pageChange]);
 
-  console.log("mypage rendering");
-
   const handleCilck = clickType => {
     if (clickType.includes("collaborative")) {
       setCollaboPage(clickType);
@@ -43,7 +41,7 @@ const MyPage = memo(props => {
             justifyContent: "space-between"
           }}
         >
-          <div style={{ width: "82%" }}>
+          <div style={{ width: "80%" }}>
             {isHome ? (
               <UserMovie
                 name={name}
@@ -61,7 +59,7 @@ const MyPage = memo(props => {
               </Switch>
             )}
           </div>
-          <div style={{ width: "16%" }}>
+          <div style={{ width: "17%" }}>
             <div style={{ width: "100%", height: "100%", position: "fixed" }}>
               <SideBar onClick={handleCilck} pageChange={props.pageChange} />
             </div>

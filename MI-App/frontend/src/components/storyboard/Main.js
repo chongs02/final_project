@@ -28,7 +28,6 @@ const Main = props => {
       let value = JSON.parse(clickType);
       const keyword = value.keyword;
       const filteredKeyword = keyword.replace(/ +/g, " ").trim();
-      console.log(keyword);
       props.movieInfo(keyword);
       setRenderKeyword(filteredKeyword);
       setIsMyPage(false);
@@ -76,7 +75,7 @@ const Main = props => {
               />
               <Route exact path="/logout" component={Logout} />
             </Switch>
-            {/* <DailyBoxOffice isUnMount={isMyPage} /> */}
+            <DailyBoxOffice isUnMount={isMyPage} />
             <div style={{ height: "10%" }} />
           </div>
           <StyledBottomNav>

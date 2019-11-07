@@ -168,18 +168,8 @@ export const StyledSideBarButton = styled.div`
 
   :hover {
     background: #748ffc;
-  }
-  
-  :visited {
     color: #e1e6ec;
   }
-
-  :active,
-  .active {
-    background: #ffffff;
-    color: rgba(55, 66, 250, 0.75);
-  }
-  
 `;
 
 export const StyledSubButton = styled.button`
@@ -254,8 +244,7 @@ export const StyledMovieSearch = styled.div`
 `;
 
 export const StyledMovieInfo = styled.div`
-  width: ${props => (props.width ? props.width : "60%")}
-  height: 50%;
+  width: 90%;
   padding: 10px;
   margin: 30px;
   background-color: white;
@@ -279,8 +268,8 @@ export const StyledMoviePoster = styled.img`
 
 export const StyledMovieDetailPoster = styled.img`
   display: block;
-  width: 150px;
-  height: 100%;
+  width: ${props => (props.width ? props.width : "150px")};
+  height: ${props => (props.height ? props.height : "100%")};
   border-radius: 5px;
   box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
     0 8px 16px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
