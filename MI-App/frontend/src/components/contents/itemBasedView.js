@@ -42,7 +42,7 @@ const ItemBasedView = props => {
           color: "rgba(55, 66, 250, 0.75)"
         }}
       >
-        감성 추천
+        맞춤 감성 영화
       </StyledContentTitle>
       <div
         style={{

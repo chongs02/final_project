@@ -22,7 +22,6 @@ export default function getMovieInfo(state = initialState, action) {
         recentMovieInfo: update(state.recentMovieInfo, {
           $push: action.payload
         }),
-        // recentMovieInfo: [...state.recentMovieInfo, action.payload],
         recentInfoLoaded: true
       };
     case types.CLEAR_MOVIE_INFO:
