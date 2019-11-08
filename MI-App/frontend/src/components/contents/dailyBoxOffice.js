@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { recentMovieInfo } from "../../actions/movieInfo";
 import DailyMovie from "./dailyMovie";
@@ -7,6 +7,7 @@ import axios from "axios";
 const KEY = "430156241533f1d058c603178cc3ca0e";
 
 const DailyBoxOffice = props => {
+  const [parsedRank, setParseRank] = useState([]);
   //어제날짜
 
   const dateInfo = () => {
@@ -42,6 +43,8 @@ const DailyBoxOffice = props => {
         console.log(err);
       });
 
+    setParseRank(array[0]);
+
     return array[0];
   };
 
@@ -61,7 +64,7 @@ const DailyBoxOffice = props => {
     boxOfficeDetail();
   }, []);
 
-  return <DailyMovie isUnMount={props.isUnMount} />;
+  return <DailyMovie isUnMount={props.isUnMount} parsedRank={parsedRank} />;
 };
 
 const mapStateToProps = state => {

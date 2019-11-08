@@ -69,10 +69,10 @@ const StaticVisual = props => {
     // 좋아하는 영화들의 평균 평점, 최소 평점
     let userRating = arrayStringToNumber(pickInfo(likeInfo, "userRating"));
     let avgRating = calAverage(userRating).avg;
-    avgRating = Math.round(avgRating * 100) / 100;
+    avgRating = avgRating.toFixed(1);
 
     let minRating = getMinNumber(userRating);
-    minRating = Math.round(minRating * 100) / 100;
+    minRating = minRating.toFixed(1);
 
     //좋아하는 영화의 평균 제작년도, 최소 제작년도
 
@@ -81,6 +81,7 @@ const StaticVisual = props => {
     openDt = getYear(openDt);
     openDt = arrayStringToNumber(openDt);
     let openDtAvg = calAverage(openDt).avg;
+    openDtAvg = Math.floor(openDtAvg);
 
     let minDt = getMinNumber(openDt);
     minDt = Math.floor(minDt);

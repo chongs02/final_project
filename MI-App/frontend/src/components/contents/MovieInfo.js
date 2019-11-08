@@ -20,11 +20,16 @@ import {
   StyledH5
 } from "./styleComponent";
 
+// import rankStar from "../../statics/rankStar.png";
 import { Icon } from "react-icons-kit";
 import { check } from "react-icons-kit/fa/check";
 import { heart } from "react-icons-kit/fa/heart";
 import { heartO } from "react-icons-kit/fa/heartO";
 import { u1F608 } from "react-icons-kit/noto_emoji_regular/u1F608";
+import { user } from "react-icons-kit/fa/user";
+import { group } from "react-icons-kit/fa/group";
+
+import { ic_fiber_new } from "react-icons-kit/md/ic_fiber_new";
 
 // django csrftoken
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -69,25 +74,126 @@ const hateMovie = async hate => {
 // 검색 페이지 영화 요약 정보
 export class MovieSearchInfo extends Component {
   render() {
-    const { info } = this.props;
-    const { page } = this.props;
+    const { info, isBestMovie, page } = this.props;
+
+    const audiCnt = parseInt(info.audiCnt / 100).toFixed(0);
+    const audiAcc = (parseInt(info.audiAcc) / 1000).toFixed(0);
+
     const url = page + "/details";
 
     return (
-      <StyledContentHover>
-        <StyledMovieSearch onClick={this.props.onClick}>
-          <Link to={url} style={{ color: "inherit", textDecoration: "none" }}>
-            <StyledMoviePoster
-              src={info.poster}
-              alt={info.movieNm}
-              title={info.movieNm}
-            />
-            <StyledMovieTitle>{info.movieNm}</StyledMovieTitle>
-          </Link>
-        </StyledMovieSearch>
-
-        <MovieStatusButtons data={this.props} size={20} />
-      </StyledContentHover>
+      <div>
+        {isBestMovie ? (
+          <div>
+            <div>
+              <div
+                style={{
+                  color: "#f6b93b",
+                  marginLeft: "10px"
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    color: "#747d8c"
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "90%",
+                      marginLeft: "5px",
+                      marginRight: "5px"
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        height: "10px",
+                        width: "100%",
+                        alignItems: "center"
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#f6b93b",
+                          marginRight: "5px"
+                        }}
+                      >
+                        {info.rankOldAndNew.toLowerCase() === "new" ? (
+                          <Icon size={30} icon={ic_fiber_new} />
+                        ) : (
+                          <div style={{ height: "25px" }}></div>
+                        )}
+                      </div>
+                      <div
+                        style={{
+                          color: "#74b9ff",
+                          width: "50%"
+                        }}
+                        title={`${audiCnt}백명`}
+                      >
+                        <Icon size={15} icon={user} />
+                        <span style={{ fontsize: "10px", color: "#636e72" }}>
+                          {audiCnt}
+                        </span>
+                      </div>
+                      <div style={{ width: "50%" }}>
+                        <div
+                          style={{ color: "#74b9ff" }}
+                          title={`${audiAcc}천명`}
+                        >
+                          <Icon size={15} icon={group} />
+                          <span style={{ fontsize: "10px", color: "#636e72" }}>
+                            {audiAcc}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <StyledContentHover>
+                <StyledMovieSearch onClick={this.props.onClick}>
+                  <Link
+                    to={url}
+                    style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    <StyledMoviePoster
+                      src={info.poster}
+                      alt={info.movieNm}
+                      title={info.movieNm}
+                    />
+                    <StyledMovieTitle>
+                      <span>{info.rank}.</span>
+                      <span style={{ marginLeft: "5px" }}>{info.movieNm}</span>
+                    </StyledMovieTitle>
+                  </Link>
+                </StyledMovieSearch>
+                <MovieStatusButtons data={this.props} size={20} />
+              </StyledContentHover>
+            </div>
+          </div>
+        ) : (
+          <StyledContentHover>
+            <StyledMovieSearch onClick={this.props.onClick}>
+              <Link
+                to={url}
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
+                <StyledMoviePoster
+                  src={info.poster}
+                  alt={info.movieNm}
+                  title={info.movieNm}
+                />
+                <StyledMovieTitle>{info.movieNm}</StyledMovieTitle>
+              </Link>
+            </StyledMovieSearch>
+            <MovieStatusButtons data={this.props} size={20} />
+          </StyledContentHover>
+        )}
+      </div>
     );
   }
 }
@@ -99,10 +205,7 @@ export const MovieDetailsInfo = props => {
 
   let isMyPage = props.from.includes("myPage");
 
-  console.log(props);
-
   const requestPlot = async (movieTitle, openDt, director) => {
-    // const director = directors.slice(0, 2);
     const url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=N&title=${movieTitle}&releaseDts=${openDt}&director=${director}&ServiceKey=G1Z1T6XK90K3GOQJ4Y48`;
     await axios
       .get(url)
