@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-// import ScrollArea from "react-scrollbar";
 import EmotionGraph from "./emotionChart";
 import { collaboToDetail } from "../../actions/movieInfo";
 import { StyledMovieDetailPoster, StyledContentTitle } from "./styleComponent";
@@ -65,12 +64,8 @@ const ItemBasedView = props => {
         style={{
           padding: "5px 5px",
           border: "1px solid rgba(37, 40, 47, 0.1)",
-          // boxShadow:
-          //   "0 13px 27px -5px rgba(50,50,93,0.25), 0 8px 16px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025)",
-          // boxShadow:
-          //   "0 2px 20px -5px rgba(50, 50, 93, 0.25) inset, 0 4px 16px rgba(0, 0, 0, 0.3) inset, 0 0px 16px -6px rgba(0, 0, 0, 0.025) inset",
-          borderRadius: "5px", // 없엇음
-          height: "780px"
+          borderRadius: "5px",
+          height: "810px"
         }}
       >
         {data && data.length > 0 ? (
@@ -111,7 +106,7 @@ const ItemBasedView = props => {
                           display: "flex",
                           position: "relative",
                           padding: "0px 20px",
-                          paddingTop: "15px", // 없엇음
+                          paddingTop: "15px",
                           transition:
                             "transform 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955)",
                           marginBottom: "20px",
@@ -192,8 +187,9 @@ const Card = props => {
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
-          fontFamily: "nanumB"
+          justifyContent: "flex-start",
+          fontFamily: "nanumB",
+          marginLeft: "15px"
         }}
       >
         {movieNm}

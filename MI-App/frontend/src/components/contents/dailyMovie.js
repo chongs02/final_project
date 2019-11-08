@@ -17,9 +17,35 @@ const DailyMovie = props => {
 
   const { recentInfoLoaded, recentMovieInfo } = props;
 
+  const compare = (a, b) => {
+    if (parseInt(a.rank) < parseInt(b.rank)) {
+      return -1;
+    }
+    if (parseInt(a.rank) > parseInt(b.rank)) {
+      return 1;
+    }
+    return 0;
+  };
+
+  let filteredData = [];
+  let bestMovieInfo = [];
+
+  if (recentInfoLoaded) {
+    recentMovieInfo.forEach(function(x) {
+      props.parsedRank.forEach(function(y) {
+        if (y.movieCd === x.movieCd) {
+          let temp = Object.assign(x, y);
+          filteredData.push(temp);
+        }
+      });
+    });
+  }
+
+  bestMovieInfo = filteredData.sort(compare);
+
   const handleClick = i => {
     setIsDetails(true);
-    setSelected([recentMovieInfo[i]]);
+    setSelected([bestMovieInfo[i]]);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -50,9 +76,10 @@ const DailyMovie = props => {
       <StyledContent>
         <StyledContentTitle>오늘의 인기 영화</StyledContentTitle>
         <StyledMovieList>
-          {recentMovieInfo.map((info, i) => {
+          {bestMovieInfo.map((info, i) => {
             return (
               <MovieSearchInfo
+                isBestMovie={true}
                 page={"/main"}
                 key={i}
                 info={info}
